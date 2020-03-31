@@ -45,3 +45,21 @@ unique vals
 ### Dictionary
 
 Syntax like js objects
+
+modify same as js notation 
+
+empty dict false otherwise true 
+
+### Fractions module 
+
+import fractions // to import 
+
+x = fractions.Fraction(1, 2) // 1/2
+
+x * 2 // 2/2 
+
+reduces automatically 
+
+### None 
+
+acts as the null value in python 
