@@ -63,3 +63,25 @@ reduces automatically
 ### None 
 
 acts as the null value in python 
+
+### OS module 
+
+import os 
+
+getcwd - get current working directory 
+
+chdir - change directory 
+
+### comprehension 
+
+similar to js map 
+
+apply function to each item in array 
+
+[item * 2 for item in itemArray]
+
+itemArray not effected ( creates a copy )
+
+itemArray can be reassigned in place 
+
+itemArray = [item * 2 for item in itemArray] works fine
