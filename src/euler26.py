@@ -1,19 +1,23 @@
 print('project euler problem 26')
-print ('1%2 is ', 1%2)
 
 def longDivision(divisor, dividend):
     quotientArr = []
     repeatArr = []
     while (True): 
       quotient = dividend // divisor
-      print('quotient is {}', quotient)
+      print("dividend is {} and divisor is {}".format(dividend, divisor))
+      print("quotient is {}".format(quotient))
       quotientArr.append(quotient)
       remainder = dividend % divisor
-      print('remainder is {}', remainder)
+      if (repeatArr.count(remainder) > 0):
+        print("repeated and is {}".format(repeatArr))
+        break
+      print("remainder is {}".format(remainder))
       if remainder == 0:
         break
       else:
-        dividend *= 10
+        repeatArr.append(remainder)
+        dividend = remainder * 10
     return quotientArr
 
 for denominator in range(2, 11): #range second arg is not inclusive
