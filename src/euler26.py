@@ -20,7 +20,14 @@ def longDivision(divisor, dividend):
         dividend = remainder * 10
     return quotientArr
 
-for denominator in range(2, 11): #range second arg is not inclusive
+longest = []
+longestIndex = 2
+for denominator in range(2, 1001): #range second arg is not inclusive
   fraction = 1/denominator
+  cur = longDivision(denominator, 1) 
+  if (len(cur) > len(longest)):
+    longest = cur
+    longestIndex = denominator
   print("denominator: {} fraction: {}".format(denominator, fraction))
   print("longDivision(({}, 1) is {}".format(denominator, longDivision(denominator, 1)))
+print("longest: {} longestIndex: {}".format(longest, longestIndex))
