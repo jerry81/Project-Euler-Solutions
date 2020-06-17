@@ -13,5 +13,3 @@ def longDivision(divisor, dividend):
         repeatArr.append(remainder)
         dividend = remainder * 10
     return quotientArr
-
-def hasDivisors
