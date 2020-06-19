@@ -18,6 +18,12 @@ def longDivision(divisor, dividend):
 
 
 def isPrime(input):
+  if input == 0:
+    return False
+  if input == 1: 
+    return False
+  if input < 0:
+    return False
   for x in range(2, (int)(math.sqrt(input))+1):
     if ((input % x) == 0):
       return False
