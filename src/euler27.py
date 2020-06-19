@@ -1,28 +1,9 @@
-print('project euler problem 26')
+print('project euler problem 27')
 
 
-def longDivision(divisor, dividend):
-    quotientArr = []
-    repeatArr = []
-    while (True): 
-      quotient = dividend // divisor
-      quotientArr.append(quotient)
-      remainder = dividend % divisor
-      if (repeatArr.count(remainder) > 0):
-        break
-      if remainder == 0:
-        break
-      else:
-        repeatArr.append(remainder)
-        dividend = remainder * 10
-    return quotientArr
+from utils.mathHelpers import isPrime
 
-longest = []
-longestIndex = 2
-for denominator in range(2, 1001): #range second arg is not inclusive
-  fraction = 1/denominator
-  cur = longDivision(denominator, 1) 
-  if (len(cur) > len(longest)):
-    longest = cur
-    longestIndex = denominator
-print("longest: {} longestIndex: {}".format(longest, longestIndex))
+print('isPrime(7) is {}'.format(isPrime(7)))
+print('isPrime(8) is {}'.format(isPrime(8)))
+print('isPrime(10) is {}'.format(isPrime(10)))
+print('isPrime(11) is {}'.format(isPrime(11)))

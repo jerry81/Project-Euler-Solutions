@@ -1,3 +1,5 @@
+import math
+
 def longDivision(divisor, dividend):
     quotientArr = []
     repeatArr = []
@@ -13,3 +15,10 @@ def longDivision(divisor, dividend):
         repeatArr.append(remainder)
         dividend = remainder * 10
     return quotientArr
+
+
+def isPrime(input):
+  for x in range(2, (int)(math.sqrt(input))+1):
+    if ((input % x) == 0):
+      return False
+  return True

@@ -1,5 +1,5 @@
 print('project euler problem 26')
-from utils.math import longDivision
+from utils.mathHelpers import longDivision
 
 longest = []
 longestIndex = 2
