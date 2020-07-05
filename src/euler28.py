@@ -63,5 +63,16 @@ def createSpiral(dim):
           curDirection = getNextDirection(curDirection)
     # go in curDirection cur times
   return spiralMap
-res = createSpiral(5)
-print('createSpiral result {}'.format(res))
+
+def sumDiagonals(map, dim):
+  min = (dim // 2) * -1
+  max = (dim // 2)
+  sum = 0
+  for i in range(min, max + 1):
+    sum += map[i][i]
+    sum += map[i][-i]
+  return sum - 1
+  
+res = createSpiral(1001)
+sum = sumDiagonals(res, 1001)
+print('sum is {}'.format(sum))
