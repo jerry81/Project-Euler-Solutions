@@ -59,8 +59,9 @@ def createSpiral(dim):
             y += 1
             spiralMap[x][y] = cur
           cur += 1 
-        curDirection = getNextDirection(curDirection)
+        if a == 0:
+          curDirection = getNextDirection(curDirection)
     # go in curDirection cur times
   return spiralMap
-res = createSpiral(3)
+res = createSpiral(5)
 print('createSpiral result {}'.format(res))
