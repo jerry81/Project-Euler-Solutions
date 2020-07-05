@@ -1,8 +1,6 @@
 print('project euler problem 28')
 
-curDirection = 'E'
-
-def getNextDirection():
+def getNextDirection(curDirection):
   if (curDirection == 'E'):
     return 'S'
   if (curDirection == 'S'):
@@ -18,34 +16,51 @@ def createSpiral(dim):
   y = 0
   cur = 1
   curDirection = 'E'
-  if (dim == 1):
-    spiralMap[x] = {}
-    spiralMap[x][y] = cur
-    cur += 1
-  else: 
-    if (curDirection == 'E'):
-      x += 1
-      try: spiralMap[x]
-      except (NameError, KeyError) as e: spiralMap[x] = {}
+  for i in range(0, dim): # repeat dim times
+    if (i == 0):
+      spiralMap[x] = {}
       spiralMap[x][y] = cur
-    elif (curDirection == 'S'):
-      y -= 1
-      spiralMap[x][y] = cur 
-    elif (curDirection == 'W'): 
-      x -= 1
-      try: spiralMap[x]
-      except (NameError, KeyError) as e: spiralMap[x] = {}
-      spiralMap[x][y] = cur
-    else: 
-      y += 1
-      spiralMap[x][y] = cur
-    cur += 1
-    for i in range(0, (dim - 1)): # repeat dim times
-      print('working on i {}'.format(i))
+      cur += 1
+    else:
+      if (curDirection == 'E'):
+        x += 1
+        try: spiralMap[x]
+        except (NameError, KeyError) as e: spiralMap[x] = {}
+        spiralMap[x][y] = cur
+      elif (curDirection == 'S'):
+        y -= 1
+        spiralMap[x][y] = cur 
+      elif (curDirection == 'W'): 
+        x -= 1
+        try: spiralMap[x]
+        except (NameError, KeyError) as e: spiralMap[x] = {}
+        spiralMap[x][y] = cur
+      else: 
+        y += 1
+        spiralMap[x][y] = cur
+      cur += 1
+      curDirection = getNextDirection(curDirection)
+      for a in range(0, 2):
+        for j in range(0, i):
+          if (curDirection == 'E'):
+            x += 1
+            try: spiralMap[x]
+            except (NameError, KeyError) as e: spiralMap[x] = {}
+            spiralMap[x][y] = cur
+          elif (curDirection == 'S'):
+            y -= 1
+            spiralMap[x][y] = cur 
+          elif (curDirection == 'W'): 
+            x -= 1
+            try: spiralMap[x]
+            except (NameError, KeyError) as e: spiralMap[x] = {}
+            spiralMap[x][y] = cur
+          else: 
+            y += 1
+            spiralMap[x][y] = cur
+          cur += 1 
+        curDirection = getNextDirection(curDirection)
     # go in curDirection cur times
   return spiralMap
-
-res = createSpiral(2)
+res = createSpiral(3)
 print('createSpiral result {}'.format(res))
-print('curDir is', curDirection)
-print ('nextDirecton is ', getNextDirection())
