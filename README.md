@@ -96,6 +96,12 @@ itemArray = [item * 2 for item in itemArray] works fine
 ### template strings 
 'a is {}'.format(a)
 
+### conversions
+number to string 
+str(123)
+string to number 
+int('123')
+
 ### misc
 no ++ 
 use +=
