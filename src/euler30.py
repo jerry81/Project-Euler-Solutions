@@ -1,18 +1,25 @@
 print('project euler problem 30')
 
-sampleNumber = 3456
+max = 354294
 
-def getFourthPowerArray(input):
+def getPowerArray(input, power):
   ret = []
   stringified = str(input)
   for digit in stringified:
     asNumber = int(digit)
-    powered = asNumber**4
+    powered = asNumber**power
     ret.append(powered)
   return ret 
 
-res = getFourthPowerArray(sampleNumber)
 
-
-print('res is {}'.format(res))
-print('sum is {}'.format(sum(res)))
+cur = 2
+sums = []
+while cur < max: 
+  res = getPowerArray(cur, 5)
+  resSum = sum(res)
+  if (cur == resSum):
+    print('{} and {} are equal'.format(cur, resSum))
+    sums.append(cur)
+  cur += 1
+print('sums is {}'.format(sums))
+print('sum of sums is {}'.format(sum(sums)))
