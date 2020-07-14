@@ -42,6 +42,13 @@ declared with {}
 
 unique vals 
 
+note that dictionaries are also declared with {}
+
+can also be declared with set()
+
+.add to append to set
+.union to merge two sets
+
 ### Dictionary
 
 Syntax like js objects
@@ -85,3 +92,10 @@ itemArray not effected ( creates a copy )
 itemArray can be reassigned in place 
 
 itemArray = [item * 2 for item in itemArray] works fine
+
+### template strings 
+'a is {}'.format(a)
+
+### misc
+no ++ 
+use +=
