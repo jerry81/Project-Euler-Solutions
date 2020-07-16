@@ -109,6 +109,12 @@ copy.deepCopy(x)
 ### loop backwards
 range(10, 0, -1) goes from 10 to 0 
 
+### default args
+def getNextState(coins, skip = False):
+
 ### misc
 no ++ 
 use +=
+
+### block comment
+triple quote
