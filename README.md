@@ -102,6 +102,13 @@ str(123)
 string to number 
 int('123')
 
+### shallow and deep copy
+copy.copy(x)
+copy.deepCopy(x)
+
+### loop backwards
+range(10, 0, -1) goes from 10 to 0 
+
 ### misc
 no ++ 
 use +=
