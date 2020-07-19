@@ -3,8 +3,8 @@ print('project euler problem 31')
 import copy
 
 target = 200
-coinsMatrix = [1, 2, 5, 10, 20, 50, 100]
-maxMatrix = [200, 100, 40, 20, 10, 4, 2]
+coinsMatrix = [1, 2, 5, 10, 20, 50, 100, 200]
+maxMatrix = [200, 100, 40, 20, 10, 4, 2, 1]
 
 # iterate all permutations of the coins from 0 coins to max coins
 
@@ -31,7 +31,7 @@ def getNextState(coins, skip = False):
   return None
 
 
-perms = [0, 0, 0, 0, 0, 0, 0]
+perms = [0, 0, 0, 0, 0, 0, 0, 0]
 res = 0
 shouldSkip = False
 while (True): 
