@@ -19,7 +19,6 @@ def getNextPermutation(input):
     for i in range(len(ret) - 1, pivot, -1):
       cur = ret[i]
       if pivotValue < cur:
-        print('i is {} pivot is {} pivotValue is {} cur is {}'.format(i, pivot, pivotValue, cur))
         ret = swap(ret[:], i, pivot)
         ret = reverseSlice(ret[:], pivot + 1, len(ret))
         return ret
@@ -35,7 +34,7 @@ sliced = testBase[2:4]
 joined = testBase[0:2] + testBase[2:5]
 
 
-nextPerm = [1,2,3,4,5]
+nextPerm = [1,2,3,4,5,6,7,8,9]
 allPerms = [nextPerm]
 while True:
   prev = nextPerm
@@ -45,5 +44,15 @@ while True:
   else: 
     allPerms.append(nextPerm)
 
+def stringifyAndJoin(arr):
+  s = [str(i) for i in arr]
+  return int("".join(s))
+
+print('strngifyandjoin [1,2,3]', stringifyAndJoin([1,2,3]))
+
+# for x in range(0, len(allPerms)):
+  # try [0:1]*[1:5] = [5:10]
+
+
+
 print('all perms has {} items'.format(len(allPerms)))
-print('all perms is ', allPerms)

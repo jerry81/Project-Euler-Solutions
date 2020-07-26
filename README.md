@@ -118,3 +118,14 @@ use +=
 
 ### block comment
 triple quote
+
+## arrays
+
+### convert int array into string array
+s = [str(i) for i in list]
+
+## strings
+
+### join 
+joins all items in iterable and appends to string
+e.g. "".join(items)
