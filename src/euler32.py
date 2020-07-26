@@ -14,14 +14,15 @@ def reverseSlice(arr, idx1, idx2):
 
 def getNextPermutation(input):
   ret = input[:]
-  for i in range(len(ret) - 1, -1, -1):
-    cur = ret[i]
-    print('cur is ', cur)
-    for j in range(i - 1, -1, -1):
-      comp = ret[j]
-      if j < i:
-        ret = swap(ret[:], i, j)
-
+  for pivot in range(len(ret) - 2, -1, -1):
+    pivotValue = ret[pivot]
+    for i in range(len(ret) - 1, pivot, -1):
+      cur = ret[i]
+      if pivotValue < cur:
+        print('i is {} pivot is {} pivotValue is {} cur is {}'.format(i, pivot, pivotValue, cur))
+        ret = swap(ret[:], i, pivot)
+        ret = reverseSlice(ret[:], pivot + 1, len(ret))
+        return ret
   return ret
 
 testBase = [1,2,3,4,5]
@@ -34,8 +35,15 @@ sliced = testBase[2:4]
 joined = testBase[0:2] + testBase[2:5]
 
 
-testPerm = [1,2,3,4,5]
-reversedSlice = reverseSlice(testPerm[:], 3, 4)
-nextPerm = getNextPermutation(testPerm)
-print('nextPerm is ', nextPerm)
-print('reverseSlice is ', reversedSlice)
+nextPerm = [1,2,3,4,5]
+allPerms = [nextPerm]
+while True:
+  prev = nextPerm
+  nextPerm = getNextPermutation(nextPerm[:])
+  if (prev == nextPerm):
+    break
+  else: 
+    allPerms.append(nextPerm)
+
+print('all perms has {} items'.format(len(allPerms)))
+print('all perms is ', allPerms)
