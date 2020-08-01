@@ -1,3 +1,11 @@
+# Project Euler
+greetings!  this repository is to both practice and learn python and to practice algorithms by working solutions to [https://projecteuler.net/](project euler) problems
+
+required: python3
+to run 
+1.  cd src
+2.  python3 <name of file> e.g. python3 ./euler33.py
+
 # PythonLearning
 
 ## Definitions
