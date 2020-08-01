@@ -28,3 +28,14 @@ def isPrime(input):
     if ((input % x) == 0):
       return False
   return True
+
+def reduceFraction(fraction):
+  numerator = fraction[0]
+  denom = fraction[1]
+  maxDiv = min(numerator, math.floor(denom / 2))
+  for div in range(maxDiv, 0, -1):
+    rem = numerator % div 
+    rem2 = denom % div
+    if rem == 0 and rem2 == 0:
+      return (numerator//div, denom//div)
+  return (numerator, denom)
