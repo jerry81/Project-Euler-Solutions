@@ -131,8 +131,16 @@ triple quote
 
 ### convert int array into string array
 s = [str(i) for i in list]
+### convert int to str 
+d = 15
+d.str()
 
 ## strings
+
+### replace in str x number of times
+s = 'abababab'
+print(s.replace('a', 'A', 2)) 
+#result AbAbabab
 
 ### join 
 joins all items in iterable and appends to string
