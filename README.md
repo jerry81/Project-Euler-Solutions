@@ -1,5 +1,5 @@
 # Project Euler
-greetings!  this repository is to both practice and learn python and to practice algorithms by working solutions to [https://projecteuler.net/](project euler) problems
+greetings!  this repository is to both practice and learn python and to practice algorithms by working solutions to [project euler](https://projecteuler.net/) problems
 
 required: python3
 to run 
