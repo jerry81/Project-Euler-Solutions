@@ -8,9 +8,9 @@ def factOfDigs(input):
     for char in asStr:
         print('char is ', char)
         factArr.append(math.factorial(int(char)))
-    print('factArr is ', factArr)
+    return sum(factArr)
+    
     
 
-for idx in range(0, 10):
-    print('fact of Digs is ', factOfDigs(idx))
-    print('{} factorial is {}'.format(idx, math.factorial(idx)))
+for idx in range(0, 20):
+    print('idx {} fact of Digs is {}'.format(idx, factOfDigs(idx)))
