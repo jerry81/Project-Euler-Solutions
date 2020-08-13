@@ -6,11 +6,17 @@ def factOfDigs(input):
     asStr = str(input)
     factArr = []
     for char in asStr:
-        print('char is ', char)
+        if int(char) > input:
+            return 0
         factArr.append(math.factorial(int(char)))
     return sum(factArr)
     
     
-
-for idx in range(0, 20):
-    print('idx {} fact of Digs is {}'.format(idx, factOfDigs(idx)))
+matches = []
+for idx in range(0, 10000000):
+    summed = factOfDigs(idx)
+    if idx == summed:
+        matches.append(idx)
+    # print('idx is ', idx)
+    # print('summed is ', summed)
+print('matches is ', matches)
