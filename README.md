@@ -145,3 +145,9 @@ print(s.replace('a', 'A', 2))
 ### join 
 joins all items in iterable and appends to string
 e.g. "".join(items)
+
+## math 
+
+### division
+floor division /
+decimal division //
