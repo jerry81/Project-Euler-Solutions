@@ -149,5 +149,5 @@ e.g. "".join(items)
 ## math 
 
 ### division
-floor division /
-decimal division //
+floor division //
+decimal division /

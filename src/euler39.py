@@ -17,11 +17,10 @@ print("isn't right", isRightTriangle(1,5,9))
 # third = second+1 to x-2
 
 def getAllCombinations(x): 
-  arr = []
-  for a in range(1, (x/3)):
-    for b in range((a+1), (x-3)):
-      for c in range((b+1), (x-2)):
-        arr.append({ a, b, c })
-  return arr
-
-print("get all combinations ", getAllCombinations(8))
+  combos = []
+  for a in range(1, (x//3)+1):
+    for b in range(a, (x//2)+1):
+      c = x - (a+b)
+      if (a <= b and b <= c):
+        combos.append({"a": a,"b": b,"c": c})
+  return combos
