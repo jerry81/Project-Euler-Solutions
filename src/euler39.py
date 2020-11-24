@@ -9,6 +9,10 @@ print("is right", isRightTriangle(3,4,5))
 print("is right", isRightTriangle(20,48,52))
 print("isn't right", isRightTriangle(1,5,9))
 
+def isTupleRightTriangle(object): 
+  res = isRightTriangle(object["a"], object["b"], object["c"])
+  return res
+
 # all combinations summing up to x
 # 3 for loops 
 # smallest perimeter 6 (1+2+3)
@@ -24,3 +28,13 @@ def getAllCombinations(x):
       if (a <= b and b <= c):
         combos.append({"a": a,"b": b,"c": c})
   return combos
+
+highest = { 'idx': 1, 'cnt': 0 }
+for i in range(1, 1001):
+  combos = getAllCombinations(i)
+  filteredCombos = filter(isTupleRightTriangle, list(combos))
+  comboCount = len(list(filteredCombos))
+  if (comboCount > highest['cnt']):
+    highest['idx'] = i
+    highest["cnt"] = comboCount
+    print('highest is ', highest)
