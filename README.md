@@ -65,6 +65,8 @@ modify same as js notation
 
 empty dict false otherwise true 
 
+access props with a["b"] syntax
+
 ### Fractions module 
 
 import fractions // to import 
@@ -123,6 +125,8 @@ def getNextState(coins, skip = False):
 ### misc
 no ++ 
 use +=
+no function overloading
+
 
 ### block comment
 triple quote
@@ -134,6 +138,8 @@ s = [str(i) for i in list]
 ### convert int to str 
 d = 15
 d.str()
+### filter
+filtered = filter(filterFn, originalArr)
 
 ## strings
 
