@@ -33,16 +33,19 @@ testSlice = testBase[:]
 sliced = testBase[2:4]
 joined = testBase[0:2] + testBase[2:5]
 
+def getAllPerms(nextPerm): 
+  allItems = [nextPerm]
+  while True:
+    prev = nextPerm
+    nextPerm = getNextPermutation(nextPerm[:])
+    if (prev == nextPerm):
+      break
+    else: 
+      allItems.append(nextPerm)
+  return allItems
 
-nextPerm = [1,2,3,4,5,6,7,8,9]
-allPerms = [nextPerm]
-while True:
-  prev = nextPerm
-  nextPerm = getNextPermutation(nextPerm[:])
-  if (prev == nextPerm):
-    break
-  else: 
-    allPerms.append(nextPerm)
+firstPerm = [1,2,3,4,5,6,7,8,9]
+allPerms = getAllPerms(firstPerm)
 
 def stringifyAndJoin(arr):
   s = [str(i) for i in arr]
