@@ -1,5 +1,12 @@
 import math
 
+def isPandigital(inputN):
+  asStr = str(inputN)
+  if len(asStr) != 9:
+    return False
+  panSet = set("123456789")
+  return len(panSet.intersection(set(asStr))) == 9
+
 def longDivision(divisor, dividend):
     quotientArr = []
     repeatArr = []
