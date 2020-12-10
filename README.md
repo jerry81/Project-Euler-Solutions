@@ -157,3 +157,14 @@ e.g. "".join(items)
 ### division
 floor division //
 decimal division /
+
+## file
+
+### reading file example 
+
+reader = open('./resources/p042_words.txt')
+try: 
+  inputStr = reader.read()
+  print('inputStr', inputStr)
+finally:
+  reader.close()
