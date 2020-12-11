@@ -19,11 +19,29 @@ def getTriangles(numOfEntries):
   return returned
 
 trianglesList = getTriangles(10000)
+def filterCommas(item):
+  return item != ',' and item != ''
+
+def getStrValue(input):
+  lower = input.lower()
+  total = 0
+  for i in range(0, len(input)):
+    char = lower[i]
+    total += charDict[char]
+  return total
 
 reader = open('./resources/p042_words.txt')
 try: 
   inputStr = reader.read()
-  print('inputStr', inputStr)
+  filtered = list(filter(filterCommas, inputStr.split('"')))
+  print('inputArr', len(filtered))
+  count = 0
+  for i in range(0, len(filtered)):
+    cand = getStrValue(filtered[i])
+    print('cand is ', cand)
+    if cand in trianglesList:
+      count += 1
+  print('count is ', count)
 finally:
   reader.close()
 
