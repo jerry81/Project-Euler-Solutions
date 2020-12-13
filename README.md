@@ -168,3 +168,6 @@ try:
   print('inputStr', inputStr)
 finally:
   reader.close()
+
+### loops
+break and continue both supported
