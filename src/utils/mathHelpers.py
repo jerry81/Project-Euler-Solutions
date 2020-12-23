@@ -1,5 +1,4 @@
 import math
-
 def isPandigital(inputN):
   asStr = str(inputN)
   if len(asStr) != 9:
