@@ -171,3 +171,7 @@ finally:
 
 ### loops
 break and continue both supported
+
+### lambda with filter
+
+filter(lambda x: x % 2 == 0, arr)
