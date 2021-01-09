@@ -140,6 +140,8 @@ d = 15
 d.str()
 ### filter
 filtered = filter(filterFn, originalArr)
+#### gotchas 
++= doesn't work for pushing dictionaries, use .append
 
 ## strings
 

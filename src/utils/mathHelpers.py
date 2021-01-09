@@ -45,3 +45,24 @@ def reduceFraction(fraction):
     if rem == 0 and rem2 == 0:
       return (numerator//div, denom//div)
   return (numerator, denom)
+
+def eratosthenes(limit):
+  initArr = []
+  for i in range(2, limit+1):
+    initArr.append({ "val": i, "prime": False, "touched": False })
+  # setup done 
+  for pivot in range(0, limit-1):
+    current = initArr[pivot]
+    if (current['touched'] == False):
+      current['touched'] = True
+      current['prime'] = True
+    for processed in range(pivot, limit-1):
+      current2 = initArr[processed]
+      rem = current2['val'] % current['val']
+      if rem == 0 and current2['touched'] == False:
+        current2['touched'] = True
+        current2['prime'] = False 
+  filtered = list(filter(lambda x: x['prime'] == True, initArr))
+  mapped = list(map(lambda x: x['val'], filtered))
+  return mapped 
+      
