@@ -56,12 +56,12 @@ def eratosthenes(limit):
     if (current['touched'] == False):
       current['touched'] = True
       current['prime'] = True
-    for processed in range(pivot, limit-1):
-      current2 = initArr[processed]
-      rem = current2['val'] % current['val']
-      if rem == 0 and current2['touched'] == False:
-        current2['touched'] = True
-        current2['prime'] = False 
+    start = current['val']**2
+    while start < limit:
+      current2 = initArr[start-2]
+      current2['touched'] = True
+      current2['prime'] = False 
+      start += current['val']
   filtered = list(filter(lambda x: x['prime'] == True, initArr))
   mapped = list(map(lambda x: x['val'], filtered))
   return mapped 
