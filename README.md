@@ -154,6 +154,8 @@ print(s.replace('a', 'A', 2))
 joins all items in iterable and appends to string
 e.g. "".join(items)
 
+python also has a split method for going the other direction
+
 ## math 
 
 ### division
