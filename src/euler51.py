@@ -21,12 +21,13 @@ def hasDupe(input):
     countMap[asStr[i]] += 1
     if countMap[asStr[i]] > 1:
       hasDupe = True
-  return not hasDupe
+  return hasDupe
 
 noDupes = list(filter(hasDupe,asIntList))
 
-print("len with dupes is ", len(asIntList))
-print("no dupes is ", noDupes)
-print("len is ", len(noDupes))
+""" f = open("./resources/nonDupesFiltered.txt", "x+")
+f.write(",".join([str(elem) for elem in noDupes]))
+f.close() """
+
 toc = time.perf_counter()
 print('finished in ', toc - tic)
