@@ -21,28 +21,79 @@ raw = """08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48"""
 
-# organize into 20x20 array 
+# organize into 20x20 array
 
 rawArr = raw.split("\n")
 
 rawArr = list(map(lambda item: item.split(" "), rawArr))
 
+
 def right4Prod(startingX, startingY, arr):
     prod = 1
     for x in range(startingX, startingX+4):
-        prod *= int(arr[startingY][x])
-    return prod 
+        if (x < len(arr[startingY])):
+            prod *= int(arr[startingY][x])
+    return prod
+
 
 def down4Prod(startingX, startingY, arr):
     prod = 1
     for y in range(startingY, startingY+4):
-        prod *= int(arr[y][startingX])
-    return prod 
+        if (y < len(arr)):
+            prod *= int(arr[y][startingX])
+    return prod
+
 
 def diag4Prod(startingX, startingY, arr):
     prod = 1
     for diff in range(0, 4):
-        prod *= int(arr[startingY + diff][startingX + diff])
-    return prod 
+        if startingY + diff < len(arr) and startingX + diff < len(arr[startingY]):
+            prod *= int(arr[startingY + diff][startingX + diff])
+    return prod
 
-print(diag4Prod(0,0, rawArr))
+def left4Prod(startingX, startingY, arr):
+    prod = 1
+    for x in range(startingX, startingX-4):
+        if (x >= 0):
+            prod *= int(arr[startingY][x])
+    return prod
+
+
+def up4Prod(startingX, startingY, arr):
+    prod = 1
+    for y in range(startingY, startingY-4):
+        if (y >= 0):
+            prod *= int(arr[y][startingX])
+    return prod
+
+
+def rDiag4Prod(startingX, startingY, arr):
+    prod = 1
+    for diff in range(0, 4):
+        if startingY - diff >= 0 and startingX - diff >= 0:
+            prod *= int(arr[startingY - diff][startingX - diff])
+    return prod
+
+max = 0
+for i in range(0, 20):
+    for j in range(0, 20):
+        right = right4Prod(i, j, rawArr)
+        down = down4Prod(i, j, rawArr)
+        diag = diag4Prod(i, j, rawArr)
+        left = left4Prod(i, j, rawArr)
+        up = up4Prod(i, j, rawArr)
+        rDiag = rDiag4Prod(i, j, rawArr)
+        if right > max:
+            max = right
+        if down > max:
+            max = down
+        if diag > max:
+            max = diag 
+        if left > max:
+            max = left
+        if up > max:
+            max = up
+        if rDiag > max:
+            max = rDiag 
+
+print(max)
