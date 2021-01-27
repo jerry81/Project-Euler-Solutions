@@ -27,3 +27,22 @@ rawArr = raw.split("\n")
 
 rawArr = list(map(lambda item: item.split(" "), rawArr))
 
+def right4Prod(startingX, startingY, arr):
+    prod = 1
+    for x in range(startingX, startingX+4):
+        prod *= int(arr[startingY][x])
+    return prod 
+
+def down4Prod(startingX, startingY, arr):
+    prod = 1
+    for y in range(startingY, startingY+4):
+        prod *= int(arr[y][startingX])
+    return prod 
+
+def diag4Prod(startingX, startingY, arr):
+    prod = 1
+    for diff in range(0, 4):
+        prod *= int(arr[startingY + diff][startingX + diff])
+    return prod 
+
+print(diag4Prod(0,0, rawArr))
