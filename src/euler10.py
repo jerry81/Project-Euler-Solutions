@@ -27,6 +27,7 @@ rawArr = raw.split("\n")
 
 rawArr = list(map(lambda item: item.split(" "), rawArr))
 
+print(rawArr)
 
 def right4Prod(startingX, startingY, arr):
     prod = 1
@@ -47,13 +48,13 @@ def down4Prod(startingX, startingY, arr):
 def diag4Prod(startingX, startingY, arr):
     prod = 1
     for diff in range(0, 4):
-        if startingY + diff < len(arr) and startingX + diff < len(arr[startingY]):
+        if (startingY + diff) < len(arr) and (startingX + diff) < len(arr[startingY]):
             prod *= int(arr[startingY + diff][startingX + diff])
     return prod
 
 def left4Prod(startingX, startingY, arr):
     prod = 1
-    for x in range(startingX, startingX-4):
+    for x in range(startingX, startingX-4, -1):
         if (x >= 0):
             prod *= int(arr[startingY][x])
     return prod
@@ -61,8 +62,9 @@ def left4Prod(startingX, startingY, arr):
 
 def up4Prod(startingX, startingY, arr):
     prod = 1
-    for y in range(startingY, startingY-4):
+    for y in range(startingY, startingY-4, -1):
         if (y >= 0):
+       #     print("y is ", y)
             prod *= int(arr[y][startingX])
     return prod
 
@@ -74,6 +76,13 @@ def rDiag4Prod(startingX, startingY, arr):
             prod *= int(arr[startingY - diff][startingX - diff])
     return prod
 
+def urDiag4Prod(startingX, startingY, arr):
+    prod = 1
+    for diff in range(0, 4):
+        if startingY - diff >= 0 and startingX + diff < len(rawArr):
+            prod *= int(arr[startingY - diff][startingX + diff])
+    return prod
+
 max = 0
 for i in range(0, 20):
     for j in range(0, 20):
@@ -83,6 +92,7 @@ for i in range(0, 20):
         left = left4Prod(i, j, rawArr)
         up = up4Prod(i, j, rawArr)
         rDiag = rDiag4Prod(i, j, rawArr)
+        urDiag = urDiag4Prod(i, j, rawArr)
         if right > max:
             max = right
         if down > max:
@@ -95,5 +105,9 @@ for i in range(0, 20):
             max = up
         if rDiag > max:
             max = rDiag 
+        if urDiag > max:
+            max = urDiag
 
+print(len(rawArr))
+print(len(rawArr[0]))
 print(max)
