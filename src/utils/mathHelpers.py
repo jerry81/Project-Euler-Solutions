@@ -66,3 +66,15 @@ def eratosthenes(limit):
   mapped = list(map(lambda x: x['val'], filtered))
   return mapped 
       
+def getFactors(number):
+  returned = []
+  for i in range(1, number+1):
+    if number%i == 0:
+      returned.append(i)
+  return returned
+
+def getXTriangles(x):
+  triangles = []
+  for i in range(0, x):
+    triangles.append(sum(range(1,i+2)))
+  return triangles
