@@ -1,4 +1,5 @@
 import math
+
 def isPandigital(inputN):
   asStr = str(inputN)
   if len(asStr) != 9:
@@ -68,13 +69,15 @@ def eratosthenes(limit):
       
 def getFactors(number):
   returned = []
-  for i in range(1, number+1):
+  for i in range(1, int(math.sqrt(number)) + 1):
     if number%i == 0:
       returned.append(i)
+      returned.append(number // i)
   return returned
 
 def getXTriangles(x):
   triangles = []
   for i in range(0, x):
-    triangles.append(sum(range(1,i+2)))
+    num = i + 1
+    triangles.append((num * (num +1)) // 2)
   return triangles
