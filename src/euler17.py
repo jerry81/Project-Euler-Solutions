@@ -27,7 +27,7 @@ numberMap = {
         14: "fourteen",
         15: "fifteen",
         16: "sixteen",
-        17: "sweventeen",
+        17: "seventeen",
         18: "eighteen",
         19: "nineteen",
         20: "twenty",
@@ -43,20 +43,25 @@ numberMap = {
 }
 total = 0
 finalTotal=0
-for i in range(1, 20):
+miniTest = 0
+for i in range(1, 6):
+  miniTest+=len(numberMap[i])
+for i in range(1, 21):
   total+=len(numberMap[i])
 for i in range(21, 100):
         tens = int(str(i)[0])*10
         singles = int(str(i)[1])
         numAsStr = '{}{}'.format(numberMap[tens], numberMap[singles])
+        print('numasstr', numAsStr)
         total+=len(numAsStr)
 finalTotal += total
 
 for j in range(1, 10):
-        finalTotal += (len(numberMap[100]) + len('and') + len(numberMap[j]))*100 + total     
-        finalTotal += len(numberMap[100]) + len(numberMap[j])
-finalTotal += len(numberMap[1000])
+        finalTotal += (len(numberMap[100]) + len('and') + len(numberMap[j]))*99 + total # onehundredand * 99 + (total from 1 to 99)
+        finalTotal += len(numberMap[100]) + len(numberMap[j]) # onehundred, twohundred, etc...
+finalTotal += len(numberMap[1000]) + len(numberMap[1]) # oneThousand
 print("total is ", total)    
 print("ftotal is ", finalTotal)
+print('minitest is ', miniTest)
 tic = time.perf_counter()
 print('took ', time.perf_counter() - tic)
