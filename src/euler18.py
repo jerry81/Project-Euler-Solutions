@@ -16,6 +16,9 @@ raw = """75
 63 66 04 68 89 53 67 30 73 16 69 87 40 31
 04 62 98 27 23 09 70 98 73 93 38 53 60 04 23"""
 rawArr = raw.split("\n")
+for i in range(0, len(rawArr)):
+        numStr = rawArr[i]
+        rawArr[i] = [int(x) for x in numStr.split(' ')]
 print('rawArr', rawArr)
 tic = time.perf_counter()
 print('took ', time.perf_counter() - tic)
