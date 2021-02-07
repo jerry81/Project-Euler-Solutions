@@ -30,13 +30,14 @@ def getPaths(level, rawArr):
                 curArr = nextLevel[i].copy()
                 lastItem = curArr[-1]
                 # add self
-                nextLevel[i].append(lastItem)
+                if lastItem < (len(currentLevel) - 1):
+                        nextLevel[i].append(lastItem)
                 # add -1 and +1 if within bounds
                 if lastItem>0:
                         copy1 = curArr.copy()
                         copy1.append(lastItem - 1)
                         nextLevel.append(copy1)
-                if lastItem<len(currentLevel):
+                if lastItem<len(currentLevel)-1:
                         copy2 = curArr.copy()
                         copy2.append(lastItem + 1)
                         nextLevel.append(copy2)
@@ -48,17 +49,19 @@ for i in range(0, len(rawArr)):
         rawArr[i] = [int(x) for x in numStr.split(' ')]
 print('rawArr', rawArr)
 paths = getPaths(0, rawArr)
-print('paths is ', paths)
 maxNum = 0
-for i in range(0, len(paths)):
-        path = paths[i]
+refinedPaths = list(filter(lambda x: len(x) == 15, paths))
+
+for i in range(0, len(refinedPaths)):
+        path = refinedPaths[i]
+        path.reverse()
         total = 0
         for j in range(0, len(path)):
                 cur = path[j]
                 row = rawArr[j]
                 total += row[cur]
         if total > maxNum:
-                maxNum = j
+                maxNum = total
 
 print('max is ', maxNum)
 print('took ', time.perf_counter() - tic)
