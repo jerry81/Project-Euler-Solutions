@@ -10,43 +10,65 @@ def getNextDay(day):
         return day
 
 def nextDay(curDay):
-        month = curDay.month
-        day = curDay.day
-        year = curDay.year
-        dayOfWeek = 1
+        month = curDay["month"]
+        day = curDay["day"]
+        year = curDay["year"]
+        dayOfWeek = curDay["dayOfWeek"]
         leap = isLeapYear(year)
-        nextDay = { day: -1, month: -1, year: -1 }
+        nextDay = { "day": -1, "month": -1, "year": -1, "dayOfWeek": -1 }
+        nextDay["day"] = day
+        nextDay["month"] = month
+        nextDay["year"] = year
+        nextDay["dayOfWeek"] = getNextDay(dayOfWeek)
         if month == 2:
                 if leap:
                         if day == 29:
-                                month = 3
-                                day = 1
+                                nextDay["month"] = 3
+                                nextDay["day"] = 1
                         else:
-                                day += 1
+                                nextDay["day"] = day + 1
                 else:
                         if day == 28:
-                                month = 3
-                                day = 1
+                                nextDay["month"] = 3
+                                nextDay["day"] = 1
                         else:
-                                day += 1
+                                nextDay["day"] = day + 1
         elif month in [9, 4, 6, 11]:
                 if day == 30:
-                        month += 1
-                        day = 1
+                        nextDay["month"] = month + 1
+                        nextDay["day"] = 1
                 else:
-                        day += 1
+                        nextDay["day"] = day + 1
         elif month == 12: 
                 if day == 31:
-                        month = 1
-                        day = 1
-                        year += 1
+                        nextDay["month"] = 1
+                        nextDay["day"] = 1
+                        nextDay["year"] = year + 1
+                        print("year is now ", nextDay["year"])
+                else: 
+                        nextDay["day"] = day + 1
+        else:
+                if day == 31:
+                        nextDay["month"] = month + 1
+                        print("month is now ", nextDay)
+                        nextDay["day"] = 1
+                else:
+                        nextDay["day"] = day + 1
+        return nextDay
 
+curDay = {}
+curDay["month"] = 1
+curDay["day"] = 1
+curDay["year"] = 1900
+curDay["dayOfWeek"] = 1
 
-dayOfWeek = 0
-curMonth = 1
+day = curDay
+count = 0
+while day["year"] < 2001:
+        day = nextDay(day)
+        if day["year"] >= 1901:
+                if day["dayOfWeek"] == 7 and day["day"] == 1:
+                        count += 1
 
-You are given the following information, but you may prefer to do some research for yourself.
-
-1 Jan 1900 was a Monday.
-And on leap years, twenty-nine.
-How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+print("count is ", count)
+# How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
