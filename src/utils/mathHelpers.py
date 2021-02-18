@@ -81,3 +81,18 @@ def getXTriangles(x):
     num = i + 1
     triangles.append((num * (num +1)) // 2)
   return triangles
+
+def getNextLexicalPermutation(current):
+        for i in range(len(current) - 1, -1, -1):
+                pivot = current[i]
+                for j in range(i - 1, -1, -1):
+                        compared = current[j]
+                        if compared < pivot:
+                                current[i] = compared
+                                current[j] = pivot 
+                                sublist = current[j+1:]
+                                sublist.reverse()
+                                current[j+1:] = sublist
+                                return current
+        current.reverse()
+        return current
