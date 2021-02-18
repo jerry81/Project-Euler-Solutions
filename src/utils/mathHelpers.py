@@ -97,3 +97,10 @@ def getNextLexicalPermutation(current):
                                     return current
         current.reverse()
         return current
+
+def fib(termIdx):
+  if termIdx == 0:
+    return 1
+  if termIdx == 1:
+    return 2
+  return fib(termIdx - 1) + fib(termIdx - 2)
