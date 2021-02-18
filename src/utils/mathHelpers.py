@@ -84,15 +84,16 @@ def getXTriangles(x):
 
 def getNextLexicalPermutation(current):
         for i in range(len(current) - 1, -1, -1):
-                pivot = current[i]
                 for j in range(i - 1, -1, -1):
                         compared = current[j]
-                        if compared < pivot:
-                                current[i] = compared
-                                current[j] = pivot 
-                                sublist = current[j+1:]
-                                sublist.reverse()
-                                current[j+1:] = sublist
-                                return current
+                        for k in range(i, j-1, -1):
+                            pivot = current[k]
+                            if compared < pivot:
+                                    current[k] = compared
+                                    current[j] = pivot 
+                                    sublist = current[j+1:]
+                                    sublist.reverse()
+                                    current[j+1:] = sublist
+                                    return current
         current.reverse()
         return current
