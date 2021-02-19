@@ -5,10 +5,10 @@ print('project euler problem 51')
 tic = time.perf_counter()
 
 #read the file:
-f = open("./resources/nonDupesFiltered.txt", "r")
+""" f = open("./resources/nonDupesFiltered.txt", "r")
 asStr = f.read()
 asList = asStr.split(',')
-asIntList = [int(item) for item in asList]
+asIntList = [int(item) for item in asList] """
 
 # filter list down to items with repeats
 def hasDupe(input):
@@ -29,10 +29,19 @@ def hasDupe(input):
 f.write(",".join([str(elem) for elem in noDupes]))
 f.close() """
 
-fiveDigitPrimes = list(filter(lambda x: len(str(x)) == 5,asIntList))
-sixDigitPrimes = list(filter(lambda x: len(str(x)) == 6,asIntList))
-print('len is ', len(fiveDigitPrimes))
-print('len6 is ', len(sixDigitPrimes))
+# fiveDigitPrimes = list(filter(lambda x: len(str(x)) == 5,asIntList))
+# sixDigitPrimes = list(filter(lambda x: len(str(x)) == 6,asIntList))
+""" sevDigitPrimes = list(filter(lambda x: len(str(x)) == 7, asIntList))
+f = open("./resources/sevenDigitPrimes.txt", "x+")
+f.write(",".join([str(elem) for elem in sevDigitPrimes]))
+f.close()  """
+f = open("./resources/sevenDigitPrimes.txt", "r")
+asStr = f.read()
+asList = asStr.split(',')
+sevDigitPrimes = [int(item) for item in asList] 
+print('sev len is ', len(sevDigitPrimes))
+# print('len is ', len(fiveDigitPrimes))
+# print('len6 is ', len(sixDigitPrimes))
 
 def getFamily(replacedDigits, baseNumber):
   bnAsStr = list(str(baseNumber))
@@ -54,10 +63,8 @@ def getPossibleReplacements(max):
   for i in range(0, max):
     for j in range(i, max):
       newList = [i, j]
-      print('newList', newList)
       replacementIndexes.append(newList)
-  print('replacement is ', replacementIndexes)
-  return set(replacementIndexes)
+  return replacementIndexes
 
 
 def makeRepeatIndexSet(inputArr):
@@ -77,10 +84,15 @@ print('99991', isPrime(99991))
 print('99989', isPrime(99989))
 
 # repeats = makeRepeatIndexSet(fiveDigitPrimes)
-family = getFamily([2,3], 56003)
-filtered = list(filter(lambda item: isPrime(item), family))
-print('filtered is ', len(filtered))
-print('replacements for six ', getPossibleReplacements(6))
+# family = getFamily([2,3], 56003)
+# filtered = list(filter(lambda item: isPrime(item), family))
+
+replacements = getPossibleReplacements(6)
+for pri in sevDigitPrimes:
+  for replacement in replacements:
+    family = getFamily(replacement, pri)
+    if (len(family) == 8):
+      print("family is ", family)
 # print('five', fiveDigitPrimes)
 toc = time.perf_counter()
 print('finished in ', toc - tic)
