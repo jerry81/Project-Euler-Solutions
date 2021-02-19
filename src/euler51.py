@@ -34,11 +34,31 @@ sixDigitPrimes = list(filter(lambda x: len(str(x)) == 6,asIntList))
 print('len is ', len(fiveDigitPrimes))
 print('len6 is ', len(sixDigitPrimes))
 
+def getFamily(replacedDigits, baseNumber):
+  bnAsStr = list(str(baseNumber))
+  family = []
+  for i in range(0, 10):
+    for dig in replacedDigits:
+      bnAsStr[dig] = str(i)
+    family.append(int(''.join(bnAsStr)))
+  return family
+
 # brute force: 
 # step thru each permutation of swapped indexes, index 1, index 2... index 1 and 2, index 1 and 3 ... 
 # fix some digits swap some digits.  then for each 
 # fixed number and idx pair, try 0-9 (10 ops), for each item that matches, add 1 to the count
 # permutations of abcde - ab ac ad ae
+
+def getPossibleReplacements(max):
+  replacementIndexes = []
+  for i in range(0, max):
+    for j in range(i, max):
+      newList = [i, j]
+      print('newList', newList)
+      replacementIndexes.append(newList)
+  print('replacement is ', replacementIndexes)
+  return set(replacementIndexes)
+
 
 def makeRepeatIndexSet(inputArr):
   repeats = set()
@@ -56,8 +76,11 @@ def makeRepeatIndexSet(inputArr):
 print('99991', isPrime(99991))
 print('99989', isPrime(99989))
 
-repeats = makeRepeatIndexSet(fiveDigitPrimes)
-print('repeats are ', repeats)
+# repeats = makeRepeatIndexSet(fiveDigitPrimes)
+family = getFamily([2,3], 56003)
+filtered = list(filter(lambda item: isPrime(item), family))
+print('filtered is ', len(filtered))
+print('replacements for six ', getPossibleReplacements(6))
 # print('five', fiveDigitPrimes)
 toc = time.perf_counter()
 print('finished in ', toc - tic)
