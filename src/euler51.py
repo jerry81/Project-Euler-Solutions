@@ -87,7 +87,7 @@ print('99989', isPrime(99989))
 # family = getFamily([2,3], 56003)
 # filtered = list(filter(lambda item: isPrime(item), family))
 
-replacements = getPossibleReplacements(6)
+replacements = getPossibleReplacements(7)
 for pri in sevDigitPrimes:
   for replacement in replacements:
     family = getFamily(replacement, pri)

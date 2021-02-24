@@ -179,3 +179,11 @@ break and continue both supported
 ### lambda with filter
 
 filter(lambda x: x % 2 == 0, arr)
+
+### different assignments
+
+(x_train, y_train), (x_test, y_test) = mnist.load_data() 
+two tuples separated by comma - this is known as sequence assignment 
+e.g.
+a, b, c = 'HEY'
+a gets H, b gets E, c gets Y

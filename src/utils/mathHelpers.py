@@ -52,6 +52,7 @@ def eratosthenes(limit):
   for i in range(2, limit+1):
     initArr.append({ "val": i, "prime": False, "touched": False })
   # setup done 
+  print('setup done')
   for pivot in range(0, limit-1):
     current = initArr[pivot]
     if (current['touched'] == False):
