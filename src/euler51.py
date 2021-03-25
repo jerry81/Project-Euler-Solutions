@@ -93,9 +93,21 @@ def makeRepeatIndexSet(inputArr):
             repeats.add(tuple((set(repeat))))
     return repeats
 
-replacements = getPossibleReplacements(7)
+""" cur = 10000000
+while cur < 11000000:
+  if not isPrime(cur):
+    continue
+  replacements = getPossibleReplacements(len(cur))
+  for replacement in replacements: 
+    family = getFamily(replacement, cur, 2)
+    if (len(family) == 8):
+        print("family is ", family)
+  cur += 1 """
+
+print('im done')
+replacements = getPossibleReplacements(6)
 print('replacements is ', replacements)
-for pri in sevDigitPrimes:
+for pri in sixDigitPrimes:
     for replacement in replacements:
         family = getFamily(replacement, pri, 2)
        # print('family possibility is ', family)
@@ -111,7 +123,7 @@ print('99989', isPrime(99989))
 # family = getFamily([2,3], 56003)
 # filtered = list(filter(lambda item: isPrime(item), family))
 
-replacements = getPossibleReplacements(7)
+""" replacements = getPossibleReplacements(7)
 for pri in sevDigitPrimes:
     for replacement in replacements:
         family = getFamily(replacement, pri)
@@ -119,4 +131,4 @@ for pri in sevDigitPrimes:
             print("family is ", family)
 # print('five', fiveDigitPrimes)
 toc = time.perf_counter()
-print('finished in ', toc - tic)
+print('finished in ', toc - tic) """
