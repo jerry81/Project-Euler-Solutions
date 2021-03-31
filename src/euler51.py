@@ -1,6 +1,7 @@
 import time
 from utils.mathHelpers import eratosthenes
 from utils.mathHelpers import isPrime
+from utils.fileUtils import openAndSplit
 print('project euler problem 51')
 tic = time.perf_counter()
 
@@ -34,7 +35,7 @@ f.close() """
 
 fiveDigitPrimes = list(filter(lambda x: len(str(x)) == 5, asIntList))
 
-sixDigitPrimes = list(filter(lambda x: len(str(x)) == 6,asIntList))
+sixDigitPrimes = list(filter(lambda x: len(str(x)) == 6, asIntList))
 """ sevDigitPrimes = list(filter(lambda x: len(str(x)) == 7, asIntList))
 f = open("./resources/sevenDigitPrimes.txt", "x+")
 f.write(",".join([str(elem) for elem in sevDigitPrimes]))
@@ -47,21 +48,33 @@ print('sev len is ', len(sevDigitPrimes))
 # print('len is ', len(fiveDigitPrimes))
 # print('len6 is ', len(sixDigitPrimes))
 
+f = open("./resources/sevenDigitPrimes.txt", "r")
+
+tento20 = openAndSplit('./resources/primesTo20M.txt')
+
+tento20F = openAndSplit('./resources/primesNoDupes10Mto20M.txt')
+
+print('len ten 2 20', len(tento20))
+print('len filtered', len(tento20F))
+
 
 def getFamily(replacedDigits, baseNumber, maxNonPrimes):
-  bnAsStr = list(str(baseNumber))
-  nonPrimeCount = 0
-  family = []
-  for i in range(0, 10):
-    for dig in replacedDigits:
-      bnAsStr[dig] = str(i)
-    if not isPrime(int(''.join(bnAsStr))):
-      nonPrimeCount += 1
-      if nonPrimeCount > maxNonPrimes:
-        return []
-    else: 
-      family.append(int(''.join(bnAsStr)))
-  return family
+    bnAsStr = list(str(baseNumber))
+    nonPrimeCount = 0
+    family = []
+    if bnAsStr[replacedDigits[0]] != bnAsStr[replacedDigits[1]]:
+        return family
+    for i in range(0, 10):
+        for dig in replacedDigits:
+            bnAsStr[dig] = str(i)
+        if not isPrime(int(''.join(bnAsStr))):
+            nonPrimeCount += 1
+            if nonPrimeCount > maxNonPrimes:
+                return []
+        else:
+            family.append(int(''.join(bnAsStr)))
+    return family
+
 
 print("isPrime", not isPrime(86507))
 # brute force:
@@ -93,6 +106,7 @@ def makeRepeatIndexSet(inputArr):
             repeats.add(tuple((set(repeat))))
     return repeats
 
+
 """ cur = 10000000
 while cur < 11000000:
   if not isPrime(cur):
@@ -105,15 +119,14 @@ while cur < 11000000:
   cur += 1 """
 
 print('im done')
-replacements = getPossibleReplacements(6)
+replacements = getPossibleReplacements(8)
 print('replacements is ', replacements)
-for pri in sixDigitPrimes:
+for pri in tento20F:
     for replacement in replacements:
         family = getFamily(replacement, pri, 2)
        # print('family possibility is ', family)
         if (len(family) == 8):
             print("family is ", family)
-
 
 
 print('99991', isPrime(99991))

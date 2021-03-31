@@ -105,3 +105,31 @@ def fib(termIdx):
   if termIdx == 1:
     return 2
   return fib(termIdx - 1) + fib(termIdx - 2)
+
+def eratosthenesWithSupport(fname, start, limit):
+  f = open(fname, "r")
+  asStr = f.read()
+  asList = asStr.split(',')
+  initArr = []
+  for i in range(2, limit+1):
+    initArr.append({ "val": i, "prime": False, "touched": False })
+  for j in range(0, len(asList)):
+    prime = int(asList[j])
+    initArr[prime-2]['prime'] = True
+    initArr[prime-2]['touched'] = True
+  # setup done 
+  print('setup done')
+  for pivot in range(start, limit-1):
+    current = initArr[pivot]
+    if (current['touched'] == False):
+      current['touched'] = True
+      current['prime'] = True
+    start = current['val']**2
+    while start < limit:
+      current2 = initArr[start-2]
+      current2['touched'] = True
+      current2['prime'] = False 
+      start += current['val']
+  filtered = list(filter(lambda x: x['prime'] == True, initArr))
+  mapped = list(map(lambda x: x['val'], filtered))
+  return mapped 
