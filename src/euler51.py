@@ -54,9 +54,15 @@ tento20 = openAndSplit('./resources/primesTo20M.txt')
 
 tento20F = openAndSplit('./resources/primesNoDupes10Mto20M.txt')
 
+raw = openAndSplit('./resources/eightDigPrimesUpTo179424673.txt')
+
 print('len ten 2 20', len(tento20))
 print('len filtered', len(tento20F))
+print('len raw', len(raw))
 
+tento30F = raw[100000: 200000] #first chunk
+
+print('len 30', len(tento30F))
 
 def getFamily(replacedDigits, baseNumber, maxNonPrimes):
     bnAsStr = list(str(baseNumber))
@@ -121,7 +127,7 @@ while cur < 11000000:
 print('im done')
 replacements = getPossibleReplacements(8)
 print('replacements is ', replacements)
-for pri in tento20F:
+for pri in tento30F:
     for replacement in replacements:
         family = getFamily(replacement, pri, 2)
        # print('family possibility is ', family)
