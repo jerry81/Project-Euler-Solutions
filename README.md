@@ -198,4 +198,3 @@ def arbiraryInput(*args, **kwargs):
   for key, val in kwargs.items():
     print(f"key is {key} val is {val}")
   
-### decorator with args
