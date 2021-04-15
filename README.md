@@ -187,3 +187,15 @@ two tuples separated by comma - this is known as sequence assignment
 e.g.
 a, b, c = 'HEY'
 a gets H, b gets E, c gets Y
+
+### using *args and **kwargs
+
+allow a function to accept arbitrary number of positional and keyword args
+
+def arbiraryInput(*args, **kwargs):
+  for arg in args:
+    print('arg', arg)
+  for key, val in kwargs.items():
+    print(f"key is {key} val is {val}")
+  
+### decorator with args
