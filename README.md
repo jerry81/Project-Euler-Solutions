@@ -198,3 +198,10 @@ def arbiraryInput(*args, **kwargs):
   for key, val in kwargs.items():
     print(f"key is {key} val is {val}")
   
+### for ... else
+
+for i in range(100):
+  pass
+else:
+  pass
+else clause runs if for did not call break or return

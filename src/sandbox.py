@@ -51,3 +51,18 @@ def helloWithReturn(num):
 
 result = helloWithReturn(2)
 print("result is ", result)
+
+def dec_nested(notFunction): # this syntax is specific to decorators that take in params
+  def outer(fn):
+    def inner():
+      print('PRE with arg', notFunction)
+      fn()
+      print('POST')
+    return inner
+  return outer
+
+@dec_nested("dec arg!")
+def helloNest():
+  print('hello nested')
+
+helloNest()
