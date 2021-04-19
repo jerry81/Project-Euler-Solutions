@@ -205,3 +205,12 @@ for i in range(100):
 else:
   pass
 else clause runs if for did not call break or return
+
+### contextlib
+
+out of the box module
+
+common tasks involving with
+
+@contextlib.contextmanager
+decorator that defines factory function for with context managers, no need for __enter__() and __exit__()

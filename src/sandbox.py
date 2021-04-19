@@ -67,6 +67,7 @@ def helloNest():
 
 helloNest()
 
+# issubclass example
 class Polygon:
   def __init__(polygonType):
     print('Polygon is ', polygonType)
@@ -78,3 +79,22 @@ class Triangle(Polygon):
 print(issubclass(Triangle, Polygon))
 # second arg can be a tuple
 print(issubclass(Triangle, (Polygon, bool)))
+
+# contextmanager example
+
+from contextlib import contextmanager 
+import time
+
+@contextmanager
+def managed():
+  time.sleep(3) # sleeps 3 seconds
+  try:
+    yield 'hello world'
+  finally:
+    print('released')
+
+with managed() as mg:
+  print('mg is ', mg)
+  time.sleep(3)
+
+print('done with')
