@@ -66,3 +66,15 @@ def helloNest():
   print('hello nested')
 
 helloNest()
+
+class Polygon:
+  def __init__(polygonType):
+    print('Polygon is ', polygonType)
+
+class Triangle(Polygon):
+  def __init__(self):
+    Polygon.__init__('triangle')
+
+print(issubclass(Triangle, Polygon))
+# second arg can be a tuple
+print(issubclass(Triangle, (Polygon, bool)))
