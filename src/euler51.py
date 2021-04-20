@@ -36,6 +36,7 @@ f.close() """
 fiveDigitPrimes = list(filter(lambda x: len(str(x)) == 5, asIntList))
 
 sixDigitPrimes = list(filter(lambda x: len(str(x)) == 6, asIntList))
+
 """ sevDigitPrimes = list(filter(lambda x: len(str(x)) == 7, asIntList))
 f = open("./resources/sevenDigitPrimes.txt", "x+")
 f.write(",".join([str(elem) for elem in sevDigitPrimes]))
@@ -60,7 +61,7 @@ print('len ten 2 20', len(tento20))
 print('len filtered', len(tento20F))
 print('len raw', len(raw))
 
-tento30F = raw[100000: 200000] #first chunk
+tento30F = raw[4000000: 4100000] #first chunk
 
 print('len 30', len(tento30F))
 
@@ -92,10 +93,11 @@ print("isPrime", not isPrime(86507))
 
 def getPossibleReplacements(max):
     replacementIndexes = []
-    for i in range(1, max):
+    for i in range(0, max):
         for j in range(i, max):
-            newList = [i, j]
-            replacementIndexes.append(newList)
+            for k in range(j, max):
+                newList = [i, j, k]
+                replacementIndexes.append(newList)
     return replacementIndexes
 
 
@@ -125,9 +127,10 @@ while cur < 11000000:
   cur += 1 """
 
 print('im done')
-replacements = getPossibleReplacements(8)
-print('replacements is ', replacements)
-for pri in tento30F:
+replacements = getPossibleReplacements(6)
+
+print('replacements are ', replacements)
+for pri in sixDigitPrimes:
     for replacement in replacements:
         family = getFamily(replacement, pri, 2)
        # print('family possibility is ', family)
