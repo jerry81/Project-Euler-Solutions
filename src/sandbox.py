@@ -87,7 +87,7 @@ import time
 
 @contextmanager
 def managed():
-  time.sleep(3) # sleeps 3 seconds
+  time.sleep(1) # sleeps 3 seconds
   try:
     yield 'hello world'
   finally:
@@ -95,6 +95,21 @@ def managed():
 
 with managed() as mg:
   print('mg is ', mg)
-  time.sleep(3)
+  time.sleep(1)
 
 print('done with')
+
+# zip
+
+iter1 = [1,2,3]
+zip1 = zip(iter1)
+print('zip1', list(zip1))
+
+iter2 = ['a', 'b', 'c']
+
+zip2 = zip(iter2, iter1)
+
+print('zip2', list(zip2))
+
+print('this doesnt work', dict(zip2)) # because zip2 has already been converted to list
+print('asdict', dict(zip(iter2, iter1))) # this works

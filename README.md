@@ -214,3 +214,7 @@ common tasks involving with
 
 @contextlib.contextmanager
 decorator that defines factory function for with context managers, no need for __enter__() and __exit__()
+
+### zip 
+
+takes iterables and aggregates them into a tuple
