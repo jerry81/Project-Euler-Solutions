@@ -218,3 +218,16 @@ decorator that defines factory function for with context managers, no need for _
 ### zip 
 
 takes iterables and aggregates them into a tuple
+
+### nsq
+
+a distributed messaging platform similar to rabbitMQ
+run in a different container
+topic
+message
+channel
+used for saving history asynchronously
+
+### getting type of python object
+
+x.type

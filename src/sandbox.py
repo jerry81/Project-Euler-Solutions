@@ -113,3 +113,18 @@ print('zip2', list(zip2))
 
 print('this doesnt work', dict(zip2)) # because zip2 has already been converted to list
 print('asdict', dict(zip(iter2, iter1))) # this works
+
+# types
+
+a = 1
+b = 'string'
+c = 2.22
+d = { a: 'a' }
+class e:
+  x = 5
+f = []
+
+g = [a,b,c,d,e,f]
+
+for item in g:
+  print('type is ', type(item))
