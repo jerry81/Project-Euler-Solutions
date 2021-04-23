@@ -97,10 +97,10 @@ def getFreqMap(cards):
       freqMap[val] = 1
   return freqMap
 
-def getFourOfAKind(cards):
+def getXOfAKind(cards, x):
   freqMap = getFreqMap(cards)
   for val, freq in freqMap.items():
-    if freq == 4:
+    if freq == x:
       return val
   return -1
 
@@ -174,8 +174,26 @@ def test4():
   cards2.append(Card('H', '5'))
   cards2.append(Card('D', '9'))
 
-  print('4oak 1, -1', getFourOfAKind(cards1))
-  print('4oak 2, 9', getFourOfAKind(cards2))
+  print('4oak 1, -1', getXOfAKind(cards1, 4))
+  print('4oak 2, 9', getXOfAKind(cards2, 4))
+
+def test3():
+  cards1 = []
+  cards1.append(Card('H', '7'))
+  cards1.append(Card('H', '3'))
+  cards1.append(Card('H', '4'))
+  cards1.append(Card('H', '5'))
+  cards1.append(Card('H', '6'))
+  
+  cards2 = []
+  cards2.append(Card('H', '9'))
+  cards2.append(Card('S', '9'))
+  cards2.append(Card('C', '9'))
+  cards2.append(Card('H', '5'))
+  cards2.append(Card('D', 'K'))
+
+  print('3oak 1, -1', getXOfAKind(cards1, 3))
+  print('3oak 2, 9', getXOfAKind(cards2, 3))
 
 @track_performance
 def euler54():
@@ -185,3 +203,4 @@ testSameSuit()
 testStraightHigh()
 testFreqMap()
 test4()
+test3()
