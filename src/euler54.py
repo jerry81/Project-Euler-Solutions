@@ -13,7 +13,7 @@ class Card:
     self.suit = s
     self.value = v 
   def __str__(self):
-    return "up yours"
+    return f'suit {self.suit}, value {self.value}'
   
 VALUE_MAP = {
   '2': 2,
@@ -36,8 +36,29 @@ SUIT_MAP = {
   'H': 3,
   'S': 4
 }
-def sameSuit(cards):
-  pass
+def getSameSuitHigh(cards):
+  cards.sort(key=lambda x:VALUE_MAP[x.value])
+  highCard = VALUE_MAP[cards[4].value]
+  suit = cards[0].suit
+  for card in cards:
+    if suit != card.suit:
+      return -1
+  return highCard
+
+def getStraightHigh(cards):
+  cards.sort(key=lambda x:VALUE_MAP[x.value])
+  highCard = VALUE_MAP[cards[0].value]
+  for idx, item in enumerate(cards):
+    if idx == 0: 
+      continue
+    curVal = VALUE_MAP[item.value]
+    if curVal == highCard:
+      return -1
+    elif curVal != highCard + 1:
+      return -1
+    highCard = curVal
+  return highCard
+
 
 def prepare():
   games = openAndSplitPlus('./resources/p054_poker.txt', '\n')
@@ -51,7 +72,6 @@ def prepare():
   for hand in filteredCards:
     newHand = list(map(lambda c: Card(c[1], c[0]),hand))
     handsRaw.append(newHand)
-    print('newHand is ', newHand)
   processedHands = []
   for rawHand in handsRaw:
     p1 = rawHand[:5]
@@ -59,10 +79,46 @@ def prepare():
     processedHands.append(p1)
     processedHands.append(p2)
   return processedHands
+
+def testSameSuit():
+  cards1 = []
+  cards1.append(Card('H', '2'))
+  cards1.append(Card('H', '3'))
+  cards1.append(Card('H', '4'))
+  cards1.append(Card('H', '5'))
+  cards1.append(Card('H', '6'))
   
+  cards2 = []
+  cards2.append(Card('H', '2'))
+  cards2.append(Card('S', '3'))
+  cards2.append(Card('H', '4'))
+  cards2.append(Card('H', '5'))
+  cards2.append(Card('H', '6'))
+  
+  print('6 is ', getSameSuitHigh(cards1))
+  print('-1 is ', getSameSuitHigh(cards2))
+
+def testStraightHigh():
+  cards1 = []
+  cards1.append(Card('H', '7'))
+  cards1.append(Card('H', '3'))
+  cards1.append(Card('H', '4'))
+  cards1.append(Card('H', '5'))
+  cards1.append(Card('H', '6'))
+  
+  cards2 = []
+  cards2.append(Card('H', '9'))
+  cards2.append(Card('S', '3'))
+  cards2.append(Card('H', '4'))
+  cards2.append(Card('H', '5'))
+  cards2.append(Card('H', '6'))
+
+  print('7 is ', getStraightHigh(cards1))
+  print('-1 is ', getStraightHigh(cards2))
 
 @track_performance
 def euler54():
   cards = prepare()
-  print('cards are ', cards)
 euler54()
+testSameSuit()
+testStraightHigh()
