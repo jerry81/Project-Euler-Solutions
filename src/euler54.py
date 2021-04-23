@@ -80,6 +80,16 @@ def prepare():
     processedHands.append(p2)
   return processedHands
 
+def getFreqMap(cards):
+  freqMap = {}
+  for card in cards:
+    val = card.value 
+    try:
+      freqMap[val] += 1
+    except:
+      freqMap[val] = 1
+  return freqMap
+
 def testSameSuit():
   cards1 = []
   cards1.append(Card('H', '2'))
@@ -116,9 +126,28 @@ def testStraightHigh():
   print('7 is ', getStraightHigh(cards1))
   print('-1 is ', getStraightHigh(cards2))
 
+def testFreqMap():
+  cards1 = []
+  cards1.append(Card('H', '7'))
+  cards1.append(Card('H', '3'))
+  cards1.append(Card('H', '4'))
+  cards1.append(Card('H', '5'))
+  cards1.append(Card('H', '6'))
+  
+  cards2 = []
+  cards2.append(Card('H', '9'))
+  cards2.append(Card('S', '9'))
+  cards2.append(Card('C', '9'))
+  cards2.append(Card('H', '5'))
+  cards2.append(Card('H', '6'))
+
+  print('freqMap 1, 7 high', getFreqMap(cards1))
+  print('freqMap 2, 3 nines', getFreqMap(cards2))
+
 @track_performance
 def euler54():
   cards = prepare()
 euler54()
 testSameSuit()
 testStraightHigh()
+testFreqMap()
