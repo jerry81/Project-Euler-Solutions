@@ -104,6 +104,20 @@ def getXOfAKind(cards, x):
       return val
   return -1
 
+def getPairs(cards):
+  freqMap = getFreqMap(cards)
+  pairs = []
+  for val, freq in freqMap.items():
+    if freq == 2:
+      pairs.append(val)
+  return pairs
+
+def getFullHouse(cards):
+  _3 = getXOfAKind(cards, 3)
+  _2 = getPairs(cards)
+  if (_3 != -1 and len(_2) == 1):
+    return _3
+  return -1
 
 def testSameSuit():
   cards1 = []
@@ -195,6 +209,60 @@ def test3():
   print('3oak 1, -1', getXOfAKind(cards1, 3))
   print('3oak 2, 9', getXOfAKind(cards2, 3))
 
+def testPairs():
+  cards1 = []
+  cards1.append(Card('H', '7'))
+  cards1.append(Card('H', '3'))
+  cards1.append(Card('H', '4'))
+  cards1.append(Card('H', '5'))
+  cards1.append(Card('H', '6'))
+  
+  cards2 = []
+  cards2.append(Card('H', '9'))
+  cards2.append(Card('S', '9'))
+  cards2.append(Card('C', '9'))
+  cards2.append(Card('H', '5'))
+  cards2.append(Card('D', 'K'))
+
+
+  cards3 = []
+  cards3.append(Card('H', '9'))
+  cards3.append(Card('S', '9'))
+  cards3.append(Card('C', 'A'))
+  cards3.append(Card('H', '5'))
+  cards3.append(Card('D', 'K'))
+
+
+  cards4 = []
+  cards4.append(Card('H', '9'))
+  cards4.append(Card('S', '9'))
+  cards4.append(Card('C', '10'))
+  cards4.append(Card('H', '10'))
+  cards4.append(Card('D', 'K'))
+
+  print('pairs -1', getPairs(cards1))
+  print('pairs -1', getPairs(cards2))
+  print('pairs 9', getPairs(cards3))
+  print('pairs 9, 10', getPairs(cards4))
+
+def testFH():
+  cards1 = []
+  cards1.append(Card('H', '7'))
+  cards1.append(Card('S', '7'))
+  cards1.append(Card('D', '4'))
+  cards1.append(Card('C', '4'))
+  cards1.append(Card('H', '4'))
+  
+  cards2 = []
+  cards2.append(Card('H', '9'))
+  cards2.append(Card('S', '9'))
+  cards2.append(Card('C', '9'))
+  cards2.append(Card('H', '5'))
+  cards2.append(Card('D', 'K'))
+
+  print('3oak 1, -1', get(cards1, 3))
+  print('3oak 2, 9', getXOfAKind(cards2, 3))
+
 @track_performance
 def euler54():
   cards = prepare()
@@ -204,3 +272,4 @@ testStraightHigh()
 testFreqMap()
 test4()
 test3()
+testPairs()
