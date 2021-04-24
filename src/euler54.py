@@ -119,6 +119,12 @@ def getFullHouse(cards):
     return _3
   return -1
 
+def get2Pair(cards):
+  pairs = getPairs(cards)
+  if len(pairs) != 2:
+    return -1
+  return max(pairs)
+
 def testSameSuit():
   cards1 = []
   cards1.append(Card('H', '2'))
@@ -263,6 +269,24 @@ def testFH():
   print('FH: 4 is ', getFullHouse(cards1))
   print('FH: -1 is', getFullHouse(cards2))
 
+def test2P():
+  cards1 = []
+  cards1.append(Card('H', '7'))
+  cards1.append(Card('S', '7'))
+  cards1.append(Card('D', '4'))
+  cards1.append(Card('C', '4'))
+  cards1.append(Card('H', '5'))
+  
+  cards2 = []
+  cards2.append(Card('H', '9'))
+  cards2.append(Card('S', '9'))
+  cards2.append(Card('C', '9'))
+  cards2.append(Card('H', '5'))
+  cards2.append(Card('D', 'K'))
+
+  print('2P: 7 is ', get2Pair(cards1))
+  print('2P: -1 is', get2Pair(cards2))
+
 @track_performance
 def euler54():
   cards = prepare()
@@ -274,3 +298,4 @@ test4()
 test3()
 testPairs()
 testFH()
+test2P()
