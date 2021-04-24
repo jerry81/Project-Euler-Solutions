@@ -50,7 +50,7 @@ def getSameSuitHigh(cards):
   for card in cards:
     if suit != card.suit:
       return -1
-  return highCard
+  return highCard, cards # return sorted cards for further comparisons
 
 def getStraightHigh(cards):
   cards.sort(key=lambda x:VALUE_MAP[x.value])
@@ -64,8 +64,7 @@ def getStraightHigh(cards):
     elif curVal != highCard + 1:
       return -1
     highCard = curVal
-  return highCard
-
+  return highCard, cards
 
 def prepare():
   games = openAndSplitPlus('./resources/p054_poker.txt', '\n')
@@ -98,32 +97,36 @@ def getFreqMap(cards):
   return freqMap
 
 def getXOfAKind(cards, x):
+  cards.sort(key=lambda x:VALUE_MAP[x.value])
   freqMap = getFreqMap(cards)
   for val, freq in freqMap.items():
     if freq == x:
-      return val
+      remainder = list(filter(lambda x: x != val, cards))
+      return val, remainder
   return -1
 
 def getPairs(cards):
+  cards.sort(key=lambda x:VALUE_MAP[x.value])
   freqMap = getFreqMap(cards)
   pairs = []
   for val, freq in freqMap.items():
     if freq == 2:
       pairs.append(val)
-  return pairs
+  remainder = list(filter(lambda x: x not in pairs, cards))
+  return pairs, remainder
 
 def getFullHouse(cards):
   _3 = getXOfAKind(cards, 3)
   _2 = getPairs(cards)
   if (_3 != -1 and len(_2) == 1):
-    return _3
+    return _3, _2
   return -1
 
 def get2Pair(cards):
-  pairs = getPairs(cards)
+  pairs, remainder = getPairs(cards)
   if len(pairs) != 2:
     return -1
-  return max(pairs)
+  return max(pairs), pairs, remainder
 
 def testSameSuit():
   cards1 = []
