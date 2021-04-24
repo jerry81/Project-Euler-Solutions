@@ -260,8 +260,8 @@ def testFH():
   cards2.append(Card('H', '5'))
   cards2.append(Card('D', 'K'))
 
-  print('3oak 1, -1', get(cards1, 3))
-  print('3oak 2, 9', getXOfAKind(cards2, 3))
+  print('FH: 4 is ', getFullHouse(cards1))
+  print('FH: -1 is', getFullHouse(cards2))
 
 @track_performance
 def euler54():
@@ -273,3 +273,4 @@ testFreqMap()
 test4()
 test3()
 testPairs()
+testFH()
