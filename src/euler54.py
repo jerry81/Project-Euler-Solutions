@@ -128,6 +128,39 @@ def get2Pair(cards):
     return -1
   return max(pairs), pairs, remainder
 
+def getSraightFlushRank(cards):
+  sameHigh, sortedCards = getSameSuitHigh(cards)
+  fourHigh, remainingSameHigh = getXOfAKind(cards, 4)
+  straightHigh, _ = getStraightHigh(cards)
+  bigRank = 0
+  smallRank = 0
+  rest = 0
+  # straight flush 
+  if (sameHigh > 0 and straightHigh > 0):
+    bigRank = '9'
+    smallRank = str(straightHigh)
+    rest = ''
+    for item in straightHigh:
+      rest.append(VALUE_MAP[item.value])
+  bigRank.append(smallRank).append(rest)
+  return float(bigRank)
+
+def getRank(cards):
+  # 10 big ranks
+  #   High Card: Highest value card.
+  # One Pair: Two cards of the same value.
+  # Two Pairs: Two different pairs.
+  # Three of a Kind: Three cards of the same value.
+  # Straight: All cards are consecutive values.
+  # Flush: All cards of the same suit.
+  # Full House: Three of a kind and a pair.
+  # Four of a Kind: Four cards of the same value.
+  # Straight Flush: All cards are consecutive values of same suit.
+  # Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
+
+
+  
+
 def testSameSuit():
   cards1 = []
   cards1.append(Card('H', '2'))
