@@ -35,7 +35,8 @@ VALUE_MAP = {
   'J': 11,
   'Q': 12,
   'K': 13,
-  'A': 14
+  'A': 14,
+  '0': 0
 } 
 SUIT_MAP = {
   'C': 1,
@@ -49,7 +50,7 @@ def getSameSuitHigh(cards):
   suit = cards[0].suit
   for card in cards:
     if suit != card.suit:
-      return -1
+      return -1, [0]
   return highCard, cards # return sorted cards for further comparisons
 
 def getStraightHigh(cards):
@@ -103,7 +104,7 @@ def getXOfAKind(cards, x):
     if freq == x:
       remainder = list(filter(lambda x: x != val, cards))
       return val, remainder
-  return -1
+  return -1, [0]
 
 def getPairs(cards):
   cards.sort(key=lambda x:VALUE_MAP[x.value])
@@ -134,18 +135,17 @@ def getSraightFlushRank(cards):
   straightHigh, _ = getStraightHigh(cards)
   bigRank = 0
   smallRank = 0
-  rest = 0
   # straight flush 
   if (sameHigh > 0 and straightHigh > 0):
     bigRank = '9'
-    smallRank = str(straightHigh)
-    rest = ''
-    for item in straightHigh:
-      rest.append(VALUE_MAP[item.value])
-  bigRank.append(smallRank).append(rest)
-  return float(bigRank)
+    smallRankList = list(map(lambda card: str(VALUE_MAP[card.value]), sortedCards))
+    smallRankList.reverse()
+    smallRank = "".join(smallRankList)
+  returned = str(bigRank) + '.' + str(smallRank)
+  return float(returned)
 
 def getRank(cards):
+  pass
   # 10 big ranks
   #   High Card: Highest value card.
   # One Pair: Two cards of the same value.
@@ -158,8 +158,26 @@ def getRank(cards):
   # Straight Flush: All cards are consecutive values of same suit.
   # Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
 
-
+def testStraightFlushRank():
+  cards1 = []
+  cards1.append(Card('H', '2'))
+  cards1.append(Card('H', '3'))
+  cards1.append(Card('H', '4'))
+  cards1.append(Card('H', '5'))
+  cards1.append(Card('H', '6'))
   
+  cards2 = []
+  cards2.append(Card('H', '2'))
+  cards2.append(Card('S', '3'))
+  cards2.append(Card('H', '4'))
+  cards2.append(Card('H', '5'))
+  cards2.append(Card('H', '6'))
+
+  rank1 = getSraightFlushRank(cards1)
+  rank2 = getSraightFlushRank(cards2)
+
+  print('SF rank expected: 9.65432', rank1)
+  print('SF rank expected: 0', rank2)
 
 def testSameSuit():
   cards1 = []
@@ -335,3 +353,4 @@ test3()
 testPairs()
 testFH()
 test2P()
+testStraightFlushRank()
