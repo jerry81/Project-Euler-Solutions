@@ -414,18 +414,18 @@ def test3Rank():
   cards1.append(Card('H', '7'))
   cards1.append(Card('S', '7'))
   cards1.append(Card('D', '7'))
-  cards1.append(Card('C', '7'))
+  cards1.append(Card('C', 'A'))
   cards1.append(Card('H', '5'))
   
   cards2 = []
   cards2.append(Card('H', '9'))
   cards2.append(Card('S', '9'))
-  cards2.append(Card('C', '9'))
+  cards2.append(Card('C', 'Q'))
   cards2.append(Card('H', '5'))
   cards2.append(Card('D', 'K'))
 
-  print('4oakRank: 8.77775 is ', get4Rank(cards1))
-  print('4oakRank: 0.0 is', get4Rank(cards2))
+  print('3 rank: 4 [14,7,7,7, 5] is ', get3Rank(cards1))
+  print('3 rank: 0 [] is', get3Rank(cards2))
 
 def testFHRank():
   cards1 = []
