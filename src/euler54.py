@@ -67,6 +67,14 @@ def getStraightHigh(cards):
     highCard = curVal
   return highCard, cards
 
+def getHighCard(cards):
+  cards.sort(key=lambda x:VALUE_MAP[x.value])
+  bigRank = '1'
+  cards = list(map(lambda card: str(VALUE_MAP[card.value]), cards))
+  cards.reverse()
+  return bigRank, cards
+  
+
 def prepare():
   games = openAndSplitPlus('./resources/p054_poker.txt', '\n')
   cards = list(
@@ -546,6 +554,24 @@ def testPairRank():
   print('pair rank: 0 [] is ', getPairRank(cards1))
   print('pair rank: 2 99,K, Q, 5 is', getPairRank(cards2))
 
+def testGetHighCard():
+  cards1 = []
+  cards1.append(Card('H', 'J'))
+  cards1.append(Card('D', 'Q'))
+  cards1.append(Card('H', 'K'))
+  cards1.append(Card('C', '3'))
+  cards1.append(Card('H', '10'))
+  
+  cards2 = []
+  cards2.append(Card('H', '9'))
+  cards2.append(Card('S', '9'))
+  cards2.append(Card('C', '5'))
+  cards2.append(Card('H', 'Q'))
+  cards2.append(Card('D', 'K'))
+
+  print('pair rank: 1 [KQJ 10 3] is ', getHighCard(cards1))
+  print('pair rank: 1 [K Q 99 5]', getHighCard(cards2))
+
 @track_performance
 def euler54():
   cards = prepare()
@@ -566,3 +592,4 @@ testStraightRank()
 test3Rank()
 test2PRank()
 testPairRank()
+testGetHighCard()
