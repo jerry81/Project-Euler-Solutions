@@ -147,7 +147,10 @@ def get4Rank(cards):
   if (int(fourHigh) > 0):
     bigRank = '8'
     smallRankList = list(map(lambda card: str(VALUE_MAP[card.value]), remainingSameHigh))
-    smallRankList.reverse()
+    remaining = list(filter(lambda x: x != fourHigh, smallRankList))
+    remaining.reverse()
+    repeated = list(filter(lambda x: x == fourHigh, smallRankList))
+    smallRankList = [*repeated, *remaining]
   return bigRank, smallRankList
 
 def getFHRank(cards):
@@ -191,7 +194,10 @@ def get3Rank(cards):
   if (int(threeHigh) > 0):
     bigRank = '4'
     smallRankList = list(map(lambda card: str(VALUE_MAP[card.value]), remainingSameHigh))
-    smallRankList.reverse()
+    remaining = list(filter(lambda x: x != threeHigh, smallRankList))
+    remaining.reverse()
+    repeated = list(filter(lambda x: x == threeHigh, smallRankList))
+    smallRankList = [*repeated, *remaining]
   return bigRank, smallRankList
 
 def getRank(cards):
@@ -397,7 +403,7 @@ def test4Rank():
   cards1.append(Card('S', '7'))
   cards1.append(Card('D', '7'))
   cards1.append(Card('C', '7'))
-  cards1.append(Card('H', '5'))
+  cards1.append(Card('H', 'A'))
   
   cards2 = []
   cards2.append(Card('H', '9'))
@@ -406,7 +412,7 @@ def test4Rank():
   cards2.append(Card('H', '5'))
   cards2.append(Card('D', 'K'))
 
-  print('4oakRank: 8.77775 is ', get4Rank(cards1))
+  print('4oakRank: 8 [7777, 14] is ', get4Rank(cards1))
   print('4oakRank: 0.0 is', get4Rank(cards2))
 
 def test3Rank():
@@ -424,7 +430,7 @@ def test3Rank():
   cards2.append(Card('H', '5'))
   cards2.append(Card('D', 'K'))
 
-  print('3 rank: 4 [14,7,7,7, 5] is ', get3Rank(cards1))
+  print('3 rank: 4 [7,7,7,14,5] is ', get3Rank(cards1))
   print('3 rank: 0 [] is', get3Rank(cards2))
 
 def testFHRank():
