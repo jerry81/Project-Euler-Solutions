@@ -177,9 +177,9 @@ def get4Rank(cards):
   if (int(fourHigh) > 0):
     bigRank = '8'
     smallRankList = list(map(lambda card: str(VALUE_MAP[card.value]), remainingSameHigh))
-    remaining = list(filter(lambda x: x != fourHigh, smallRankList))
+    remaining = list(filter(lambda x: x != str(fourHigh), smallRankList))
     remaining.reverse()
-    repeated = list(filter(lambda x: x == fourHigh, smallRankList))
+    repeated = list(filter(lambda x: x == str(fourHigh), smallRankList))
     smallRankList = [*repeated, *remaining]
   return bigRank, smallRankList
 
@@ -224,9 +224,9 @@ def get3Rank(cards):
   if (int(threeHigh) > 0):
     bigRank = '4'
     smallRankList = list(map(lambda card: str(VALUE_MAP[card.value]), remainingSameHigh))
-    remaining = list(filter(lambda x: x != threeHigh, smallRankList))
+    remaining = list(filter(lambda x: x != str(threeHigh), smallRankList))
     remaining.reverse()
-    repeated = list(filter(lambda x: x == threeHigh, smallRankList))
+    repeated = list(filter(lambda x: x == str(threeHigh), smallRankList))
     smallRankList = [*repeated, *remaining]
   return bigRank, smallRankList
 
@@ -234,9 +234,9 @@ def compareSmallRanks(arr1, arr2):
   total = len(arr1)
   for idx, item in enumerate(arr1):
     arr2Item = arr2[idx]
-    if item > arr2Item:
+    if int(item) > int(arr2Item):
       return 0
-    if arr2Item > item:
+    if int(arr2Item) > int(item):
       return 1
 
 def getRank(cards):
@@ -589,8 +589,8 @@ def testGetHighCard():
   cards2.append(Card('H', 'Q'))
   cards2.append(Card('D', 'K'))
 
-  print('pair rank: 1 [KQJ 10 3] is ', getHighCard(cards1))
-  print('pair rank: 1 [K Q 99 5]', getHighCard(cards2))
+  print('hc rank: 1 [KQJ 10 3] is ', getHighCard(cards1))
+  print('hc rank: 1 [K Q 99 5]', getHighCard(cards2))
 
 def testCompareSmallRanks():
   sm1 = [7, 5, 14]
