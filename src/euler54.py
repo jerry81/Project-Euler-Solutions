@@ -31,7 +31,7 @@ VALUE_MAP = {
   '7': 7,  
   '8': 8,
   '9': 9,
-  '10': 10,
+  'T': 10,
   'J': 11,
   'Q': 12,
   'K': 13,
@@ -111,7 +111,7 @@ def getXOfAKind(cards, x):
   for val, freq in freqMap.items():
     if freq == x:
       remainder = list(filter(lambda x: x != val, cards))
-      return val, remainder
+      return VALUE_MAP[str(val)], remainder
   return -1, [0]
 
 def getPairs(cards):
@@ -403,8 +403,8 @@ def testPairs():
   cards4 = []
   cards4.append(Card('H', '9'))
   cards4.append(Card('S', '9'))
-  cards4.append(Card('C', '10'))
-  cards4.append(Card('H', '10'))
+  cards4.append(Card('C', 'T'))
+  cards4.append(Card('H', 'T'))
   cards4.append(Card('D', 'K'))
 
   print('pairs -1', getPairs(cards1))
@@ -526,7 +526,7 @@ def testStraightRank():
   cards1.append(Card('D', 'Q'))
   cards1.append(Card('H', 'K'))
   cards1.append(Card('C', '9'))
-  cards1.append(Card('H', '10'))
+  cards1.append(Card('H', 'T'))
   
   cards2 = []
   cards2.append(Card('H', '9'))
@@ -544,7 +544,7 @@ def test2PRank():
   cards1.append(Card('D', 'Q'))
   cards1.append(Card('H', 'K'))
   cards1.append(Card('C', '9'))
-  cards1.append(Card('H', '10'))
+  cards1.append(Card('H', 'T'))
   
   cards2 = []
   cards2.append(Card('H', '9'))
@@ -562,7 +562,7 @@ def testPairRank():
   cards1.append(Card('D', 'Q'))
   cards1.append(Card('H', 'K'))
   cards1.append(Card('C', '9'))
-  cards1.append(Card('H', '10'))
+  cards1.append(Card('H', 'T'))
   
   cards2 = []
   cards2.append(Card('H', '9'))
@@ -580,7 +580,7 @@ def testGetHighCard():
   cards1.append(Card('D', 'Q'))
   cards1.append(Card('H', 'K'))
   cards1.append(Card('C', '3'))
-  cards1.append(Card('H', '10'))
+  cards1.append(Card('H', 'T'))
   
   cards2 = []
   cards2.append(Card('H', '9'))
@@ -608,7 +608,7 @@ def testCompareHands():
   cards1.append(Card('D', 'Q'))
   cards1.append(Card('H', 'K'))
   cards1.append(Card('C', '9'))
-  cards1.append(Card('H', '10'))
+  cards1.append(Card('H', 'T'))
   
   cards2 = []
   cards2.append(Card('H', '9'))
@@ -633,11 +633,11 @@ def testGetRank():
   cards1.append(Card('D', 'Q'))
   cards1.append(Card('H', 'K'))
   cards1.append(Card('C', '3'))
-  cards1.append(Card('H', '10'))
+  cards1.append(Card('H', 'T'))
   
   cards2 = []
   cards2.append(Card('H', '9'))
-  cards2.append(Card('H', '10'))
+  cards2.append(Card('H', 'T'))
   cards2.append(Card('H', 'J'))
   cards2.append(Card('H', 'Q'))
   cards2.append(Card('H', 'K'))
@@ -704,6 +704,16 @@ def testGetRank():
 @track_performance
 def euler54():
   cards = prepare()
+  tally = 0
+  for i in range(0, 1000):
+    hand1 = cards[(i*2)]
+    hand2 = cards[(i*2)+1]
+    res = compareHands(hand1, hand2)
+    # print('res is ', res)
+    if res == 0:
+      tally += 1
+  print('tally is ', tally)
+
 euler54()
 testSameSuit()
 testStraightHigh()
@@ -724,4 +734,4 @@ testPairRank()
 testGetHighCard()
 testGetRank()
 testCompareSmallRanks()
-testCompareHands()
+testCompareHands() 
