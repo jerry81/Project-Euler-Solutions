@@ -131,7 +131,6 @@ def get2Pair(cards):
 
 def getSraightFlushRank(cards):
   sameHigh, sortedCards = getSameSuitHigh(cards)
-  fourHigh, remainingSameHigh = getXOfAKind(cards, 4)
   straightHigh, _ = getStraightHigh(cards)
   bigRank = 0
   smallRank = 0
@@ -139,6 +138,19 @@ def getSraightFlushRank(cards):
   if (sameHigh > 0 and straightHigh > 0):
     bigRank = '9'
     smallRankList = list(map(lambda card: str(VALUE_MAP[card.value]), sortedCards))
+    smallRankList.reverse()
+    smallRank = "".join(smallRankList)
+  returned = str(bigRank) + '.' + str(smallRank)
+  return float(returned)
+
+def get4Rank(cards):
+  fourHigh, remainingSameHigh = getXOfAKind(cards, 4)
+  bigRank = 0
+  smallRank = 0
+  # straight flush 
+  if (int(fourHigh) > 0):
+    bigRank = '8'
+    smallRankList = list(map(lambda card: str(VALUE_MAP[card.value]), remainingSameHigh))
     smallRankList.reverse()
     smallRank = "".join(smallRankList)
   returned = str(bigRank) + '.' + str(smallRank)
@@ -341,6 +353,24 @@ def test2P():
   print('2P: 7 is ', get2Pair(cards1))
   print('2P: -1 is', get2Pair(cards2))
 
+def test4Rank():
+  cards1 = []
+  cards1.append(Card('H', '7'))
+  cards1.append(Card('S', '7'))
+  cards1.append(Card('D', '7'))
+  cards1.append(Card('C', '7'))
+  cards1.append(Card('H', '5'))
+  
+  cards2 = []
+  cards2.append(Card('H', '9'))
+  cards2.append(Card('S', '9'))
+  cards2.append(Card('C', '9'))
+  cards2.append(Card('H', '5'))
+  cards2.append(Card('D', 'K'))
+
+  print('4oakRank: 8.77775 is ', get4Rank(cards1))
+  print('4oakRank: 0.0 is', get4Rank(cards2))
+
 @track_performance
 def euler54():
   cards = prepare()
@@ -354,3 +384,4 @@ testPairs()
 testFH()
 test2P()
 testStraightFlushRank()
+test4Rank()
