@@ -61,9 +61,9 @@ def getStraightHigh(cards):
       continue
     curVal = VALUE_MAP[item.value]
     if curVal == highCard:
-      return -1
+      return -1, [-1]
     elif curVal != highCard + 1:
-      return -1
+      return -1, [-1]
     highCard = curVal
   return highCard, cards
 
@@ -164,6 +164,34 @@ def getFHRank(cards):
   returned = str(bigRank) + '.' + str(smallRank)
   return float(returned)
 
+def getFlushRank(cards):
+  sameHigh, sortedCards = getSameSuitHigh(cards)
+  straightHigh, _ = getStraightHigh(cards)
+  bigRank = 0
+  smallRank = 0
+  # TODO: extract (getStraightFlushRank getStraightRank)
+  if (sameHigh > 0 and straightHigh < 0):
+    bigRank = '6'
+    smallRankList = list(map(lambda card: str(VALUE_MAP[card.value]), sortedCards))
+    smallRankList.reverse()
+    smallRank = "".join(smallRankList)
+  returned = str(bigRank) + '.' + str(smallRank)
+  return float(returned)
+
+def getStraightRank(cards):
+  sameHigh, _ = getSameSuitHigh(cards)
+  straightHigh, sortedCards = getStraightHigh(cards)
+  bigRank = 0
+  smallRank = 0
+  # TODO: extract (getStraightFlushRank getStraightRank)
+  if (sameHigh < 0 and straightHigh > 0):
+    bigRank = '5'
+    smallRankList = list(map(lambda card: str(VALUE_MAP[card.value]), sortedCards))
+    smallRankList.reverse()
+    smallRank = "".join(smallRankList)
+  returned = str(bigRank) + '.' + str(smallRank)
+  return float(returned)
+
 def getRank(cards):
   pass
   # 10 big ranks
@@ -172,8 +200,8 @@ def getRank(cards):
   # Two Pairs: Two different pairs.
   # Three of a Kind: Three cards of the same value.
   # Straight: All cards are consecutive values.
-  # Flush: All cards of the same suit.
-  # Full House: Three of a kind and a pair.
+  # Flush: All cards of the same suit. - 
+  # Full House: Three of a kind and a pair. - done 
   # Four of a Kind: Four cards of the same value. - done 
   # Straight Flush: All cards are consecutive values of same suit. - done 
   # Royal Flush: Ten, Jack, Queen, King, Ace, in same suit. - done
@@ -397,6 +425,24 @@ def testFHRank():
   print('fhRank: 7.75 is ', getFHRank(cards1))
   print('fhRank: 0.0 is', getFHRank(cards2))
 
+def testFlushRank():
+  cards1 = []
+  cards1.append(Card('H', 'J'))
+  cards1.append(Card('H', 'Q'))
+  cards1.append(Card('H', 'K'))
+  cards1.append(Card('H', 'A'))
+  cards1.append(Card('H', '5'))
+  
+  cards2 = []
+  cards2.append(Card('H', '9'))
+  cards2.append(Card('S', '9'))
+  cards2.append(Card('C', '5'))
+  cards2.append(Card('H', '5'))
+  cards2.append(Card('D', 'K'))
+
+  print('flush rank: 6.141312115 is ', getFlushRank(cards1))
+  print('flush rank: 0.0 is', getFlushRank(cards2))
+
 @track_performance
 def euler54():
   cards = prepare()
@@ -412,3 +458,4 @@ test2P()
 testStraightFlushRank()
 test4Rank()
 testFHRank()
+testFlushRank()
