@@ -141,7 +141,6 @@ def getPairRank(cards):
   pairs, remainder = getPairs(cards)
   bigRank = 0
   smallRankList = []
-  print('pairs is ', pairs)
   if len(pairs) == 1 and int(pairs[0]) > 0:
     bigRank = '2'
     remainder = list(map(lambda card: str(VALUE_MAP[card.value]), remainder))
@@ -231,8 +230,27 @@ def get3Rank(cards):
     smallRankList = [*repeated, *remaining]
   return bigRank, smallRankList
 
+def compareSmallRanks(arr1, arr2):
+  total = len(arr1)
+  for idx, item in enumerate(arr1):
+    arr2Item = arr2[idx]
+    if item > arr2Item:
+      return 0
+    if arr2Item > item:
+      return 1
+
 def getRank(cards):
-  TESTERS = [getSraightFlushRank, get4Rank]
+  TESTERS = [
+    getSraightFlushRank, 
+    get4Rank,
+    getFHRank,
+    getFlushRank,
+    getStraightRank,
+    get3Rank,
+    get2PairRank,
+    getPairRank,
+    getHighCard
+  ]
   for fn in TESTERS:
     big, small = fn(cards)
     if (int(big) > 0):
@@ -579,6 +597,16 @@ def testGetHighCard():
   print('pair rank: 1 [KQJ 10 3] is ', getHighCard(cards1))
   print('pair rank: 1 [K Q 99 5]', getHighCard(cards2))
 
+def testCompareSmallRanks():
+  sm1 = [7, 5, 14]
+  sm2 = [7, 2, 14]
+  print('0 is ', compareSmallRanks(sm1, sm2))
+  print('1 is ', compareSmallRanks(sm2, sm1))
+  sm3 = ['14', '7', '7', '5', '5']
+  sm4 = ['14', '7', '7', '5', '2']
+  print('0 is ', compareSmallRanks(sm3, sm4))
+  print('1 is ', compareSmallRanks(sm4, sm3))
+
 def testGetRank():
   cards1 = []
   cards1.append(Card('H', 'J'))
@@ -601,9 +629,57 @@ def testGetRank():
   cards3.append(Card('S', '9'))
   cards3.append(Card('H', 'K'))
 
-  print('rank: 9 is ', getRank(cards1))
+  cards4 = []
+  cards4.append(Card('H', '7'))
+  cards4.append(Card('S', '7'))
+  cards4.append(Card('D', '7'))
+  cards4.append(Card('C', '5'))
+  cards4.append(Card('H', '5'))
+
+  cards5 = []
+  cards5.append(Card('S', 'A'))
+  cards5.append(Card('S', '7'))
+  cards5.append(Card('S', '7'))
+  cards5.append(Card('S', '5'))
+  cards5.append(Card('S', '5'))
+
+  cards6 = []
+  cards6.append(Card('H', '2'))
+  cards6.append(Card('S', '3'))
+  cards6.append(Card('D', '4'))
+  cards6.append(Card('C', '5'))
+  cards6.append(Card('H', '6'))
+
+  cards7 = []
+  cards7.append(Card('H', '7'))
+  cards7.append(Card('S', '7'))
+  cards7.append(Card('D', '7'))
+  cards7.append(Card('C', '5'))
+  cards7.append(Card('H', '6'))
+
+  cards8 = []
+  cards8.append(Card('S', 'A'))
+  cards8.append(Card('S', '7'))
+  cards8.append(Card('D', '7'))
+  cards8.append(Card('S', '5'))
+  cards8.append(Card('S', '5'))
+
+  cards9 = []
+  cards9.append(Card('H', '2'))
+  cards9.append(Card('S', '2'))
+  cards9.append(Card('D', '4'))
+  cards9.append(Card('C', '5'))
+  cards9.append(Card('H', '6'))
+
+  print('rank: 1 is ', getRank(cards1))
   print('rank: 9 is ', getRank(cards2))
   print('rank: 8 is ', getRank(cards3))
+  print('rank: 7 is ', getRank(cards4))
+  print('rank: 6 is ', getRank(cards5))
+  print('rank: 5 is ', getRank(cards6))
+  print('rank: 4 is ', getRank(cards7))
+  print('rank: 3 is ', getRank(cards8))
+  print('rank: 2 is ', getRank(cards9))
 
 @track_performance
 def euler54():
@@ -627,3 +703,4 @@ test2PRank()
 testPairRank()
 testGetHighCard()
 testGetRank()
+testCompareSmallRanks()
