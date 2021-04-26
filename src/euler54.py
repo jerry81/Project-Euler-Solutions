@@ -129,6 +129,18 @@ def get2Pair(cards):
     return -1, -1, -1
   return max(pairs), pairs, remainder
 
+def getPairRank(cards):
+  pairs, remainder = getPairs(cards)
+  bigRank = 0
+  smallRankList = []
+  print('pairs is ', pairs)
+  if len(pairs) == 1 and int(pairs[0]) > 0:
+    bigRank = '2'
+    remainder = list(map(lambda card: str(VALUE_MAP[card.value]), remainder))
+    remainder.reverse()
+    smallRankList = [int(pairs[0]), *remainder]
+  return bigRank, smallRankList
+
 def get2PairRank(cards):
   maxPair, pairs, remainder = get2Pair(cards)
   bigRank = 0
@@ -214,7 +226,7 @@ def get3Rank(cards):
 def getRank(cards):
   pass
   # 10 big ranks
-  #   High Card: Highest value card.
+  # High Card: Highest value card.
   # One Pair: Two cards of the same value.
   # Two Pairs: Two different pairs.
   # Three of a Kind: Three cards of the same value.
@@ -516,6 +528,24 @@ def test2PRank():
   print('2P rank: 0 [] is ', get2PairRank(cards1))
   print('2P rank: 3 KK,99,5 is', get2PairRank(cards2))
 
+def testPairRank():
+  cards1 = []
+  cards1.append(Card('H', 'J'))
+  cards1.append(Card('D', 'Q'))
+  cards1.append(Card('H', 'K'))
+  cards1.append(Card('C', '9'))
+  cards1.append(Card('H', '10'))
+  
+  cards2 = []
+  cards2.append(Card('H', '9'))
+  cards2.append(Card('S', '9'))
+  cards2.append(Card('C', '5'))
+  cards2.append(Card('H', 'Q'))
+  cards2.append(Card('D', 'K'))
+
+  print('pair rank: 0 [] is ', getPairRank(cards1))
+  print('pair rank: 2 99,K, Q, 5 is', getPairRank(cards2))
+
 @track_performance
 def euler54():
   cards = prepare()
@@ -535,3 +565,4 @@ testFlushRank()
 testStraightRank()
 test3Rank()
 test2PRank()
+testPairRank()
