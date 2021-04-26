@@ -232,7 +232,14 @@ def get3Rank(cards):
   return bigRank, smallRankList
 
 def getRank(cards):
-  pass
+  TESTERS = [getSraightFlushRank, get4Rank]
+  for fn in TESTERS:
+    big, small = fn(cards)
+    if (int(big) > 0):
+      return big, small
+  """ big, small = get4Rank(cards)
+  if (int(big) > 0): 
+    return big, small """
   # 10 big ranks
   # High Card: Highest value card.
   # One Pair: Two cards of the same value.
@@ -572,6 +579,32 @@ def testGetHighCard():
   print('pair rank: 1 [KQJ 10 3] is ', getHighCard(cards1))
   print('pair rank: 1 [K Q 99 5]', getHighCard(cards2))
 
+def testGetRank():
+  cards1 = []
+  cards1.append(Card('H', 'J'))
+  cards1.append(Card('D', 'Q'))
+  cards1.append(Card('H', 'K'))
+  cards1.append(Card('C', '3'))
+  cards1.append(Card('H', '10'))
+  
+  cards2 = []
+  cards2.append(Card('H', '9'))
+  cards2.append(Card('H', '10'))
+  cards2.append(Card('H', 'J'))
+  cards2.append(Card('H', 'Q'))
+  cards2.append(Card('H', 'K'))
+
+  cards3 = []
+  cards3.append(Card('D', '9'))
+  cards3.append(Card('H', '9'))
+  cards3.append(Card('C', '9'))
+  cards3.append(Card('S', '9'))
+  cards3.append(Card('H', 'K'))
+
+  print('rank: 9 is ', getRank(cards1))
+  print('rank: 9 is ', getRank(cards2))
+  print('rank: 8 is ', getRank(cards3))
+
 @track_performance
 def euler54():
   cards = prepare()
@@ -593,3 +626,4 @@ test3Rank()
 test2PRank()
 testPairRank()
 testGetHighCard()
+testGetRank()
