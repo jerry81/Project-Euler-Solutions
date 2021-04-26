@@ -112,8 +112,8 @@ def getPairs(cards):
   pairs = []
   for val, freq in freqMap.items():
     if freq == 2:
-      pairs.append(val)
-  remainder = list(filter(lambda x: x not in pairs, cards))
+      pairs.append(VALUE_MAP[val])
+  remainder = list(filter(lambda x: VALUE_MAP[x.value] not in pairs, cards))
   return pairs, remainder
 
 def getFullHouse(cards):
@@ -126,8 +126,19 @@ def getFullHouse(cards):
 def get2Pair(cards):
   pairs, remainder = getPairs(cards)
   if len(pairs) != 2:
-    return -1
+    return -1, -1, -1
   return max(pairs), pairs, remainder
+
+def get2PairRank(cards):
+  maxPair, pairs, remainder = get2Pair(cards)
+  bigRank = 0
+  smallRankList = []
+  if int(maxPair) > 0:
+    bigRank = '3'
+    remainder = list(map(lambda card: str(VALUE_MAP[card.value]), remainder))
+    pairs.reverse()
+    smallRankList = [*pairs, int(remainder[0])]
+  return bigRank, smallRankList
 
 def getSraightFlushRank(cards):
   sameHigh, sortedCards = getSameSuitHigh(cards)
@@ -487,6 +498,24 @@ def testStraightRank():
   print('straight rank: 5.131211109 is ', getStraightRank(cards1))
   print('straight rank: 0.0 is', getStraightRank(cards2))
 
+def test2PRank():
+  cards1 = []
+  cards1.append(Card('H', 'J'))
+  cards1.append(Card('D', 'Q'))
+  cards1.append(Card('H', 'K'))
+  cards1.append(Card('C', '9'))
+  cards1.append(Card('H', '10'))
+  
+  cards2 = []
+  cards2.append(Card('H', '9'))
+  cards2.append(Card('S', '9'))
+  cards2.append(Card('C', '5'))
+  cards2.append(Card('H', 'K'))
+  cards2.append(Card('D', 'K'))
+
+  print('2P rank: 0 [] is ', get2PairRank(cards1))
+  print('2P rank: 3 KK,99,5 is', get2PairRank(cards2))
+
 @track_performance
 def euler54():
   cards = prepare()
@@ -505,3 +534,4 @@ testFHRank()
 testFlushRank()
 testStraightRank()
 test3Rank()
+test2PRank()
