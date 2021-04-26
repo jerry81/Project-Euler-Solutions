@@ -255,20 +255,15 @@ def getRank(cards):
     big, small = fn(cards)
     if (int(big) > 0):
       return big, small
-  """ big, small = get4Rank(cards)
-  if (int(big) > 0): 
-    return big, small """
-  # 10 big ranks
-  # High Card: Highest value card.
-  # One Pair: Two cards of the same value.
-  # Two Pairs: Two different pairs.
-  # Three of a Kind: Three cards of the same value.
-  # Straight: All cards are consecutive values. - done
-  # Flush: All cards of the same suit. - done
-  # Full House: Three of a kind and a pair. - done 
-  # Four of a Kind: Four cards of the same value. - done 
-  # Straight Flush: All cards are consecutive values of same suit. - done 
-  # Royal Flush: Ten, Jack, Queen, King, Ace, in same suit. - done
+
+def compareHands(hand1, hand2):
+  big1, sm1 = getRank(hand1)
+  big2, sm2 = getRank(hand2)
+  if int(big1) > int(big2):
+    return 0
+  if int(big2) > int(big1):
+    return 1
+  return compareSmallRanks(sm1, sm2)
 
 def testStraightFlushRank():
   cards1 = []
@@ -607,6 +602,31 @@ def testCompareSmallRanks():
   print('0 is ', compareSmallRanks(sm3, sm4))
   print('1 is ', compareSmallRanks(sm4, sm3))
 
+def testCompareHands():
+  cards1 = []
+  cards1.append(Card('H', 'J'))
+  cards1.append(Card('D', 'Q'))
+  cards1.append(Card('H', 'K'))
+  cards1.append(Card('C', '9'))
+  cards1.append(Card('H', '10'))
+  
+  cards2 = []
+  cards2.append(Card('H', '9'))
+  cards2.append(Card('S', '9'))
+  cards2.append(Card('C', '5'))
+  cards2.append(Card('H', 'Q'))
+  cards2.append(Card('D', 'K'))
+
+  cards3 = []
+  cards3.append(Card('H', '9'))
+  cards3.append(Card('S', '9'))
+  cards3.append(Card('C', 'A'))
+  cards3.append(Card('H', 'Q'))
+  cards3.append(Card('D', 'K'))
+
+  print('compare hands: 0 is ', compareHands(cards1, cards2))
+  print('compare hands: 1 is ', compareHands(cards2, cards3))
+
 def testGetRank():
   cards1 = []
   cards1.append(Card('H', 'J'))
@@ -704,3 +724,4 @@ testPairRank()
 testGetHighCard()
 testGetRank()
 testCompareSmallRanks()
+testCompareHands()
