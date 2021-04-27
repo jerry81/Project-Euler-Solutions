@@ -37,6 +37,12 @@ print('project euler problem 55')
 @track_performance
 def euler55():
   print('starting 55')
+  LIMIT = 10000
+  cnt = 0
+  for i in range(LIMIT):
+    if isLychrel(i):
+      cnt+=1
+  print('count is ', cnt)
 
 testReverseAndAdd()
 testIsLychrel()
