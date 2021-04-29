@@ -14,8 +14,12 @@ def longSqrt(base, expansions):
   # 1 / (2 + (1 / (2 + (1 / (2 + (1 / 2))
 
 def testUseDenom():
-  print('1/2 is ', useDenom(2, 18, 36))
-  print('4/2 is ', useDenom(2, 2))
+  fraction1 = useDenom(2, 18, 36)
+  fraction2 = useDenom(2, 2)
+  print('1/2 is ', fraction1)
+  print('4/2 is ', fraction2)
+  pro = fraction1*fraction2
+  print('4/4 is ', pro)
 
 @track_performance
 def euler57():
