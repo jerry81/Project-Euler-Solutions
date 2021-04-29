@@ -43,7 +43,13 @@ def testLongSqrt():
 
 @track_performance
 def euler57():
-  print('57')
+  LIMIT = 1001
+  count = 0
+  for i in range(1, LIMIT):
+    nextIter = longSqrt(i)
+    if len(str(nextIter.numerator)) > len(str(nextIter.denominator)):
+      count += 1
+  print(count)
 
 euler57()
 testUseDenom()
