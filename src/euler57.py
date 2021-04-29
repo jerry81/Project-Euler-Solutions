@@ -11,8 +11,11 @@ def useDenom(target, num, denom = None):
 def expDenom(cur):
   return Fraction(1) / (Fraction(2) + cur)
 
-def longSqrt(base, expansions):
-  pass
+def longSqrt(expansions):
+  right = Fraction(1, 2)
+  for i in range(expansions):
+    right = expDenom(right)
+  return Fraction(1, 1) + right
   # expansions = 4
   # 1 / (2 + (1 / (2 + (1 / (2 + (1 / 2))
 
@@ -32,6 +35,12 @@ def testExpDenom():
   print('5/12 is ', second)
   print('12/29 is ', third)
 
+def testLongSqrt():
+  print('3/2 is ', longSqrt(1))
+  print('7/5 is ', longSqrt(2))
+  for i in range(3, 9):
+    print('next iter', longSqrt(i))
+
 @track_performance
 def euler57():
   print('57')
@@ -39,3 +48,4 @@ def euler57():
 euler57()
 testUseDenom()
 testExpDenom()
+testLongSqrt()
