@@ -1,7 +1,10 @@
 from utils.annotations import track_performance
+from utils.fileUtils import openAndSplit
 from utils.mathHelpers import isPrime
 
 print('project euler problem 58')
+
+raw = openAndSplit('./resources/primesTo20M.txt')
 
 # 1
 # 5 4 3
@@ -17,11 +20,8 @@ def makeSpirals(iterations):
   minDim = 0
   maxDim = dim - 1
   start = dim ** 2
-  print('dim is ', dim)
-  print('start is ', start)
   midpoint = int(dim / 2)
   direction = 'L'
-  print('mid is ', midpoint)
   x = maxDim
   y = maxDim
   if dim < 1:
@@ -30,7 +30,6 @@ def makeSpirals(iterations):
   while start > 0:
     if direction == 'L':
       while x >= minDim:
-        print('x y is ', x, y)
         spiral[y][x] = start 
         x -= 1
         start -= 1
@@ -39,7 +38,6 @@ def makeSpirals(iterations):
       direction = 'U'
     elif direction == 'U':
       while y >= minDim:
-        print('x y is ', x, y)
         spiral[y][x] = start 
         y -= 1
         start -= 1
@@ -48,7 +46,6 @@ def makeSpirals(iterations):
       direction = 'R'
     elif direction == 'R':
       while x <= maxDim:
-        print('x y is ', x, y)
         spiral[y][x] = start 
         x += 1
         start -= 1
@@ -57,9 +54,7 @@ def makeSpirals(iterations):
       direction = 'D'
     else: 
       while y <= maxDim - 1:
-        print('x y is ', x, y)
         spiral[y][x] = start 
-        print('x, y set to ', start)
         y += 1
         start -= 1
       y -= 1
@@ -67,8 +62,6 @@ def makeSpirals(iterations):
       minDim += 1
       maxDim -= 1
       direction = 'L'
-      print('x, y after one full', x, y)
-  print('spiral is ', spiral)
   return spiral
 
 def getDiagonals(spiral):
@@ -80,9 +73,9 @@ def getDiagonals(spiral):
     diagonals.add(spiral[i][dim - i - 1])
   return diagonals
 
+primes = list(map(lambda x: int(x), raw))
 def getRatioOfPrimesOnDiagonal(diagonals):
   primeDiags = list(filter(lambda x: isPrime(x), list(diagonals)))
-  print('lens are ', len(primeDiags), len(list(diagonals)))
   return len(primeDiags) / len(list(diagonals))
 
 def testSpirals():
@@ -99,13 +92,26 @@ def testGetRatioOfPrimesOnDiagonal():
   four = makeSpirals(4)
   diags = getDiagonals(four)
   print('ratio is 62', getRatioOfPrimesOnDiagonal(diags))
-
+  five = makeSpirals(5)
+  diags = getDiagonals(five)
+  six = makeSpirals(6)
+  diags = getDiagonals(six)
 
 @track_performance
 def euler58():
   print('spirals')
+  ratio = 1
+  iterations = 13120
+  while ratio >= 0.1:
+    spiral = makeSpirals(iterations)
+    iterations += 1
+    diags = getDiagonals(spiral)
+    ratio = getRatioOfPrimesOnDiagonal(diags)
+    print('iterations is ', iterations)
+    print('ratio is ', ratio)
+  print('iterations is ', iterations)
 
-euler58()
 testSpirals()
 testGetDiagonals()
 testGetRatioOfPrimesOnDiagonal()
+euler58()
