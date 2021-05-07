@@ -1,4 +1,5 @@
 from utils.annotations import track_performance
+from utils.mathHelpers import isPrime
 
 print('project euler problem 58')
 
@@ -79,6 +80,11 @@ def getDiagonals(spiral):
     diagonals.add(spiral[i][dim - i - 1])
   return diagonals
 
+def getRatioOfPrimesOnDiagonal(diagonals):
+  primeDiags = list(filter(lambda x: isPrime(x), list(diagonals)))
+  print('lens are ', len(primeDiags), len(list(diagonals)))
+  return len(primeDiags) / len(list(diagonals))
+
 def testSpirals():
   makeSpirals(1)
   makeSpirals(2)
@@ -89,6 +95,12 @@ def testGetDiagonals():
   four = makeSpirals(4)
   print(getDiagonals(four))
 
+def testGetRatioOfPrimesOnDiagonal():
+  four = makeSpirals(4)
+  diags = getDiagonals(four)
+  print('ratio is 62', getRatioOfPrimesOnDiagonal(diags))
+
+
 @track_performance
 def euler58():
   print('spirals')
@@ -96,3 +108,4 @@ def euler58():
 euler58()
 testSpirals()
 testGetDiagonals()
+testGetRatioOfPrimesOnDiagonal()
