@@ -70,11 +70,24 @@ def makeSpirals(iterations):
   print('spiral is ', spiral)
   return spiral
 
+def getDiagonals(spiral):
+  diagonals = set()
+  dim = len(spiral[0])
+  for i in range(dim):
+    diagonals.add(spiral[i][i])
+  for i in range(dim):
+    diagonals.add(spiral[i][dim - i - 1])
+  return diagonals
+
 def testSpirals():
   makeSpirals(1)
   makeSpirals(2)
   makeSpirals(3)
-  # makeSpirals(4)
+  makeSpirals(4)
+
+def testGetDiagonals():
+  four = makeSpirals(4)
+  print(getDiagonals(four))
 
 @track_performance
 def euler58():
@@ -82,3 +95,4 @@ def euler58():
 
 euler58()
 testSpirals()
+testGetDiagonals()
