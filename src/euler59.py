@@ -3,8 +3,7 @@ from utils.fileUtils import openAndSplit
 import binascii
 
 asArr = openAndSplit('./resources/p059_cipher.txt')
-asCharArr = list(map(lambda x: chr(int(x)), asArr))
-print('asArr', asCharArr)
+asIntArr = list(map(lambda x: int(x), asArr))
 def stoa(s):
   charArr = list(s)
   return list(map(lambda x: ord(x),charArr))
@@ -51,12 +50,30 @@ def testXOR():
   expected = '0000000'
   # print('xor should be {} - {}'.format(expected, bin(ord(s1)) ^ bin(ord(key1))))
 
+# key is array of ascii codes between a-z 97 to 123
+def decypher(key):
+  output = []
+  for i in range(len(asIntArr)):
+    toDecode = asIntArr[i]
+    decoded = toDecode ^ key[i % 3]
+    output.append(chr(decoded))
+  return output
+
+def testDecypher():
+  print('output is ', decypher([97, 98, 99]))
+
 @track_performance
 def euler59():
   print('project euler problem 59')
+  for i in range(97, 124):
+    for j in range(97, 124):
+      for k in range(97, 124):
+        print(decypher([i,j,k]))
 
 print('xor test 0bx0 is', bin(97 ^ 97))
 print('xor test 0bx11 is ', bin(97 ^ 98))
+
+
 
 euler59()
 testStoA()
@@ -64,3 +81,4 @@ testAtoS()
 testAtoB()
 testBtoA()
 testXOR()
+testDecypher()
