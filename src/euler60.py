@@ -11,9 +11,7 @@ def checkConcatenations(inputs):
   candidates = []
   for a in range(len(inputs) - 1):
     for b in range(a + 1, len(inputs)):
-      f,r = assembleCandidate(a,b)
-      candidates.append(f)
-      candidates.append(r)
+      candidates.append(assembleCandidate(inputs[a],inputs[b]))
   for c in candidates:
     if not checkPrime(c):
       return False
@@ -22,7 +20,7 @@ def checkConcatenations(inputs):
 def assembleCandidate(a,b):
   f = int(str(a) + str(b))
   r = int(str(b) + str(a))
-  return f,r
+  return [f,r]
 
 def testAssemble():
   assembleCandidate(7, 109)
@@ -52,7 +50,7 @@ def testCheckPrime():
 @track_performance
 def euler60():
   print('project euler problem 60')
-  pick4ofX(10)
+  pick4ofX(5)
 
 euler60()
 # testCheckPrime()

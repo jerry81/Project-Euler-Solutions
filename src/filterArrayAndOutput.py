@@ -18,13 +18,20 @@ def hasDupe(input):
 
 f = open("./resources/2T_part1.txt", "r")
 asStr = f.read()
-asList = asStr.split('\t')
-filteredList = list(filter(lambda x: len(x) == 8, asList))
-noDups = list(filter(lambda x: hasDupe(int(x)),filteredList))
+lines = asStr.split('\n')
+twoD = list(map(lambda line: line.split('\t'), lines))
+flattened = []
+for i in twoD:
+    for j in i:
+        flattened.append(j)
+flattened = list(filter(lambda x: len(x) > 0, flattened))
+# print('asList ', asList)
+# filteredList = list(filter(lambda x: len(x) == 8, asList))
+noDups = list(map(lambda x: int(x), flattened))
 primeMap = {}
 for i in range(len(noDups)):
   primeMap[noDups[i]] = True
-  
+
 """ f2 = open("./resources/largePrimeMap.txt", "x+")
 f2.write(",".join([str(elem) for elem in noDups]))
 f.close()
