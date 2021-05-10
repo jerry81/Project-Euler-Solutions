@@ -21,8 +21,11 @@ asStr = f.read()
 asList = asStr.split('\t')
 filteredList = list(filter(lambda x: len(x) == 8, asList))
 noDups = list(filter(lambda x: hasDupe(int(x)),filteredList))
-
-f2 = open("./resources/eightDigPrimesUpTo179424673.txt", "x+")
+primeMap = {}
+for i in range(len(noDups)):
+  primeMap[noDups[i]] = True
+  
+""" f2 = open("./resources/largePrimeMap.txt", "x+")
 f2.write(",".join([str(elem) for elem in noDups]))
 f.close()
-f2.close()
+f2.close() """
