@@ -2,17 +2,34 @@ from utils.annotations import track_performance
 from filterArrayAndOutput import primeMap
 import binascii
 
+keys = list(map(lambda x: int(x), primeMap.keys()))
+
 def checkPrime(num):
-  return str(num) in primeMap.keys()
+  return num in keys
 
 def checkConcatenations(inputs):
+  candidates = []
   for a in range(len(inputs) - 1):
     for b in range(a + 1, len(inputs)):
-      print('ab are ', a,b)
+      f,r = assembleCandidate(a,b)
+      candidates.append(f)
+      candidates.append(r)
+  for c in candidates:
+    if not checkPrime(c):
+      return False
+  return True
+
+def assembleCandidate(a,b):
+  f = int(str(a) + str(b))
+  r = int(str(b) + str(a))
+  return f,r
+
+def testAssemble():
+  assembleCandidate(7, 109)
 
 def testConcatenations():
-  checkConcatenations([1,2,3,4])
-  checkConcatenations([10,11,12,13,14])
+  print('1,2,3,4 is ', checkConcatenations([1,2,3,4]))
+  print('10,11,12,13,14 is ', checkConcatenations([10,11,12,13,14]))
 
 def pick4ofX(limSet):
   # perms
@@ -20,9 +37,7 @@ def pick4ofX(limSet):
     for b in range(a + 1, limSet - 2):
       for c in range(b + 1, limSet - 1):
         for d in range(c + 1, limSet):
-          print('abcd',a,b,c,d)
-          # checkConcatenations([a,b,c,d])
-          
+          checkConcatenations([keys[a],keys[b],keys[c],keys[d]])
 
 def testPick4():
   pick4ofX(10)
@@ -36,6 +51,7 @@ def euler60():
   print('project euler problem 60')
 
 euler60()
-testCheckPrime()
-testPick4()
+# testCheckPrime()
+# testPick4()
 testConcatenations()
+# testAssemble()
