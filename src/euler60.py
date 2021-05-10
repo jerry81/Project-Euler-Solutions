@@ -5,6 +5,15 @@ import binascii
 def checkPrime(num):
   return str(num) in primeMap.keys()
 
+def checkConcatenations(inputs):
+  for a in range(len(inputs) - 1):
+    for b in range(a + 1, len(inputs)):
+      print('ab are ', a,b)
+
+def testConcatenations():
+  checkConcatenations([1,2,3,4])
+  checkConcatenations([10,11,12,13,14])
+
 def pick4ofX(limSet):
   # perms
   for a in range(limSet - 3):
@@ -12,10 +21,8 @@ def pick4ofX(limSet):
       for c in range(b + 1, limSet - 1):
         for d in range(c + 1, limSet):
           print('abcd',a,b,c,d)
-          # checkConcatenations4(a,b,c,d)
+          # checkConcatenations([a,b,c,d])
           
-def checkConcatenations4(a,b,c,d):
-  pass
 
 def testPick4():
   pick4ofX(10)
@@ -31,3 +38,4 @@ def euler60():
 euler60()
 testCheckPrime()
 testPick4()
+testConcatenations()
