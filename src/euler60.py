@@ -4,14 +4,20 @@ import binascii
 
 keys = list(map(lambda x: int(x), primeMap.keys()))
 
-def checkPrime(num):
-  return num in keys
+def checkPrime(num):   
+  value = primeMap.get(num, None)
+  if value is not None: 
+    return True
+  return False
+  # return num in keys # is this O(1)? - no - keys is an array
 
 def checkConcatenations(inputs):
   candidates = []
   for a in range(len(inputs) - 1):
     for b in range(a + 1, len(inputs)):
-      candidates.append(assembleCandidate(inputs[a],inputs[b]))
+      cands = assembleCandidate(inputs[a],inputs[b])
+      for cd in cands:
+        candidates.append(cd)
   for c in candidates:
     if not checkPrime(c):
       return False
@@ -50,7 +56,7 @@ def testCheckPrime():
 @track_performance
 def euler60():
   print('project euler problem 60')
-  pick4ofX(5)
+  pick4ofX(10)
 
 euler60()
 # testCheckPrime()
