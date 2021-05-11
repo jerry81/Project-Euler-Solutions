@@ -3,6 +3,14 @@ from filterArrayAndOutput import primeMap
 import binascii
 
 keys = list(map(lambda x: int(x), primeMap.keys()))
+memo = {} # { 122: False }
+
+def checkMemo(num):
+  value = memo.get(num, None)
+  if value is not None:
+    return value
+  memo[num] = checkPrime(num)
+  return memo[num]
 
 def checkPrime(num):   
   value = primeMap.get(num, None)
@@ -19,7 +27,7 @@ def checkConcatenations(inputs):
       for cd in cands:
         candidates.append(cd)
   for c in candidates:
-    if not checkPrime(c):
+    if not checkMemo(c):
       return False
   return True
 
@@ -68,7 +76,7 @@ def testCheckPrime():
 @track_performance
 def euler60():
   print('project euler problem 60')
-  pick5ofX(130)
+  pick5ofX(140)
 
 euler60()
 # testCheckPrime()
