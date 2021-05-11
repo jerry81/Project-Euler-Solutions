@@ -47,7 +47,11 @@ def pick4ofX(limSet):
   # perms
   for a in range(limSet - 3):
     for b in range(a + 1, limSet - 2):
+      if not checkConcatenations([keys[a],keys[b]]):
+        continue
       for c in range(b + 1, limSet - 1):
+        if not checkConcatenations([keys[a],keys[b],keys[c]]):
+          continue
         for d in range(c + 1, limSet):
           toCheck = list(map(lambda x: keys[x],[a,b,c,d]))
           if not checkConcatenations(toCheck):
@@ -58,13 +62,29 @@ def pick5ofX(limSet):
   # perms
   for a in range(limSet - 4):
     for b in range(a + 1, limSet - 3):
+      toCheck = list(map(lambda x: keys[x],[a,b]))
+      if not checkConcatenations(toCheck):
+        continue
       for c in range(b + 1, limSet - 2):
+        toCheck = list(map(lambda x: keys[x],[a,b,c]))
+        if not checkConcatenations(toCheck):
+          continue
         for d in range(c + 1, limSet -1):
+          toCheck = list(map(lambda x: keys[x],[a,b,c,d]))
+          if not checkConcatenations(toCheck):
+            continue
           for e in range(d + 1, limSet):
             toCheck = list(map(lambda x: keys[x],[a,b,c,d,e]))
             if not checkConcatenations(toCheck):
               continue
             print('candidates found', toCheck)
+
+def pick1(limSet):
+  for a in range(limSet):
+    toCheck=[3,7,109,673,keys[a]]
+    if not checkConcatenations(toCheck):
+      continue
+    print('candidates found', keys[a])
 
 def testPick4():
   pick4ofX(10)
@@ -85,11 +105,13 @@ def testCheckMemo():
 @track_performance
 def euler60():
   print('project euler problem 60')
-  pick5ofX(140)
+  # print('check', checkConcatenations([3,7,109,673]))
+  # pick1(9000000)
+  pick5ofX(1000)
 
-# euler60()
+euler60()
 # testCheckPrime()
 # testPick4()
 # testConcatenations()
 # testAssemble()
-testCheckMemo()
+# testCheckMemo()
