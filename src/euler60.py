@@ -107,7 +107,7 @@ def euler60():
   print('project euler problem 60')
   # print('check', checkConcatenations([3,7,109,673]))
   # pick1(9000000)
-  pick5ofX(1000)
+  pick5ofX(2000)
 
 euler60()
 # testCheckPrime()
