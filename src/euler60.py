@@ -73,13 +73,23 @@ def testCheckPrime():
   print('check prime Prime', checkPrime(15092801))
   print('check prime not Prime', checkPrime(2222))
 
+def testCheckMemo():
+  print('check prime Prime', checkMemo(15092801))
+  print('check prime not Prime', checkMemo(2222))
+  print('not prime', checkMemo(124))
+  print('memo is now ', memo)
+  print('check prime Prime', checkMemo(15092801))
+  print('check prime not Prime', checkMemo(2222))
+  print('not prime', checkMemo(124))
+
 @track_performance
 def euler60():
   print('project euler problem 60')
   pick5ofX(140)
 
-euler60()
+# euler60()
 # testCheckPrime()
 # testPick4()
 # testConcatenations()
 # testAssemble()
+testCheckMemo()
