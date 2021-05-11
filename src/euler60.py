@@ -46,6 +46,18 @@ def pick4ofX(limSet):
             continue
           print('candidates found', toCheck)
 
+def pick5ofX(limSet):
+  # perms
+  for a in range(limSet - 4):
+    for b in range(a + 1, limSet - 3):
+      for c in range(b + 1, limSet - 2):
+        for d in range(c + 1, limSet -1):
+          for e in range(d + 1, limSet):
+            toCheck = list(map(lambda x: keys[x],[a,b,c,d,e]))
+            if not checkConcatenations(toCheck):
+              continue
+            print('candidates found', toCheck)
+
 def testPick4():
   pick4ofX(10)
 
@@ -56,7 +68,7 @@ def testCheckPrime():
 @track_performance
 def euler60():
   print('project euler problem 60')
-  pick4ofX(10)
+  pick5ofX(130)
 
 euler60()
 # testCheckPrime()
