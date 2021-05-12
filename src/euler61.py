@@ -15,21 +15,30 @@ octa = openMap('./resources/octa.txt')
 
 allTests = [triangles, squares, pent, hexa, hep, octa]
 
-def pick4Of89():
+def pick3Of89():
   for a in range(10,99):
     for b in range(10,99):
       for c in range(10,99):
-        for d in range(10,99):
           num1 = str(a) + str(b)
           num2 = str(b) + str(c)
-          num3 = str(c) + str(d)
-          num4 = str(d) + str(a)
-          print('numbers are ', num1,num2,num3,num4)
+          num3 = str(c) + str(a)
+          sub = allTests[:3]
+          result = allInSet(sub, [num1, num2, num3])
+          if len(set(result.values())) == 3:
+            print('result is ', result)
+
+def allInSet(setC, inputs):
+  resultMap = {}
+  for num in inputs:
+    for idx, s in enumerate(setC):
+      if checkMap(num, s):
+        resultMap[num] = idx
+  return resultMap
 
 @track_performance
 def euler61():
   print('project euler problem 61')
-  pick4Of89()
+  pick3Of89()
 
 def checkMap(num, _map):
   value = _map.get(num, None)
