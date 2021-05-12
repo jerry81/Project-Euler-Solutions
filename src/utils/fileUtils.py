@@ -13,3 +13,7 @@ def writeMapToFile(filename, arr):
   f = open(filename, "w")
   f.write(json.dumps(arr))
   f.close() 
+
+def openMap(filename):
+  f = open(filename, 'r')
+  return json.loads(f.read())
