@@ -13,11 +13,23 @@ hep = openMap('./resources/hep.txt')
 
 octa = openMap('./resources/octa.txt')
 
+allTests = [triangles, squares, pent, hexa, hep, octa]
+
+def pick4Of89():
+  for a in range(10,99):
+    for b in range(10,99):
+      for c in range(10,99):
+        for d in range(10,99):
+          num1 = str(a) + str(b)
+          num2 = str(b) + str(c)
+          num3 = str(c) + str(d)
+          num4 = str(d) + str(a)
+          print('numbers are ', num1,num2,num3,num4)
+
 @track_performance
 def euler61():
   print('project euler problem 61')
-  # print('check', checkConcatenations([3,7,109,673]))
-  # pick1(9000000)
+  pick4Of89()
 
 def checkMap(num, _map):
   value = _map.get(num, None)
@@ -36,10 +48,6 @@ def testCheckmap():
   print('test5 is FAlse', checkMap('17', squares))
   print('test6 is FAlse', checkMap('17', pent))
 
+
 euler61()
-testCheckmap()
-# testCheckPrime()
-# testPick4()
-# testConcatenations()
-# testAssemble()
-# testCheckMemo()
+# testCheckmap()
