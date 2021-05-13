@@ -27,6 +27,41 @@ def pick3Of89():
           if len(set(result.values())) == 3:
             print('result is ', result)
 
+def pick6Of89():
+  sub = allTests
+  for a in range(10,99):
+    for b in range(10,99):
+      num1 = str(a) + str(b)
+      result = allInSet(sub, [num1])
+      if len(set(result.values())) != 1:
+        continue
+      for c in range(10,99):
+        num2 = str(b) + str(c)
+        last = str(c) + str(a)
+        result = allInSet(sub, [num1, num2, last])
+        if len(set(result.values())) != 3:
+          continue
+        for d in range(10,99):
+          num3 = str(c) + str(d)
+          last = str(d) + str(a)
+          result = allInSet(sub, [num1, num2, num3, last])
+          if len(set(result.values())) != 4:
+            continue
+          for e in range(10,99):
+            num4 = str(d) + str(e)
+            last = str(e) + str(a)
+            result = allInSet(sub, [num1, num2, num3, num4, last])
+            if len(set(result.values())) != 5:
+              continue
+            for f in range(10,99):
+              num5 = str(e) + str(f)
+              num6 = str(f) + str(a)
+              
+              sub = allTests
+              result = allInSet(sub, [num1, num2, num3, num4, num5, num6])
+              if len(set(result.values())) == 6:
+                print('result is ', result)
+
 def allInSet(setC, inputs):
   resultMap = {}
   for num in inputs:
@@ -38,7 +73,7 @@ def allInSet(setC, inputs):
 @track_performance
 def euler61():
   print('project euler problem 61')
-  pick3Of89()
+  pick6Of89()
 
 def checkMap(num, _map):
   value = _map.get(num, None)
