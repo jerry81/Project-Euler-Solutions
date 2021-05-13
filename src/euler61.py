@@ -60,8 +60,7 @@ def pick6Of89():
               num5 = str(e) + str(f)
               num6 = str(f) + str(a)
               result = allInSet(sub, [num1, num2, num3, num4, num5, num6])
-              #if len(list(result.keys())) == 6 and len(set(flattenLists(result.values()))) == 6:
-              if len(list(result.keys())) == 6:
+              if len(list(result.keys())) == 6 and len(set(flattenLists(result.values()))) == 6:
                 print('result is ', result)
 
 def allInSet(setC, inputs):
