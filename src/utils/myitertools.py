@@ -1,0 +1,72 @@
+import copy
+
+def swap(arr, idx1, idx2):
+  arr[idx1], arr[idx2] = arr[idx2], arr[idx1]
+  return arr
+
+def reverseSlice(arr, idx1, idx2):
+  sliced = arr[idx1:idx2+1]
+  prefix = arr[0:idx1]
+  reversedSlice = sliced[::-1]
+  return prefix + reversedSlice
+
+def getNextPermutation(input):
+  ret = input[:]
+  for pivot in range(len(ret) - 2, -1, -1):
+    pivotValue = ret[pivot]
+    for i in range(len(ret) - 1, pivot, -1):
+      cur = ret[i]
+      if pivotValue < cur:
+        ret = swap(ret[:], i, pivot)
+        ret = reverseSlice(ret[:], pivot + 1, len(ret))
+        return ret
+  return ret
+
+testBase = [1,2,3,4,5]
+testSwap = copy.copy(testBase)
+res = swap(testSwap, 0,4)
+testReverse = copy.copy(testBase)
+reverseRes = testReverse[::-1]
+testSlice = testBase[:]
+sliced = testBase[2:4]
+joined = testBase[0:2] + testBase[2:5]
+
+def getAllPerms(nextPerm): 
+  allItems = [nextPerm]
+  while True:
+    prev = nextPerm
+    nextPerm = getNextPermutation(nextPerm[:])
+    if (prev == nextPerm):
+      break
+    else: 
+      allItems.append(nextPerm)
+  return allItems
+
+def getPermsOfNumber(num):
+  asList = list(str(num))
+  idxArr = getAllPerms(list(range(len(asList))))
+  newArr = []
+  for a in idxArr:
+    newNum = []
+    for i in a:
+      dig = asList[i]
+      newNum.append(dig)
+    newArr.append(newNum)
+  asInts = list(map(lambda x: int("".join(x)), newArr))
+  return asInts
+
+firstPerm = [1,2,3,4,5,6,7,8,9]
+
+def testPermutations():
+  print('permutations are 123 132 213 231 312 321', getAllPerms(list('123')))
+  print('permutations are 1234 1243 1324 1342 1423 1432 etc...', getAllPerms(list('1234')))
+  seqArr = list(range(5))
+  print('permutations are 01234 01243 etc...', getAllPerms(seqArr))
+
+def testGetPermsOfNumber():
+  print('permutations are 123 132 213 231 312 321', getPermsOfNumber(123))
+  print('permutations are 123 132 213 231 312 321', getPermsOfNumber(321))
+  print('permutations are 221 122 212 122 212 etc...', getPermsOfNumber(221))
+
+# testPermutations()
+# testGetPermsOfNumber()

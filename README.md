@@ -231,3 +231,7 @@ used for saving history asynchronously
 ### getting type of python object
 
 x.type
+
+### general - how to have "variable amount of nested loops in function"
+
+recursion
