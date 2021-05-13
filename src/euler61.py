@@ -35,19 +35,12 @@ def pick6Of89():
       for c in range(10,100):
         num2 = str(b) + str(c)
         last = str(c) + str(a)
-        result = allInSet(sub, [num1, num2, last])
-        if len(set(result.values())) != 3:
-          continue
         for d in range(10,100):
           num3 = str(c) + str(d)
           last = str(d) + str(a)
-          result = allInSet(sub, [num1, num2, num3, last])
           for e in range(10,100):
             num4 = str(d) + str(e)
             last = str(e) + str(a)
-            result = allInSet(sub, [num1, num2, num3, num4, last])
-            if len(set(result.values())) != 5:
-              continue
             for f in range(10,100):
               print('got to 5')
               num5 = str(e) + str(f)
@@ -66,6 +59,7 @@ def allInSet(setC, inputs):
 
 def testAllInSet():
   set1 = ['8128', '2882', '8281']
+  print('result test is: ', allInSet(allTests, set1))
 
 
 @track_performance
@@ -92,4 +86,5 @@ def testCheckmap():
 
 
 euler61()
+testAllInSet()
 # testCheckmap()

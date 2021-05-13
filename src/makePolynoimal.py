@@ -21,7 +21,7 @@ def getHex(n):
   return n * (2*n - 1)
 
 def getHep(n):
-  return n * (5*n - 3) // 2
+  return (n * (5*n - 3)) // 2
 
 def getOct(n):
   return n * (3*n - 2)
@@ -37,8 +37,8 @@ octa = getXPolynomials(999999, getOct)
 tri = getXPolynomials(999999, getTri)
 
 writeMapToFile('./resources/triangleMap.txt', tri)
-""" writeMapToFile('./resources/squares.txt', squares)
+writeMapToFile('./resources/squares.txt', squares)
 writeMapToFile('./resources/pentagonal.txt', pentagonal)
 writeMapToFile('./resources/hexa.txt', hexa)
 writeMapToFile('./resources/hep.txt', hep)
-writeMapToFile('./resources/octa.txt', octa) """
+writeMapToFile('./resources/octa.txt', octa)
