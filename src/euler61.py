@@ -29,35 +29,29 @@ def pick3Of89():
 
 def pick6Of89():
   sub = allTests
-  for a in range(10,99):
-    for b in range(10,99):
+  for a in range(10,100):
+    for b in range(10,100):
       num1 = str(a) + str(b)
-      result = allInSet(sub, [num1])
-      if len(set(result.values())) != 1:
-        continue
-      for c in range(10,99):
+      for c in range(10,100):
         num2 = str(b) + str(c)
         last = str(c) + str(a)
         result = allInSet(sub, [num1, num2, last])
         if len(set(result.values())) != 3:
           continue
-        for d in range(10,99):
+        for d in range(10,100):
           num3 = str(c) + str(d)
           last = str(d) + str(a)
           result = allInSet(sub, [num1, num2, num3, last])
-          if len(set(result.values())) != 4:
-            continue
-          for e in range(10,99):
+          for e in range(10,100):
             num4 = str(d) + str(e)
             last = str(e) + str(a)
             result = allInSet(sub, [num1, num2, num3, num4, last])
             if len(set(result.values())) != 5:
               continue
-            for f in range(10,99):
+            for f in range(10,100):
+              print('got to 5')
               num5 = str(e) + str(f)
               num6 = str(f) + str(a)
-              
-              sub = allTests
               result = allInSet(sub, [num1, num2, num3, num4, num5, num6])
               if len(set(result.values())) == 6:
                 print('result is ', result)
@@ -69,6 +63,10 @@ def allInSet(setC, inputs):
       if checkMap(num, s):
         resultMap[num] = idx
   return resultMap
+
+def testAllInSet():
+  set1 = ['8128', '2882', '8281']
+
 
 @track_performance
 def euler61():

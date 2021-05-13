@@ -18,7 +18,7 @@ def getPentagon(n):
   return (n * (3*n - 1)) // 2
 
 def getHex(n):
-  return n * (2*n -1)
+  return n * (2*n - 1)
 
 def getHep(n):
   return n * (5*n - 3) // 2
