@@ -35,9 +35,15 @@ def pick6Of89():
   for a in range(10,100):
     for b in range(10,100):
       num1 = str(a) + str(b)
+      result = allInSet(sub, [num1])
+      if len(set(flattenLists(result.values()))) != 1:
+        continue
       for c in range(10,100):
         num2 = str(b) + str(c)
         last = str(c) + str(a)
+        result = allInSet(sub, [num1, num2, last])
+        if len(set(flattenLists(result.values()))) != 3:
+          continue
         for d in range(10,100):
           num3 = str(c) + str(d)
           last = str(d) + str(a)
@@ -51,11 +57,10 @@ def pick6Of89():
             if len(set(flattenLists(result.values()))) != 5:
               continue
             for f in range(10,100):
-              print('found 5')
               num5 = str(e) + str(f)
               num6 = str(f) + str(a)
               result = allInSet(sub, [num1, num2, num3, num4, num5, num6])
-              if len(set(flattenLists(result.values()))) == 6:
+              if len(result.keys()) == 6 and len(set(flattenLists(result.values()))) == 6:
                print('result is ', result)
 
 def allInSet(setC, inputs):
