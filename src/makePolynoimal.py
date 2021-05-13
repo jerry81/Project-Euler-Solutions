@@ -29,12 +29,12 @@ def getOct(n):
 def getTri(n):
   return ((n * (n + 1))) // 2
 
-squares = getXPolynomials(999999, getSquare)
-pentagonal = getXPolynomials(999999, getPentagon)
-hexa = getXPolynomials(999999, getHex)
-hep = getXPolynomials(999999, getHep)
-octa = getXPolynomials(999999, getOct)
-tri = getXPolynomials(999999, getTri)
+squares = getXPolynomials(500, getSquare)
+pentagonal = getXPolynomials(500, getPentagon)
+hexa = getXPolynomials(500, getHex)
+hep = getXPolynomials(500, getHep)
+octa = getXPolynomials(500, getOct)
+tri = getXPolynomials(500, getTri)
 
 writeMapToFile('./resources/triangleMap.txt', tri)
 writeMapToFile('./resources/squares.txt', squares)
