@@ -1,4 +1,5 @@
 import copy
+import itertools
 
 def swap(arr, idx1, idx2):
   arr[idx1], arr[idx2] = arr[idx2], arr[idx1]
@@ -55,6 +56,17 @@ def getPermsOfNumber(num):
   asInts = list(map(lambda x: int("".join(x)), newArr))
   return asInts
 
+def getPermsOfNumberOOTB(num):
+  asList = list(str(num))
+  return list(
+    map(
+      lambda x: int("".join(x)), itertools.permutations(asList)
+    )
+  )
+
+def testOOTB():
+  print('OOTB', getPermsOfNumberOOTB(12345))
+
 def getPermutationsR(arr):
   if len(arr) == 1:
     return arr
@@ -100,3 +112,5 @@ def testGetPermsOfNumber():
 # testPermutations()
 # testGetPermsOfNumber()
 # testGetPermutationsR()
+
+# testOOTB()

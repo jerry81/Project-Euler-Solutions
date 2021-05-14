@@ -1,5 +1,5 @@
 from utils.annotations import track_performance
-from utils.myitertools import getPermsOfNumber, getPermutationsR
+from utils.myitertools import getPermsOfNumber, getPermutationsR, getPermsOfNumberOOTB
 import math
 
 
@@ -35,10 +35,10 @@ def euler62():
     print('project euler problem 62')
     for i in range(20000):
         cube = i ** 3
-        permutations = getPermsOfNumber(cube)
+        permutations = getPermsOfNumberOOTB(cube)
         noDups = list(set(permutations))
         count = getCubeCount(noDups, cube)
-        if count == 3:
+        if count == 5:
             print('i is ', i)
             return
 
