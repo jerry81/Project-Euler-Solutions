@@ -43,9 +43,14 @@ def getAllPerms(nextPerm):
       allItems.append(nextPerm)
   return allItems
 
-def getPermsOfNumber(num):
+def getPermsOfNumber(num, withMemo = False, memo = {}):
   asList = list(str(num))
-  idxArr = getAllPerms(list(range(len(asList))))
+  fun = getAllPerms
+  seq = list(range(len(asList)))
+  if withMemo:
+    idxArr, memo = getPermutationsRWithMemo(seq, memo)
+  else:
+    idxArr = getAllPerms(seq)
   newArr = []
   for a in idxArr:
     newNum = []
@@ -54,7 +59,11 @@ def getPermsOfNumber(num):
       newNum.append(dig)
     newArr.append(newNum)
   asInts = list(map(lambda x: int("".join(x)), newArr))
-  return asInts
+  return asInts, memo
+
+def getPermsOfNumberM(num, memo):
+  return getPermsOfNumber(num, True, memo)
+
 
 def getPermsOfNumberOOTB(num):
   asList = list(str(num))
@@ -102,11 +111,14 @@ def getPermutationsRWithMemo(arr, memo):
   # isolate first item 
   sub1 = arr[:1][0]
   sub2 = arr[1:]
-  if checkMap(sub2):
+  sub2C = copy.copy(sub2)
+  sub2Key = "".join(list(map(lambda x: str(x), sub2C)))
+  if checkMap(sub2Key, memo):
+    print('memo used')
     permutations = memo[sub2]
   else:
     permutations = getPermutationsR(sub2)
-    memo[sub2] = permutations
+    memo[sub2Key] = permutations
   expanded = []
   for i in range(len(arr)):
     for idx, p in enumerate(permutations):
@@ -114,6 +126,9 @@ def getPermutationsRWithMemo(arr, memo):
       c.insert(i, sub1)
       expanded.append(c)
   return expanded, memo
+
+def testMemo():
+  print('1552 is ', getPermsOfNumberM(1552, {}))
 
 def testGetPermutationsR():
   test1 = [1,2]
@@ -143,3 +158,4 @@ def testGetPermsOfNumber():
 # testGetPermutationsR()
 
 # testOOTB()
+testMemo()
