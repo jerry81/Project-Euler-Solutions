@@ -86,6 +86,35 @@ def getPermutationsR(arr):
       expanded.append(c)
   return expanded
 
+def checkMap(num, _map):
+  value = _map.get(num, None)
+  if value is not None:
+    return True
+  return False
+
+def getPermutationsRWithMemo(arr, memo):
+  if len(arr) == 1:
+    return arr
+  if len(arr) == 2:
+    rev = copy.copy(arr)
+    rev.reverse()
+    return [arr, rev]
+  # isolate first item 
+  sub1 = arr[:1][0]
+  sub2 = arr[1:]
+  if checkMap(sub2):
+    permutations = memo[sub2]
+  else:
+    permutations = getPermutationsR(sub2)
+    memo[sub2] = permutations
+  expanded = []
+  for i in range(len(arr)):
+    for idx, p in enumerate(permutations):
+      c = copy.copy(p)
+      c.insert(i, sub1)
+      expanded.append(c)
+  return expanded, memo
+
 def testGetPermutationsR():
   test1 = [1,2]
   test2 = [5,6]
