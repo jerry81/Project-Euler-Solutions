@@ -43,14 +43,11 @@ def getAllPerms(nextPerm):
       allItems.append(nextPerm)
   return allItems
 
-def getPermsOfNumber(num, withMemo = False, memo = {}):
+def getPermsOfNumber(num):
   asList = list(str(num))
   fun = getAllPerms
   seq = list(range(len(asList)))
-  if withMemo:
-    idxArr, memo = getPermutationsRWithMemo(seq, memo)
-  else:
-    idxArr = getAllPerms(seq)
+  idxArr = getPermutationsR(seq)
   newArr = []
   for a in idxArr:
     newNum = []
@@ -59,11 +56,7 @@ def getPermsOfNumber(num, withMemo = False, memo = {}):
       newNum.append(dig)
     newArr.append(newNum)
   asInts = list(map(lambda x: int("".join(x)), newArr))
-  return asInts, memo
-
-def getPermsOfNumberM(num, memo):
-  return getPermsOfNumber(num, True, memo)
-
+  return asInts 
 
 def getPermsOfNumberOOTB(num):
   asList = list(str(num))
@@ -76,6 +69,8 @@ def getPermsOfNumberOOTB(num):
 def testOOTB():
   print('OOTB', getPermsOfNumberOOTB(12345))
 
+memo = {}
+
 def getPermutationsR(arr):
   if len(arr) == 1:
     return arr
@@ -86,7 +81,14 @@ def getPermutationsR(arr):
   # isolate first item 
   sub1 = arr[:1][0]
   sub2 = arr[1:]
-  permutations = getPermutationsR(sub2)
+  cp = copy.copy(sub2)
+  sub2Key = "".join(list(map(lambda x: str(x),cp)))
+  permutations = []
+  if checkMap(sub2Key, memo):
+    permutations = memo[sub2Key]
+  else:
+    permutations = getPermutationsR(sub2)
+    memo[sub2Key] = permutations
   expanded = []
   for i in range(len(arr)):
     for idx, p in enumerate(permutations):
@@ -101,34 +103,11 @@ def checkMap(num, _map):
     return True
   return False
 
-def getPermutationsRWithMemo(arr, memo):
-  if len(arr) == 1:
-    return arr
-  if len(arr) == 2:
-    rev = copy.copy(arr)
-    rev.reverse()
-    return [arr, rev]
-  # isolate first item 
-  sub1 = arr[:1][0]
-  sub2 = arr[1:]
-  sub2C = copy.copy(sub2)
-  sub2Key = "".join(list(map(lambda x: str(x), sub2C)))
-  if checkMap(sub2Key, memo):
-    print('memo used')
-    permutations = memo[sub2]
-  else:
-    permutations = getPermutationsR(sub2)
-    memo[sub2Key] = permutations
-  expanded = []
-  for i in range(len(arr)):
-    for idx, p in enumerate(permutations):
-      c = copy.copy(p)
-      c.insert(i, sub1)
-      expanded.append(c)
-  return expanded, memo
-
 def testMemo():
-  print('1552 is ', getPermsOfNumberM(1552, {}))
+  print('1552 is ', getPermsOfNumber(1552))
+  print('memo is now ', memo)
+  print('another 4 digit 5432', getPermsOfNumber(5432))
+  # print('1552 is ', getPermsOfNumberM(1552, {'52': [[5,2], [2,5]]}))
 
 def testGetPermutationsR():
   test1 = [1,2]
@@ -158,4 +137,4 @@ def testGetPermsOfNumber():
 # testGetPermutationsR()
 
 # testOOTB()
-testMemo()
+# testMemo()
