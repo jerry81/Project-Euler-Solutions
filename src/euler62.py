@@ -1,5 +1,5 @@
 from utils.annotations import track_performance
-from utils.myitertools import getPermsOfNumber
+from utils.myitertools import getPermsOfNumber, getPermsOfNumberOOTB
 import math
 
 
@@ -29,13 +29,32 @@ def getCubeCount(perms, orig):
         )
     ))
 
+def getFingerprint(num):
+  asList = list(str(num))
+  fpL = [0,0,0,0,0,0,0,0,0,0]
+  for i in asList:
+    fpL[int(i)] += 1
+  return "".join(list(map(lambda x: str(x),fpL)))
+
+def makeCubesMap(limit):
+  cm = {}
+  for i in range(3, limit):
+    k = i**3
+    cm[k] = getFingerprint(k)
+  return cm
+
+def testGetFingerprint():
+  print('fingerprint of 127395882 is ', getFingerprint(127395882))
+
+def testCubeMap():
+  print('makeCubeMap 2000', makeCubesMap(2000))
 
 @track_performance
 def euler62():
     print('project euler problem 62')
-    for i in range(16,20000):
+    for i in range(1002,2000):
         cube = i ** 3
-        permutations = getPermsOfNumber(cube)
+        permutations = getPermsOfNumberOOTB(cube)
         noDups = list(set(permutations))
         count = getCubeCount(noDups, cube)
         if count == 5:
@@ -56,4 +75,6 @@ print('getCubecount', getCubeCount(
     41063625))
 testLog()
 testCube()
-euler62()
+testGetFingerprint()
+testCubeMap()
+# euler62()
