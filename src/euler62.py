@@ -50,7 +50,10 @@ def testGetFingerprint():
   print('fingerprint of 66430125 is ', getFingerprint(66430125))
 
 def testCubeMap():
-  print('makeCubeMap 2000', makeCubesMap(2000))
+  cubeMap = makeCubesMap(2000)
+  print('getCubemap 41063625', cubeMap.get(41063625))
+  print('getCubeMap 56623104', cubeMap.get(56623104))
+  print('getCubeMap 66430125', cubeMap.get(66430125))
 
 def testFPMap():
   print('fingerPrintMap 2000 is ', makeFingerPrintMap(makeCubesMap(2000)))
@@ -88,6 +91,6 @@ print('getCubecount', getCubeCount(
 testLog()
 testCube()
 testGetFingerprint()
-# testCubeMap()
+testCubeMap()
 # testFPMap()
-euler62()
+# euler62()
