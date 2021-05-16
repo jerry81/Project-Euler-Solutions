@@ -45,21 +45,33 @@ def makeCubesMap(limit):
 
 def testGetFingerprint():
   print('fingerprint of 127395882 is ', getFingerprint(127395882))
+  print('fingerPrint of 41063625 is ', getFingerprint(41063625))
+  print('fingerprint of 56623104 is ', getFingerprint(56623104))
+  print('fingerprint of 66430125 is ', getFingerprint(66430125))
 
 def testCubeMap():
   print('makeCubeMap 2000', makeCubesMap(2000))
 
+def testFPMap():
+  print('fingerPrintMap 2000 is ', makeFingerPrintMap(makeCubesMap(2000)))
+
+def makeFingerPrintMap(cubeMap):
+  fpMap = {}
+  for i in cubeMap.values():
+    if fpMap.get(i, None) !=  None:
+      fpMap[i] += 1
+    else:
+      fpMap[i] = 1
+  return fpMap
+
 @track_performance
 def euler62():
     print('project euler problem 62')
-    for i in range(1002,2000):
-        cube = i ** 3
-        permutations = getPermsOfNumberOOTB(cube)
-        noDups = list(set(permutations))
-        count = getCubeCount(noDups, cube)
-        if count == 5:
-            print('i is ', i)
-            return
+    fp = makeFingerPrintMap(makeCubesMap(4000))
+    vals = list(fp.values())
+    print('vals is ', vals)
+    print('max is ', max(vals))
+    print('index is ', vals.index(3))
 
 
 print('345 cubed is ', 345*345*345, 345**3)
@@ -76,5 +88,6 @@ print('getCubecount', getCubeCount(
 testLog()
 testCube()
 testGetFingerprint()
-testCubeMap()
-# euler62()
+# testCubeMap()
+# testFPMap()
+euler62()
