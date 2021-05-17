@@ -73,9 +73,11 @@ def makeFingerPrintMap(cubeMap):
 @track_performance
 def euler62():
     print('project euler problem 62')
-    fp = makeFingerPrintMap(makeCubesMap(4000))
-    vals = list(fp.values())
-    print('vals is ', vals)
+    fp = makeFingerPrintMap(makeCubesMap(20000))
+    for k in fp:
+      v = fp[k]
+      if len(v) == 5:
+        print('v is ', v)
 
 
 print('345 cubed is ', 345*345*345, 345**3)
@@ -94,4 +96,4 @@ testCube()
 testGetFingerprint()
 testCubeMap()
 testFPMap()
-# euler62()
+euler62()
