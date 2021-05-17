@@ -56,15 +56,18 @@ def testCubeMap():
   print('getCubeMap 66430125', cubeMap.get(66430125))
 
 def testFPMap():
-  print('fingerPrintMap 2000 is ', makeFingerPrintMap(makeCubesMap(2000)))
+  fpMap = makeFingerPrintMap(makeCubesMap(2000))
+  # print('fpMap is ', fpMap)
+  print('41063625 is ', fpMap['1111112000'])
 
 def makeFingerPrintMap(cubeMap):
   fpMap = {}
-  for i in cubeMap.values():
-    if fpMap.get(i, None) !=  None:
-      fpMap[i] += 1
+  for i in cubeMap:
+    val = cubeMap[i]
+    if fpMap.get(val, None) !=  None:
+      fpMap[val].append(i)
     else:
-      fpMap[i] = 1
+      fpMap[val] = [i]
   return fpMap
 
 @track_performance
@@ -73,8 +76,6 @@ def euler62():
     fp = makeFingerPrintMap(makeCubesMap(4000))
     vals = list(fp.values())
     print('vals is ', vals)
-    print('max is ', max(vals))
-    print('index is ', vals.index(3))
 
 
 print('345 cubed is ', 345*345*345, 345**3)
@@ -92,5 +93,5 @@ testLog()
 testCube()
 testGetFingerprint()
 testCubeMap()
-# testFPMap()
+testFPMap()
 # euler62()
