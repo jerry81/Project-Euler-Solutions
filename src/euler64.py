@@ -9,6 +9,9 @@ def splitDec(num):
     nxt = 1/remainder
     return whole, remainder, nxt
 
+def oddPeriod(arr):
+    return len(arr) % 2 == 1
+
 def getPattern(num):
     pattern = []
     repeatRemainders = []
@@ -19,16 +22,23 @@ def getPattern(num):
       pattern.append(whole)
       remainder = round(remainder, 7)
       if remainder == 0 or remainder in repeatRemainders:
-          return repeatRemainders, pattern, count
+          return repeatRemainders, pattern[1:], count
       repeatRemainders.append(remainder)
       inp = nxt
       count += 1
-      if count > 10: 
+      if count > 100:
           return repeatRemainders, pattern[1:], count
+
 
 @track_performance
 def euler64():
     print('project euler problem 64')
+    oddCount = 0
+    for i in range(10001):
+        repeats, remainders, count = getPattern(i)
+        if oddPeriod(remainders):
+            oddCount += 1
+    print('oddCount is ', oddCount)
     
 def testRemainder():
   w, r, n = splitDec(sqrt(2))
@@ -37,9 +47,12 @@ def testRemainder():
   print('w2, r2, and n2 are ', w2, r2, n2)
 
 def testGetPattern():
+    oddCount = 0
     for i in range(14):
         repeats, remainders, count = getPattern(i)
-        print('getPattern i is rep, rem, count', i, repeats, remainders, count)
+        if oddPeriod(remainders):
+            oddCount += 1
+        print('getPattern i is rep, rem, count, oddCount', i, repeats, remainders, count, oddCount)
 
 euler64()
 testRemainder()
