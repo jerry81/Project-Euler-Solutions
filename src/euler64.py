@@ -20,13 +20,13 @@ def getPattern(num):
     while True:
       whole, remainder, nxt = splitDec(inp)
       pattern.append(whole)
-      remainder = round(remainder, 7)
+      remainder = round(remainder, 8)
       if remainder == 0 or remainder in repeatRemainders:
           return repeatRemainders, pattern[1:], count
       repeatRemainders.append(remainder)
       inp = nxt
       count += 1
-      if count > 100:
+      if count > 1000:
           return repeatRemainders, pattern[1:], count
 
 
@@ -48,12 +48,12 @@ def testRemainder():
 
 def testGetPattern():
     oddCount = 0
-    for i in range(14):
+    for i in range(100):
         repeats, remainders, count = getPattern(i)
         if oddPeriod(remainders):
             oddCount += 1
         print('getPattern i is rep, rem, count, oddCount', i, repeats, remainders, count, oddCount)
 
 euler64()
-testRemainder()
+# testRemainder()
 testGetPattern()
