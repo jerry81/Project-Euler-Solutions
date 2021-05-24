@@ -61,7 +61,17 @@ def testTupleComparison():
     print('False is ', t1 == t2)
     print('True is ', t1 == t3)
 
+def testTupleSearch():
+    t1 = (5, 7)
+    t2 = (7, -2)
+    t3 = (5,7)
+    t4 = (8, 8)
+    ta = [t1, t2]
+    print('True is ', t3 in ta)
+    print('False is ', t4 in ta)
+
 # euler64()
 # testRemainder()
 testGetPattern()
 testTupleComparison()
+testTupleSearch()
