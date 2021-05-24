@@ -48,12 +48,20 @@ def testRemainder():
 
 def testGetPattern():
     oddCount = 0
-    for i in range(100):
+    for i in range(50):
         repeats, remainders, count = getPattern(i)
         if oddPeriod(remainders):
             oddCount += 1
         print('getPattern i is rep, rem, count, oddCount', i, repeats, remainders, count, oddCount)
 
-euler64()
+def testTupleComparison():
+    t1 = (5, 7)
+    t2 = (7, -2)
+    t3 = (5,7)
+    print('False is ', t1 == t2)
+    print('True is ', t1 == t3)
+
+# euler64()
 # testRemainder()
 testGetPattern()
+testTupleComparison()
