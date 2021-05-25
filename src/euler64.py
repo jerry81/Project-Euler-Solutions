@@ -33,6 +33,8 @@ def getNextIter(i, n, d):
     newN = n * -1
     newTop = sqrt(i) + newN
     newD = (i - n ** 2) / d
+    if newD == 0:
+        return 0, 0, 0
     whole = int( newTop / newD )
     newN = newN - (newD * whole)
     return newN, newD, whole
@@ -44,6 +46,8 @@ def getResult(i):
     d = 1
     n = w * -1
     n, d, w = getNextIter(i, n, d)
+    if n == 0 or d == 0:
+        return repeats, wholes
     while (n, d) not in repeats:
         repeats.append((n, d))
         wholes.append(w)
@@ -99,6 +103,11 @@ def testTupleSearch():
 def testResult():
     repeats, wholes = getResult(43)
     print('result of 43 is ', repeats, wholes)
+    repeats, wholes = getResult(2)
+    print('result of 2 is ', repeats, wholes)
+    repeats, wholes = getResult(4)
+    print('result of 4 is ', repeats, wholes)
+
 
 euler64()
 # testRemainder()
