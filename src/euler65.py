@@ -11,8 +11,12 @@ def makeFractionSeriesForE(lim):
         else:
             res.append(1)
     return res
+
+""" def getRecurrentFractionForE(atIdx):
+    seriesLim = atIdx -  """
         
 def testSeries():
+    print('10 series is ', makeFractionSeriesForE(10))
     print('100 series is ', makeFractionSeriesForE(100))
 
 @track_performance
