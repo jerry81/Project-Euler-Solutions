@@ -12,12 +12,22 @@ def makeFractionSeriesForE(lim):
             res.append(1)
     return res
 
-""" def getRecurrentFractionForE(atIdx):
-    seriesLim = atIdx -  """
-        
+def getRecurrentFractionForE(atIdx):
+    if atIdx == 0:
+        return 2, 1
+    seriesLim = atIdx - 1
+    series = makeFractionSeriesForE(seriesLim)
+    while series:
+        item = series.pop()
+        print('item is ', item)
+    print('series is ', series)
+            
 def testSeries():
     print('10 series is ', makeFractionSeriesForE(10))
     print('100 series is ', makeFractionSeriesForE(100))
+
+def testRecurrentFractionForE():
+    print('recurrent 1 is ', getRecurrentFractionForE(1))
 
 @track_performance
 def euler65():
@@ -25,3 +35,4 @@ def euler65():
     
 euler65()
 testSeries()
+testRecurrentFractionForE()
