@@ -23,10 +23,10 @@ def getRecurrentFractionForE(atIdx):
     den = item
     while series:
         item = series.pop()
-        newNum = (den * item) + num
-        newDen = newNum 
+        newNum = (den * item) + num 
+        num = den
         den = newNum
-        num = newDen
+    print('num and den are now ', num, den)
     num = den * 2 + num
     print('series is ', series) 
     return num, den
