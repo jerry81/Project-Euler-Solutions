@@ -43,7 +43,10 @@ def testRecurrentFractionForE():
 @track_performance
 def euler65():
     print('project euler problem 65')
+    num, den = getRecurrentFractionForE(99)
+    asInts = map(lambda x: int(x), list(str(num)))
+    print('sum is ', sum(asInts))
     
 euler65()
-testSeries()
+# testSeries()
 testRecurrentFractionForE()
