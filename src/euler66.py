@@ -1,4 +1,5 @@
 from utils.annotations import track_performance
+from utils.fileUtils import writeArrayToFile
 from math import sqrt
 
 def isPerfectSquare(x):
@@ -35,10 +36,11 @@ def testSolveX():
 def euler66():
     print('project euler problem 66')
     solutions = []
-    for i in range(1001):
+    for i in range(101):
         x = solveXDiophantine(i)
         solutions.append(x)
     print('solutions is ', solutions)
+    writeArrayToFile('./resources/diophantines0to100.txt', solutions)
     
 euler66()
 # testIsPerfect()
