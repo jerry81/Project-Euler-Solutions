@@ -50,7 +50,7 @@ def getMaxInFiles():
 def euler66():
     print('project euler problem 66')
     solutions = []
-    for i in range(701, 801):
+    for i in range(801, 901):
         x = solveXDiophantine(i)
         solutions.append(x)
     print('solutions is ', solutions)
