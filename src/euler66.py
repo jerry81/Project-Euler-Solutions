@@ -1,5 +1,5 @@
 from utils.annotations import track_performance
-from utils.fileUtils import writeArrayToFile
+from utils.fileUtils import writeArrayToFile, openAndSplit
 from math import sqrt
 
 def isPerfectSquare(x):
@@ -32,15 +32,18 @@ def testSolveX():
   print('solve x 6', solveXDiophantine(d4))
   print('solve x 7', solveXDiophantine(d5))
 
+def getMaxInFiles():
+  files = ['701to800.txt', '701to800.txt', '701to800.txt', '701to800.txt', '701to800.txt', '701to800.txt', '701to800.txt', '701to800.txt']
+
 @track_performance
 def euler66():
     print('project euler problem 66')
     solutions = []
-    for i in range(601, 701):
+    for i in range(701, 801):
         x = solveXDiophantine(i)
         solutions.append(x)
     print('solutions is ', solutions)
-    writeArrayToFile('./resources/diophantines601to700.txt', solutions)
+    writeArrayToFile('./resources/diophantines701to800.txt', solutions)
     
 euler66()
 # testIsPerfect()
