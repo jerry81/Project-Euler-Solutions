@@ -36,11 +36,11 @@ def testSolveX():
 def euler66():
     print('project euler problem 66')
     solutions = []
-    for i in range(301, 401):
+    for i in range(401, 501):
         x = solveXDiophantine(i)
         solutions.append(x)
     print('solutions is ', solutions)
-    writeArrayToFile('./resources/diophantines301to400.txt', solutions)
+    writeArrayToFile('./resources/diophantines401to500.txt', solutions)
     
 euler66()
 # testIsPerfect()
