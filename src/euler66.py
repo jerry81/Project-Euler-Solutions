@@ -50,11 +50,11 @@ def getMaxInFiles():
 def euler66():
     print('project euler problem 66')
     solutions = []
-    for i in range(801, 901):
+    for i in range(901, 1001):
         x = solveXDiophantine(i)
         solutions.append(x)
     print('solutions is ', solutions)
-    writeArrayToFile('./resources/diophantines801to900.txt', solutions)
+    writeArrayToFile('./resources/diophantines901to1000.txt', solutions)
     
 euler66()
 # testIsPerfect()
