@@ -26,36 +26,40 @@ def testSolveX():
   d3 = 5
   d4 = 6
   d5 = 7
+  d13 = 13
+  d109 = 109
+  d661 = 661
   print('solve x 2', solveXDiophantine(d1))
   print('solve x 3', solveXDiophantine(d2))
   print('solve x 5', solveXDiophantine(d3))
   print('solve x 6', solveXDiophantine(d4))
   print('solve x 7', solveXDiophantine(d5))
+  print('solve x 13', solveXDiophantine(d13))
+  print('solve x 661', solveXDiophantine(d661))
+  print('solve x 109', solveXDiophantine(d109))
+
 
 def getMaxInFiles():
   files = ['0to100', '100to200', '201to300', '301to400', '401to500', '501to600', '601to700', '701to800', '801to900', '901to1000']
   prefix = './resources/diophantines'
   suffix = '.txt'
   mx = 0
+  fx = ''
   for f in files:
     arr = openAndSplit(prefix+f+suffix)
     asF = map(lambda x: float(x), arr)
     tmax = max(asF)
     if tmax > mx:
         mx = tmax
-  return mx
+        fx = f
+  return mx, fx
 
 
 @track_performance
 def euler66():
     print('project euler problem 66')
-    solutions = []
-    for i in range(901, 1001):
-        x = solveXDiophantine(i)
-        solutions.append(x)
-    print('solutions is ', solutions)
-    writeArrayToFile('./resources/diophantines901to1000.txt', solutions)
+    print('max is ', getMaxInFiles())
     
 euler66()
 # testIsPerfect()
-# testSolveX()
+testSolveX()
