@@ -1,6 +1,6 @@
 from utils.annotations import track_performance
 from utils.fileUtils import writeArrayToFile, openAndSplit
-from .euler64 import getNextIter
+from euler64 import getNextIter
 from math import sqrt
 
 
@@ -17,6 +17,9 @@ def solveXDiophantine(d):
         if isPerfectSquare(attempt):
             return sqrt(attempt)
         y += 1
+
+def solvePell(x, y, d):
+    return x ** 2 - (d * (y ** 2))
 
 
 def testIsPerfect():
@@ -40,8 +43,8 @@ def testSolveX():
     print('solve x 6', solveXDiophantine(d4))
     print('solve x 7', solveXDiophantine(d5))
     print('solve x 13', solveXDiophantine(d13))
-    print('solve x 661', solveXDiophantine(d661))
-    print('solve x 109', solveXDiophantine(d109))
+"""     print('solve x 661', solveXDiophantine(d661))
+    print('solve x 109', solveXDiophantine(d109)) """
 
 
 def tryI(i):
@@ -50,8 +53,13 @@ def tryI(i):
     w = int(sqrt(i))
     d = 1
     n = w * -1
-    n, d, w = getNextIter(i, n, d)
-
+    pell = solvePell(n, d, i)
+    print('pell is ', pell)
+    while pell != 1:
+      n, d, w = getNextIter(i, n, d)
+      pell = solvePell(n, d, i)
+      print('pell is ', pell)
+    return n
 
 def getMaxInFiles():
     files = ['0to100', '100to200', '201to300', '301to400', '401to500',
@@ -69,7 +77,10 @@ def getMaxInFiles():
             fx = f
     return mx, fx
 
-
+def testI():
+    # print('tryI 7 is ', tryI(7))
+    print('solve pell 8, 3, 7 is ', solvePell(8, 3, 7))
+    
 @track_performance
 def euler66():
     print('project euler problem 66')
@@ -79,3 +90,4 @@ def euler66():
 euler66()
 # testIsPerfect()
 testSolveX()
+testI()
