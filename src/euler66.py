@@ -51,15 +51,35 @@ def tryI(i):
     repeats = []
     wholes = []
     w = int(sqrt(i))
+    wholes.append(w)
     d = 1
     n = w * -1
     pell = solvePell(n, d, i)
     print('pell is ', pell)
+    returnedNum = 0
     while pell != 1:
       n, d, w = getNextIter(i, n, d)
-      pell = solvePell(n, d, i)
-      print('pell is ', pell)
-    return n
+      wholes.append(w)
+      num, den = getRecurrentFraction(wholes.copy())
+      print('num, den are ', num, den)
+      pell = solvePell(num, den, i)
+      returnedNum = num
+    return num
+
+def getRecurrentFraction(series):
+    if len(series) == 1:
+        return series[0], 1
+    print('series is ', series)
+    num = 1
+    item = series.pop()
+    den = item
+    while series:
+        item = series.pop()
+        print('item is ', item)
+        newNum = (den * item) + num 
+        num = den
+        den = newNum
+    return den, num
 
 def getMaxInFiles():
     files = ['0to100', '100to200', '201to300', '301to400', '401to500',
@@ -78,16 +98,27 @@ def getMaxInFiles():
     return mx, fx
 
 def testI():
-    # print('tryI 7 is ', tryI(7))
+    print('tryI 7 is ', tryI(7))
     print('solve pell 8, 3, 7 is ', solvePell(8, 3, 7))
-    
+    print('tryI 109 is ', tryI(109))
+
 @track_performance
 def euler66():
     print('project euler problem 66')
-    print('max is ', getMaxInFiles())
+    tmax = 0
+    highestIndex = 0
+    for i in range(0, 1001):
+        if isPerfectSquare(i):
+            continue
+        cur = tryI(i)
+        if cur > tmax:
+            highestIndex = i
+            tmax = cur
+    print('highestIndex ', highestIndex)
+    print('tmax ', tmax)
 
 
 euler66()
 # testIsPerfect()
-testSolveX()
-testI()
+# testSolveX()
+# testI()
