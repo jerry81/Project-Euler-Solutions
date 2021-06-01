@@ -15,6 +15,20 @@ perms = list(map(lambda x: list(x), list(permutations(oneToSix))))
 
 print('perms are ', perms)
 
+def addUpLines(xGon, cur):
+    tSum = 0
+    mSum = 0
+    for i in xGon:
+        line = list(map(lambda x: cur[x], i))
+        cSum += sum(line)
+        if mSum != 0 and cSum != mSum:
+            return
+        mSum = cSum
+        tSum += cSum
+    return tSum
+
+
+
 @track_performance
 def euler68():
     print('project euler problem 68')
