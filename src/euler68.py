@@ -65,14 +65,13 @@ def euler68():
       cur = []
       for j in fiveGon:
           for k in j:
-              print('k is ', k)
-              cur.append(i[j[k]])
+              cur.append(i[k])
       fiveGons.append(cur)
     for i in fiveGons:
         asStr = list(map(lambda x: str(x), i))
         joined = ''.join(asStr)
         print('asStr is ', joined)
-        if int(joined) > maxT:
+        if len(joined) == 16 and int(joined) > maxT:
             maxT = int(joined)
     print('maxT', maxT)
 
