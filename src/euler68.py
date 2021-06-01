@@ -45,9 +45,7 @@ def testAddUpLines():
     print('addUpLines is, threeGon, 235416', addUpLines(threeGon, [2,3,5,4,1,6]))
     print('addupLines, 5gon, index 197438 is ', perms10[197438], addUpLines(fiveGon, perms10[197438]))
 
-@track_performance
-def euler68():
-    print('project euler problem 68')
+def get5GonSolutions():
     results = []
     idx = 0
     for p in perms10:
@@ -55,8 +53,28 @@ def euler68():
         if res:
           results.append(idx)
         idx+=1
-    print('res is ', results)
+    return results 
 
+@track_performance
+def euler68():
+    print('project euler problem 68')
+    maxT = 0
+    perms = list(map(lambda x: perms10[x],solutions))
+    fiveGons = []
+    for i in perms:
+      cur = []
+      for j in fiveGon:
+          for k in j:
+              print('k is ', k)
+              cur.append(i[j[k]])
+      fiveGons.append(cur)
+    for i in fiveGons:
+        asStr = list(map(lambda x: str(x), i))
+        joined = ''.join(asStr)
+        print('asStr is ', joined)
+        if int(joined) > maxT:
+            maxT = int(joined)
+    print('maxT', maxT)
 
-# euler68()
-testAddUpLines()
+euler68()
+# testAddUpLines()
