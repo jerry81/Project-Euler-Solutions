@@ -20,14 +20,17 @@ def addUpLines(xGon, cur):
     mSum = 0
     for i in xGon:
         line = list(map(lambda x: cur[x], i))
-        cSum += sum(line)
+        cSum = sum(line)
         if mSum != 0 and cSum != mSum:
             return
         mSum = cSum
         tSum += cSum
-    return tSum
+    return mSum
 
-
+def testAddUpLines():
+    print('addupLines is, threeGon, 123456', addUpLines(threeGon, perms[0]))
+    print('addUpLines is, threeGon, 432615', addUpLines(threeGon, [4,3,2,6,1,5]))
+    print('addUpLines is, threeGon, 235416', addUpLines(threeGon, [2,3,5,4,1,6]))
 
 @track_performance
 def euler68():
@@ -35,3 +38,4 @@ def euler68():
 
 
 euler68()
+testAddUpLines()
