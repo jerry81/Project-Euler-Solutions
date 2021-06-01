@@ -55,11 +55,16 @@ def get5GonSolutions():
         idx+=1
     return results 
 
+def firstOuterNodeSmallest(perm):
+    candidates = [perm[0], perm[3], perm[5], perm[7], perm[9]]
+    return min(candidates) == perm[0]
+
 @track_performance
 def euler68():
     print('project euler problem 68')
     maxT = 0
     perms = list(map(lambda x: perms10[x],solutions))
+    perms = list(filter(firstOuterNodeSmallest, perms))
     fiveGons = []
     for i in perms:
       cur = []
