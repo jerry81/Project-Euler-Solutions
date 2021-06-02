@@ -38,6 +38,8 @@ def getRelativePrimes(n):
 @track_performance
 def euler69():
     print('project euler problem 69')
+    for i in range(2,1000000):
+        getFactors(i)
 
 def testFactors():
     print('factors without 1 27', getFactorsWithout1(27))
@@ -50,4 +52,4 @@ def testRp():
 
 euler69()
 # testFactors()
-testRp()
+# testRp()
