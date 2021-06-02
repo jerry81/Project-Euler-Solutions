@@ -75,6 +75,7 @@ def getFactors(number):
       returned.append(i)
       returned.append(number // i)
   return returned
+  
 
 def getXTriangles(x):
   triangles = []
@@ -133,3 +134,9 @@ def eratosthenesWithSupport(fname, start, limit):
   filtered = list(filter(lambda x: x['prime'] == True, initArr))
   mapped = list(map(lambda x: x['val'], filtered))
   return mapped 
+
+def testGetAllFactors():
+  print('get all factors 15 ', getFactors(15))
+  print('get all factors 42 ', getFactors(42))
+
+# testGetAllFactors()
