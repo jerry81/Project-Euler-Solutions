@@ -1,5 +1,6 @@
 from utils.annotations import track_performance
 from utils.mathHelpers import getFactors, isPrime
+from filterArrayAndOutput import primeMap
 
 factorsMap = {}
 
@@ -59,13 +60,20 @@ def getRelativePrimes2(n):
             rps.append(key)
     return rps
 
+def getStats(n, rps):
+    count = len(rps)
+    return n / count
 
 @track_performance
 def euler69():
     print('project euler problem 69')
-    for i in range(2, 1000000):
-        getFactors(i)
-
+    tmax = (11550,4.1825)
+    for i in range(20000, 100000):
+        cur = getStats(i, getRelativePrimes2(i))
+        a, b = tmax
+        if cur > b:
+            tmax = i, cur
+    print('tmax is ', tmax)
 
 def testFactors():
     print('factors without 1 27', getFactorsWithout1(27))
@@ -76,8 +84,9 @@ def testFactors():
 def testRp():
     for i in range(2, 11):
         print('testRP i is ', i, getRelativePrimes2(i))
+        print('statss are ', i, getStats(i, getRelativePrimes(i)))
 
 
-# euler69()
+euler69()
 # testFactors()
-testRp()
+# testRp()
