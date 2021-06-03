@@ -147,6 +147,11 @@ def euler69():
 def testPrepareCoprimeMap():
     prepareCoprimeMap(11)
     print('coprime map up to 11 is ', coprimeMap)
+    print('testing merging coprime map 2 and 3')
+    newCPM = {}
+    newCPM.update(coprimeMap[2])
+    newCPM.update(coprimeMap[3])
+    print('newCPM is ', newCPM)
 
 def testFactors():
     print('factors without 1 27', getFactorsWithout1(27))
