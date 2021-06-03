@@ -66,7 +66,15 @@ def processSeive(seive):
     for (key, val) in seive.items():
       if val:
           rps.append(key)
+    rps.sort()
     return rps
+
+def o1isPrime(n):
+    try:
+        prime = primeMap[n]
+        return True
+    except:
+        return False
 
 def getRP(n):
     seive = {}
@@ -91,6 +99,35 @@ def getRP(n):
                         seive[j] = nonfactor
     return processSeive(seive)
 
+coprimeMap = {}
+
+def prepareCoprimeMap(lim):
+    print('preparing coprime map')
+    for i in primeMap.keys():
+        if i > lim:
+            return
+        curCoprimeMap = {}
+        for j in range(1, lim//i + 1):
+            k = i * j
+            curCoprimeMap[k] = False
+        coprimeMap[i] = curCoprimeMap
+    print('finished coprime map')
+    return coprimeMap
+
+def getRP2(n):
+    premadeEvenCoprimeMap = prepareCoprimeMap()
+    if o1isPrime(n):
+        return n-1
+    isEven = n % 2 == 0
+    cfactors = 0 # common factors
+    primes = primeMap.keys()
+    if isEven:
+        print('isEven')
+    else: 
+        print('isOdd')
+    return cfactors
+
+
 def getStats(n, rps):
     count = len(rps)
     return n / count
@@ -107,6 +144,9 @@ def euler69():
             tmax = i, cur
     print('tmax is ', tmax)
 
+def testPrepareCoprimeMap():
+    prepareCoprimeMap(11)
+    print('coprime map up to 11 is ', coprimeMap)
 
 def testFactors():
     print('factors without 1 27', getFactorsWithout1(27))
@@ -115,10 +155,11 @@ def testFactors():
 
 
 def testRp():
-    for i in range(2, 11):
-        print('getRp i is ', i, getRP(i))
+    for i in range(2, 36):
+        print('getRp i is ', i, getRP2(i))
 
 
-euler69()
+# euler69()
 # testFactors()
 # testRp()
+testPrepareCoprimeMap()
