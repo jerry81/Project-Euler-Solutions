@@ -102,29 +102,30 @@ def getRP(n):
 coprimeMap = {}
 
 def prepareCoprimeMap(lim):
-    print('preparing coprime map')
     for i in primeMap.keys():
         if i > lim:
-            return
+            return coprimeMap
         curCoprimeMap = {}
         for j in range(1, lim//i + 1):
             k = i * j
             curCoprimeMap[k] = False
         coprimeMap[i] = curCoprimeMap
-    print('finished coprime map')
     return coprimeMap
 
 def getRP2(n):
-    premadeEvenCoprimeMap = prepareCoprimeMap()
+    coprimeMap = prepareCoprimeMap(n)
     if o1isPrime(n):
         return n-1
     isEven = n % 2 == 0
-    cfactors = 0 # common factors
+    cfactors = {} # common factors
     primes = primeMap.keys()
-    if isEven:
-        print('isEven')
-    else: 
-        print('isOdd')
+    for pr in primes:
+        isCoprime = n % pr != 0
+        if pr > n:
+            print('cfactors ', cfactors)
+            return n - len(cfactors.keys())
+        if isCoprime:
+            cfactors = {**cfactors, **coprimeMap[pr]}
     return cfactors
 
 
@@ -132,13 +133,13 @@ def getStats(n, rps):
     count = len(rps)
     return n / count
 
-
 @track_performance
 def euler69():
     print('project euler problem 69')
+    prepareCoprimeMap(1000000)
     tmax = (11550, 4.1825)
-    for i in range(20000, 100000):
-        cur = getStats(i, getRP(i))
+    for i in range(20000, 1000000):
+        cur = getRP2(i) / i
         a, b = tmax
         if cur > b:
             tmax = i, cur
@@ -150,6 +151,21 @@ def testPrepareCoprimeMap():
     print('testing merging coprime map 2 and 3')
     newCPM = {**coprimeMap[2], **coprimeMap[3]}
     print('newCPM is ', newCPM)
+
+def testPreparePerf():
+    print('testing perf of coprime map (no output)')
+    prepareCoprimeMap(1000001)
+    print(coprimeMap)
+
+def sliceToX(cp, x):
+    cpm = list(coprimeMap[cp].items())
+    itemsNeeded = x // cp 
+    return dict(cpm[:itemsNeeded])
+
+def testSliceCoprimeMap():
+    prepareCoprimeMap(100)
+    print('fullCPM to 100 for item 2 is ', coprimeMap[2])
+    print('sliceToX 2, 10 is', sliceToX(2, 10))
 
 def testFactors():
     print('factors without 1 27', getFactorsWithout1(27))
@@ -165,4 +181,6 @@ def testRp():
 # euler69()
 # testFactors()
 # testRp()
-testPrepareCoprimeMap()
+# testPrepareCoprimeMap()
+testSliceCoprimeMap()
+# testPreparePerf()
