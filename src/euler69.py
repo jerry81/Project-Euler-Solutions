@@ -105,7 +105,7 @@ def prepareCoprimeMap(lim):
     for i in primeMap.keys():
         if i > lim:
             return coprimeMap
-        curCoprimeMap = {1:False}
+        curCoprimeMap = {}
         for j in range(1, lim//i + 1):
             k = i * j
             curCoprimeMap[k] = False
@@ -116,22 +116,19 @@ def getRP2(n):
     if o1isPrime(n):
         return n-1
     primes = primeMap.keys()
-    tcoprimes = {1: False}
+    tcoprimes = {}
     for pr in primes:
-        isCoprime = n % pr != 0
-        if n == 10:
-            print('pr is ', pr)
+        isNotCoprime = n % pr == 0
         if pr > n:
-            if n == 10:
-                print('cfactors ', tcoprimes)
-            return len(tcoprimes.keys())
-        if isCoprime:
+            print('tcoprimes', tcoprimes)
+            return n - len(tcoprimes.keys())
+        if isNotCoprime:
             if pr != n:
                 tcoprimes[pr] = False
             sliced = sliceToX(pr,n)
-            if n == 10:
-                print('coprimes 3 is ', sliced)
-            coprimes = {**tcoprimes, **sliced}
+            if n == 8:
+                print('sliced is ', sliced)
+            tcoprimes = {**tcoprimes, **sliced}
  
 
 
@@ -167,12 +164,10 @@ def sliceToX(cp, x):
     cpm = list(coprimeMap[cp].items())
     itemsNeeded = (x // cp) 
     while True:
-
         item, _ = cpm[itemsNeeded]
         if (item >= x):
             break
         itemsNeeded +=1
-    print('items needed is ', itemsNeeded)
     return dict(cpm[:itemsNeeded])
 
 def testSliceCoprimeMap():
@@ -204,7 +199,7 @@ def testRp():
 
 # euler69()
 # testFactors()
-# testRp()
+testRp()
 # testPrepareCoprimeMap()
-testSliceCoprimeMap()
+# testSliceCoprimeMap()
 # testPreparePerf()
