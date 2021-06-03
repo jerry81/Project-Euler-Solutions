@@ -120,14 +120,11 @@ def getRP2(n):
     for pr in primes:
         isNotCoprime = n % pr == 0
         if pr > n:
-            print('tcoprimes', tcoprimes)
             return n - len(tcoprimes.keys())
         if isNotCoprime:
             if pr != n:
                 tcoprimes[pr] = False
             sliced = sliceToX(pr,n)
-            if n == 8:
-                print('sliced is ', sliced)
             tcoprimes = {**tcoprimes, **sliced}
  
 
@@ -184,15 +181,15 @@ def testFactors():
 
 def testRp():
     prepareCoprimeMap(1000000)
-    print('getRp 1 is ', getRP2(1))
-    print('getRp 2 is ', getRP2(2))
-    print('getRp 3 is ', getRP2(3))
-    print('getRp 4 is ', getRP2(4))
-    print('getRp 5 is ', getRP2(5))
-    print('getRp 6 is ', getRP2(6))
-    print('getRp 8 is ', getRP2(8))
-    print('getRp 9 is ', getRP2(9))
-    print('getRp 10 is ', getRP2(10))    
+    print('getRp 11 is ', getRP2(11))
+    print('getRp 12 is ', getRP2(12))
+    print('getRp 13 is ', getRP2(13))
+    print('getRp 14 is ', getRP2(14))
+    print('getRp 15 is ', getRP2(15))
+    print('getRp 16 is ', getRP2(16))
+    print('getRp 18 is ', getRP2(18))
+    print('getRp 19 is ', getRP2(19))
+    print('getRp 20 is ', getRP2(20))    
     """     for i in range(2, 12):
         print('getRp i is ', i, getRP2(i)) """
 
