@@ -112,6 +112,17 @@ def prepareCoprimeMap(lim):
         coprimeMap[i] = curCoprimeMap
     return coprimeMap
 
+def prepareCoprimeMapNoEvens(lim):
+    for i in primeMap.keys():
+        if i > lim:
+            return coprimeMap
+        curCoprimeMap = {}
+        for j in range(1, ((lim//i) // 2) + 1):
+            k = i * j * 2
+            curCoprimeMap[k] = False
+        coprimeMap[i] = curCoprimeMap
+    return coprimeMap
+
 def getRP2(n):
     if o1isPrime(n):
         return n-1
@@ -136,17 +147,37 @@ def getStats(n, rps):
 @track_performance
 def euler69():
     print('project euler problem 69')
-    prepareCoprimeMap(1000000)
-    tmax = (11550, 4.1825)
-    for i in range(20000, 1000000):
-        cur = getRP2(i) / i
+    prepareCoprimeMapNoEvens(1000000)
+    print('done preparing')
+    tmax = 30030, 5.21354167
+    for i in range(10001, 20000):
+        x = i*2
+        if (x == 22000):
+            print('22000')
+        if (x == 24000):
+            print('24000')
+        if (x == 26000):
+            print('26000')
+        if (x == 28000):
+            print('28000')
+        if (x == 29000):
+            print('29000')
+            
+        cur = x/getRP2(x)
         a, b = tmax
         if cur > b:
-            tmax = i, cur
+            tmax = x, cur
     print('tmax is ', tmax)
 
 def testPrepareCoprimeMap():
     prepareCoprimeMap(11)
+    print('coprime map up to x is ', coprimeMap)
+    print('testing merging coprime map 2 and 3')
+    newCPM = {**coprimeMap[2], **coprimeMap[3]}
+    print('newCPM is ', newCPM)
+
+def testPrepareCoprimeMapNE():
+    prepareCoprimeMapNoEvens(11)
     print('coprime map up to x is ', coprimeMap)
     print('testing merging coprime map 2 and 3')
     newCPM = {**coprimeMap[2], **coprimeMap[3]}
@@ -196,7 +227,8 @@ def testRp():
 
 # euler69()
 # testFactors()
-testRp()
+# testRp()
 # testPrepareCoprimeMap()
 # testSliceCoprimeMap()
 # testPreparePerf()
+testPrepareCoprimeMapNE()
