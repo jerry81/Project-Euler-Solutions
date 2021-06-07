@@ -117,9 +117,17 @@ def prepareCoprimeMapNoEvens(lim):
         if i > lim:
             return coprimeMap
         curCoprimeMap = {}
-        for j in range(1, ((lim//i) // 2) + 1):
-            k = i * j * 2
-            curCoprimeMap[k] = False
+        if i == 2:
+            for j in range(1, lim//i + 1):
+              k = i * j
+              curCoprimeMap[k] = False
+        else: 
+            print('upperlim is ', i, ((lim//i) // 2) + 1)
+            for j in range(1, ((lim//i) // 2) + 2):
+                k = i * ((j * 2) -1)
+                if k > lim:
+                    continue
+                curCoprimeMap[k] = False
         coprimeMap[i] = curCoprimeMap
     return coprimeMap
 
