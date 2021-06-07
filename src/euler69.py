@@ -145,7 +145,21 @@ def getRP2(n):
             sliced = sliceToX(pr,n)
             tcoprimes = {**tcoprimes, **sliced}
  
-
+def getRP3(n):
+    if o1isPrime(n):
+        return n-1
+    primes = primeMap.keys()
+    tcoprimes = {}
+    for pr in primes:
+        isNotCoprime = n % pr == 0
+        if pr > n:
+            return n - len(tcoprimes.keys())
+        if isNotCoprime:
+            if pr != n:
+                tcoprimes[pr] = False
+            sliced = sliceToX2(pr,n)
+            tcoprimes = {**tcoprimes, **sliced}
+ 
 
 def getStats(n, rps):
     count = len(rps)
@@ -248,9 +262,9 @@ def testRp():
 
 def testRP2():
     prepareCoprimeMapNoEvens(1000000)
-    print('getRp30030 is, ', getRP2(30030))
+    print('getRp30030 is, ', getRP3(30030))
 
-euler69()
+# euler69()
 
 # testFactors()
 # testRp()
@@ -258,4 +272,4 @@ euler69()
 # testSliceCoprimeMap()
 # testPreparePerf()
 # testPrepareCoprimeMapNE()
-# testRP2()
+testRP2()
