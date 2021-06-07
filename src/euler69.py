@@ -122,7 +122,6 @@ def prepareCoprimeMapNoEvens(lim):
               k = i * j
               curCoprimeMap[k] = False
         else: 
-            print('upperlim is ', i, ((lim//i) // 2) + 1)
             for j in range(1, ((lim//i) // 2) + 2):
                 k = i * ((j * 2) -1)
                 if k > lim:
@@ -155,21 +154,21 @@ def getStats(n, rps):
 @track_performance
 def euler69():
     print('project euler problem 69')
-    prepareCoprimeMapNoEvens(1000000)
+    prepareCoprimeMap(1000000)
     print('done preparing')
     tmax = 30030, 5.21354167
-    for i in range(10001, 20000):
+    for i in range(40000, 50001):
         x = i*2
-        if (x == 22000):
-            print('22000')
-        if (x == 24000):
-            print('24000')
-        if (x == 26000):
-            print('26000')
-        if (x == 28000):
-            print('28000')
-        if (x == 29000):
-            print('29000')
+        if (x == 82000):
+            print('82000')
+        if (x == 84000):
+            print('84000')
+        if (x == 86000):
+            print('86000')
+        if (x == 88000):
+            print('88000')
+        if (x == 92000):
+            print('92000')
             
         cur = x/getRP2(x)
         a, b = tmax
@@ -185,7 +184,7 @@ def testPrepareCoprimeMap():
     print('newCPM is ', newCPM)
 
 def testPrepareCoprimeMapNE():
-    prepareCoprimeMapNoEvens(11)
+    prepareCoprimeMapNoEvens(25)
     print('coprime map up to x is ', coprimeMap)
     print('testing merging coprime map 2 and 3')
     newCPM = {**coprimeMap[2], **coprimeMap[3]}
@@ -199,6 +198,19 @@ def testPreparePerf():
 def sliceToX(cp, x):
     cpm = list(coprimeMap[cp].items())
     itemsNeeded = (x // cp) 
+    while True:
+        item, _ = cpm[itemsNeeded]
+        if (item >= x):
+            break
+        itemsNeeded +=1
+    return dict(cpm[:itemsNeeded])
+
+# used with coprimes without evens
+def sliceToX2(cp, x):
+    cpm = list(coprimeMap[cp].items())
+    itemsNeeded = (x // cp) // 2
+    if cp == 2:
+        itemsNeeded = (x // cp) 
     while True:
         item, _ = cpm[itemsNeeded]
         if (item >= x):
@@ -233,10 +245,17 @@ def testRp():
         print('getRp i is ', i, getRP2(i)) """
 
 
-# euler69()
+
+def testRP2():
+    prepareCoprimeMapNoEvens(1000000)
+    print('getRp30030 is, ', getRP2(30030))
+
+euler69()
+
 # testFactors()
 # testRp()
 # testPrepareCoprimeMap()
 # testSliceCoprimeMap()
 # testPreparePerf()
-testPrepareCoprimeMapNE()
+# testPrepareCoprimeMapNE()
+# testRP2()
