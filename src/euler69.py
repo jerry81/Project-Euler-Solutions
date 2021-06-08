@@ -3,6 +3,7 @@ from utils.mathHelpers import getFactors, isPrime
 from filterArrayAndOutput import primeMap
 
 factorsMap = {}
+primeList = list(primeMap.keys())
 
 
 def getFactorsWithout1(n):
@@ -232,6 +233,30 @@ def sliceToX2(cp, x):
         itemsNeeded +=1
     return dict(cpm[:itemsNeeded])
 
+def slicePrimesToX(x):
+    floor10 = (x // 10) + 1
+    minIndex = 4 * floor10
+    print('min index is ', minIndex)
+    pm = list(primeMap.items())
+    primes = list(primeMap.keys())
+    n = 1
+    while True:
+      if n > x:
+          return dict(pm[:minIndex])
+      n = primes[minIndex]
+      print('n is now ', n)
+      minIndex-=1   
+
+def toilent(x):
+    num = 1
+    denom = 1
+    for i in primeList:
+      if i > x:
+          return (x * num)/denom
+      if x % i == 0:
+          denom *= i
+          num *= i-1
+
 def testSliceCoprimeMap():
     prepareCoprimeMap(100)
     print('fullCPM to 100 for item 2 is ', coprimeMap[2])
@@ -264,7 +289,16 @@ def testRP2():
     prepareCoprimeMapNoEvens(1000000)
     print('getRp30030 is, ', getRP3(30030))
 
-euler69()
+def testSlicePrimes():
+    print('to 100 are ', slicePrimesToX(100))
+
+def testToilent():
+    for i in range(2,12):
+      print('toilent i is ', i, toilent(i))
+    
+    print('toilent i is ', 20000, toilent(20000))
+    print('toilent i is ', 49998, toilent(49998))
+# euler69()
 
 # testFactors()
 # testRp()
@@ -273,3 +307,5 @@ euler69()
 # testPreparePerf()
 # testPrepareCoprimeMapNE()
 # testRP2()
+# testSlicePrimes()
+testToilent()
