@@ -168,23 +168,23 @@ def getStats(n, rps):
 @track_performance
 def euler69():
     print('project euler problem 69')
-    prepareCoprimeMap(1000000)
+    prepareCoprimeMapNoEvens(1000000)
     print('done preparing')
     tmax = 30030, 5.21354167
-    for i in range(40000, 50001):
+    for i in range(50000, 60001):
         x = i*2
-        if (x == 82000):
-            print('82000')
-        if (x == 84000):
-            print('84000')
-        if (x == 86000):
-            print('86000')
-        if (x == 88000):
-            print('88000')
-        if (x == 92000):
-            print('92000')
+        if (x == 102000):
+            print('102000')
+        if (x == 104000):
+            print('104000')
+        if (x == 106000):
+            print('106000')
+        if (x == 108000):
+            print('108000')
+        if (x == 112000):
+            print('112000')
             
-        cur = x/getRP2(x)
+        cur = x/getRP3(x)
         a, b = tmax
         if cur > b:
             tmax = x, cur
@@ -264,7 +264,7 @@ def testRP2():
     prepareCoprimeMapNoEvens(1000000)
     print('getRp30030 is, ', getRP3(30030))
 
-# euler69()
+euler69()
 
 # testFactors()
 # testRp()
@@ -272,4 +272,4 @@ def testRP2():
 # testSliceCoprimeMap()
 # testPreparePerf()
 # testPrepareCoprimeMapNE()
-testRP2()
+# testRP2()
