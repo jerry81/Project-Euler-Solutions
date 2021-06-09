@@ -10,7 +10,7 @@ def arePerms(a,b):
 @track_performance
 def euler70():
     print('project euler problem 70')
-    oddPrimes = getNonPrimeOddsToN(100000)
+    oddPrimes = getNonPrimeOddsToN(1000000)
     permCandidates = []
     for pr in oddPrimes:
         toi = totient(pr)
