@@ -103,6 +103,13 @@ def checkMap(num, _map):
     return True
   return False
 
+def getFingerprint(num):
+  asList = list(str(num))
+  fpL = [0,0,0,0,0,0,0,0,0,0]
+  for i in asList:
+    fpL[int(i)] += 1
+  return "".join(list(map(lambda x: str(x),fpL)))
+
 def testMemo():
   print('1552 is ', getPermsOfNumber(1552))
   print('memo is now ', memo)
