@@ -169,23 +169,13 @@ def getStats(n, rps):
 @track_performance
 def euler69():
     print('project euler problem 69')
-    prepareCoprimeMapNoEvens(1000000)
-    print('done preparing')
-    tmax = 30030, 5.21354167
-    for i in range(50000, 60001):
+    # prepareCoprimeMapNoEvens(1000000)
+    # print('done preparing')
+    tmax = 0,0
+    for i in range(1, 500000):
         x = i*2
-        if (x == 102000):
-            print('102000')
-        if (x == 104000):
-            print('104000')
-        if (x == 106000):
-            print('106000')
-        if (x == 108000):
-            print('108000')
-        if (x == 112000):
-            print('112000')
             
-        cur = x/getRP3(x)
+        cur = x/toilent(x)
         a, b = tmax
         if cur > b:
             tmax = x, cur
@@ -250,6 +240,8 @@ def slicePrimesToX(x):
 def toilent(x):
     num = 1
     denom = 1
+    if o1isPrime(x):
+      return x - 1
     for i in primeList:
       if i > x:
           return (x * num)/denom
@@ -295,10 +287,9 @@ def testSlicePrimes():
 def testToilent():
     for i in range(2,12):
       print('toilent i is ', i, toilent(i))
-    
     print('toilent i is ', 20000, toilent(20000))
     print('toilent i is ', 49998, toilent(49998))
-# euler69()
+euler69()
 
 # testFactors()
 # testRp()
@@ -308,4 +299,4 @@ def testToilent():
 # testPrepareCoprimeMapNE()
 # testRP2()
 # testSlicePrimes()
-testToilent()
+# testToilent()
