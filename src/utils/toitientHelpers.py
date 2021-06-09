@@ -10,7 +10,7 @@ def o1isPrime(n):
         return False
 
 
-def toilent(x):
+def totient(x):
     num = 1
     denom = 1
     if o1isPrime(x):
@@ -33,5 +33,9 @@ def getNonPrimeOddsToN(n):
 def testNonPrimeOdds():
     print('nonprime odds up to 10M count is ', len(getNonPrimeOddsToN(10000000)))
 
+def diagnoseTotients():
+    for i in range(200,400):
+        print('totient i is ', i, totient(i))
 
 # testNonPrimeOdds()
+# diagnoseTotients()
