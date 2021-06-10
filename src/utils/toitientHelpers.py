@@ -22,12 +22,13 @@ def totient(x):
           denom *= i
           num *= i-1
 
-def getNonPrimeOddsToN(n):
+def getNonPrimeOddsToN(n, minimum = 0):
     newMap = {}
     for i in range(1, (n//2) + 1):
         j = i * 2 + 1
         if not o1isPrime(j) and j <= n:
-            newMap[j] = True
+            if j >= minimum:
+              newMap[j] = True
     return newMap
 
 def testNonPrimeOdds():
