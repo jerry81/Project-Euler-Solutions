@@ -10,14 +10,14 @@ def arePerms(a,b):
 @track_performance
 def euler70():
     print('project euler problem 70')
-    oddPrimes = getNonPrimeOddsToN(1000000, 2000000)
+    oddPrimes = getNonPrimeOddsToN(2000000, 1000000)
     permCandidates = []
     for pr in oddPrimes:
         toi = totient(pr)
         if arePerms(toi, pr):
             permCandidates.append((pr, toi, pr/toi))
     print('permCandidates are ', permCandidates)
-    minimum = (783169, 781396.0, 1.0022690159662961)
+    minimum = (1956103, 1953160.0, 1.0015067889983411)
     for item in permCandidates:
         _,_,curmin = minimum
         x,y,z = item
