@@ -59,6 +59,29 @@ def getPrimesBetween(a,b):
 def testGetPrimesBetween():
     print('getPrimesBetween test ', getPrimesBetween(3000, 5000))
 
+def totientOfSubprimes(a,b):
+    return (a-1)*(b-1)
+
+def makePairStr(a,b):
+    return str(a) + ',' + str(b)
+
+def getCandidates():
+    primes = getPrimesBetween(2000, 5000)
+    
+def testMakePairStr():
+    print('make pair 5, 10', makePairStr(5,10))
+    print('make pair 7, 11', makePairStr(7,11))
+
+def getPairFromKey(s):
+    x = s.split(',')
+    print('x is', x)
+
+def testGetPair():
+    print('from 5,10', getPairFromKey('5,10'))
+
 # testNonPrimeOdds()
 # diagnoseTotients()
-testGetPrimesBetween()
+# testGetPrimesBetween()
+# getCandidates()
+# testMakePairStr()
+testGetPair()
