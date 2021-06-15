@@ -1,4 +1,8 @@
 from filterArrayAndOutput import primeMap
+from myitertools import getFingerprint
+
+def arePerms(a,b):
+    return getFingerprint(int(a)) == getFingerprint(int(b))
 
 primeList = list(primeMap.keys())
 
@@ -67,6 +71,18 @@ def makePairStr(a,b):
 
 def getCandidates():
     primes = getPrimesBetween(2000, 5000)
+    properPermsUnder10M = []
+    for k,v in primes.items():
+        for k2,v2 in primes.items():
+          prod = k * k2 
+          if prod > 10000000:
+              continue
+          totient = totientOfSubprimes(k, k2)
+          if not arePerms(totient, prod):
+              continue
+          properPermsUnder10M.append(prod)
+    return properPermsUnder10M
+                  
     
 def testMakePairStr():
     print('make pair 5, 10', makePairStr(5,10))
@@ -82,6 +98,6 @@ def testGetPair():
 # testNonPrimeOdds()
 # diagnoseTotients()
 # testGetPrimesBetween()
-# getCandidates()
+print('candidates are ', getCandidates())
 # testMakePairStr()
-testGetPair()
+# testGetPair()
