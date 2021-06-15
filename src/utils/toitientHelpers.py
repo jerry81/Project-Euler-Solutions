@@ -1,5 +1,11 @@
 from filterArrayAndOutput import primeMap
-from myitertools import getFingerprint
+
+def getFingerprint(num):
+  asList = list(str(num))
+  fpL = [0,0,0,0,0,0,0,0,0,0]
+  for i in asList:
+    fpL[int(i)] += 1
+  return "".join(list(map(lambda x: str(x),fpL)))
 
 def arePerms(a,b):
     return getFingerprint(int(a)) == getFingerprint(int(b))
@@ -98,6 +104,6 @@ def testGetPair():
 # testNonPrimeOdds()
 # diagnoseTotients()
 # testGetPrimesBetween()
-print('candidates are ', getCandidates())
+# print('candidates are ', getCandidates())
 # testMakePairStr()
 # testGetPair()

@@ -1,6 +1,6 @@
 from utils.annotations import track_performance
 from utils.myitertools import getFingerprint
-from utils.toitientHelpers import getNonPrimeOddsToN, totient
+from utils.toitientHelpers import getNonPrimeOddsToN, totient, getCandidates
 
 def arePerms(a,b):
     return getFingerprint(int(a)) == getFingerprint(int(b))
@@ -10,19 +10,22 @@ def arePerms(a,b):
 @track_performance
 def euler70():
     print('project euler problem 70')
-    oddPrimes = getNonPrimeOddsToN(10000000, 9500000)
+    ''' oddPrimes = getNonPrimeOddsToN(10000000, 9500000)
     permCandidates = []
     for pr in oddPrimes:
         toi = totient(pr)
         if arePerms(toi, pr):
             permCandidates.append((pr, toi, pr/toi))
     print('permCandidates are ', permCandidates)
+    ''' 
     minimum = (1956103, 1953160.0, 1.0015067889983411)
+    permCandidates = getCandidates()
     for item in permCandidates:
+        toi = totient(item)
         _,_,curmin = minimum
-        x,y,z = item
+        x,y,z = (item, toi, item/toi)
         if z < curmin:
-            minimum = item
+            minimum = x,y,z
     print('min is ', minimum)
         
 
