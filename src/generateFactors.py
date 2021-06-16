@@ -105,10 +105,10 @@ def convertFactorsMap():
 # used with coprimes without evens
 def sliceToX2(cp, x, coprimeMap):
     cpm = list(coprimeMap[cp].items())
-    itemsNeeded = (x // cp)
+    itemsNeeded = (x // int(cp))
     while True:
         item, _ = cpm[itemsNeeded]
-        if (item >= x):
+        if (int(item) >= x):
             break
         itemsNeeded +=1
     return dict(cpm[:itemsNeeded])
@@ -119,7 +119,9 @@ def makePrimeFactorsMap():
     primes = list(factorsMap.keys())
     primeFactors = {}
     # init the map 
-    for i in range(2,1000001):
+    # upperLim = 101
+    upperLim = 1000001
+    for i in range(2,upperLim):
         primeFactors[i] = {}
         if i % 100000 == 0:
             print('currently processing ', i)
@@ -131,7 +133,6 @@ def makePrimeFactorsMap():
             if i % int(pr) == 0:
                 highestIndex = i // int(pr)
                 primeFactors[i] = {**primeFactors[i], **sliceToX2(pr, i, factorsMap)}
-        primeFactors[i] = list(set(primeFactors[i]))
     json.dump(primeFactors, f)
 
 # readFactorsMap()
