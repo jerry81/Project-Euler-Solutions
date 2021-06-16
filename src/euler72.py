@@ -4,8 +4,8 @@ from utils.toitientHelpers import totient, o1isPrime
 @track_performance
 def euler72():
     print('project euler problem 72')
-    tot = 276606803908.0
-    for d in range(200001, 300001):
+    tot = 300923901638.0
+    for d in range(2, 100001):
       if o1isPrime(d):
           tot += d - 1
           continue
