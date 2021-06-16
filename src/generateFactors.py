@@ -85,6 +85,12 @@ def readFactorsMap():
     # print('last item ', list(asJson.keys())[78497])
     return asJson
 
+def readFactorsMap2():
+    f = open("./resources/factorsMapTo1M.txt", 'r')
+    asJson = json.load(f)
+    # print('last item ', list(asJson.keys())[78497])
+    return asJson
+
 def convertFactorsMap():
     f = open("./resources/factorsMapTo1M.txt", 'x+')
     factorsMapOfArr = readFactorsMap()
@@ -96,14 +102,25 @@ def convertFactorsMap():
       returnedMap[key] = curMap
     json.dump(returnedMap, f)
 
+# used with coprimes without evens
+def sliceToX2(cp, x, coprimeMap):
+    cpm = list(coprimeMap[cp].items())
+    itemsNeeded = (x // cp)
+    while True:
+        item, _ = cpm[itemsNeeded]
+        if (item >= x):
+            break
+        itemsNeeded +=1
+    return dict(cpm[:itemsNeeded])
+
 def makePrimeFactorsMap():
     f = open("./resources/primeFactorsTo1M.txt", 'x+')
-    factorsMap = readFactorsMap()
+    factorsMap = readFactorsMap2()
     primes = list(factorsMap.keys())
     primeFactors = {}
     # init the map 
     for i in range(2,1000001):
-        primeFactors[i] = []
+        primeFactors[i] = {}
         if i % 100000 == 0:
             print('currently processing ', i)
         if o1isPrime(i):
@@ -113,10 +130,10 @@ def makePrimeFactorsMap():
                 continue
             if i % int(pr) == 0:
                 highestIndex = i // int(pr)
-                primeFactors[i] = [*primeFactors[i], *factorsMap[pr][:(highestIndex - 1)]]
+                primeFactors[i] = {**primeFactors[i], **sliceToX2(pr, i, factorsMap)}
         primeFactors[i] = list(set(primeFactors[i]))
     json.dump(primeFactors, f)
 
 # readFactorsMap()
-# makePrimeFactorsMap()
-convertFactorsMap()
+makePrimeFactorsMap()
+# convertFactorsMap()
