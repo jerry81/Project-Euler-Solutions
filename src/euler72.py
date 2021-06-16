@@ -12,4 +12,12 @@ def euler72():
       tot += totient(d)
     print('tot is ', tot)      
 
-euler72()
+# euler72()
+
+@track_performance
+def perfTest():
+    for i in range(2,1000001):
+        for j in range(i, 1000001):
+            k = i+j
+
+perfTest()
