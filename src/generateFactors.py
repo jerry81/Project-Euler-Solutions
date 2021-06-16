@@ -85,7 +85,16 @@ def readFactorsMap():
     # print('last item ', list(asJson.keys())[78497])
     return asJson
 
-
+def convertFactorsMap():
+    f = open("./resources/factorsMapTo1M.txt", 'x+')
+    factorsMapOfArr = readFactorsMap()
+    returnedMap = {} 
+    for key, val in factorsMapOfArr.items():
+      curMap = {}
+      for v in val:
+          curMap[v] = True
+      returnedMap[key] = curMap
+    json.dump(returnedMap, f)
 
 def makePrimeFactorsMap():
     f = open("./resources/primeFactorsTo1M.txt", 'x+')
@@ -109,4 +118,5 @@ def makePrimeFactorsMap():
     json.dump(primeFactors, f)
 
 # readFactorsMap()
-makePrimeFactorsMap()
+# makePrimeFactorsMap()
+convertFactorsMap()
