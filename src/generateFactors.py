@@ -82,6 +82,26 @@ def writePrimeFactorsMap(factorsMap):
 def readFactorsMap():
     f = open("./resources/factorsTo1M.txt", 'r')
     asJson = json.load(f)
-    print('last item ', list(asJson.keys())[78497])
+    # print('last item ', list(asJson.keys())[78497])
+    return asJson
+
+def makePrimeFactorsMap():
+    f = open("./resources/primeFactorsTo1M.txt", 'x+')
+    factorsMap = readFactorsMap()
+    primes = list(factorsMap.keys())
+    primeFactors = {}
+    # init the map 
+    for i in range(2,101):
+        primeFactors[i] = []
+        if o1isPrime(i):
+            continue
+        for pr in primes:
+            if int(pr) >= i:
+                continue
+            if i % int(pr) == 0:
+                primeFactors[i] = [*primeFactors[i], *factorsMap[pr]]
+        primeFactors[i] = list(set(primeFactors[i]))
+    json.dump(primeFactors, f)
 
 # readFactorsMap()
+makePrimeFactorsMap()
