@@ -77,4 +77,11 @@ def writePrimeFactorsMap(factorsMap):
 
 # oneM()
 # makePrimeMapFor2and5To1M()
-makeFactorsMap()
+# makeFactorsMap()
+
+def readFactorsMap():
+    f = open("./resources/factorsTo1M.txt", 'r')
+    asJson = json.load(f)
+    print('last item ', list(asJson.keys())[78497])
+
+# readFactorsMap()
