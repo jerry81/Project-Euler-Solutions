@@ -13,4 +13,14 @@ def isInRangeAndNotReducible(n,d):
 def euler73():
     print('project euler problem 73')   
 
+def testAbsoluteSort():
+    arr = []
+    for i in range(2,12001):
+      for j in range(1, i):
+          arr.append(j/i)
+    arr.sort()
+    print('arr, sorted is ', arr)
+    print('len is ', len(arr))
+
 euler73()
+# testAbsoluteSort()
