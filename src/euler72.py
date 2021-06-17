@@ -16,8 +16,13 @@ def euler72():
 
 @track_performance
 def perfTest():
-    for i in range(2,1000001):
-        for j in range(i, 1000001):
-            k = i+j
-
+    result = 0
+    seive = list(range(9))
+    for i in range(2,9):
+        if seive[i] == i:
+          for j in range(i, 9, i):
+              seive[j] = seive[j] / i * (i-1)
+        result += seive[i]
+    print('result is ', result)
+    print('seive is now ', seive)
 perfTest()
