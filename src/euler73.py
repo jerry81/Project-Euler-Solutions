@@ -2,8 +2,8 @@ from utils.annotations import track_performance
 from utils.toitientHelpers import o1isPrime, getGCD
 
 def isInRangeAndNotReducible(n,d):
-    notReducible = getGCD(n,d) == 1
-    if notReducible:
+    reducible = getGCD(n,d) != 1
+    if reducible:
         return False
     val = n / d
     inRange = val > (1/3) and val < (1/2)
@@ -32,8 +32,16 @@ def testAbsoluteSort():
     print('len is ', len(arr))
 
 def testFractionCount():
-    print('f count 8 is ', getFractionCountInRange(8))
-    print('f count 9 is ', getFractionCountInRange())
+    for i in range(2, 10):
+        print('f count i is ', i, getFractionCountInRange(i))
+
+@track_performance
+def testFCPerf():
+    print('starting perf test for FC')
+    for i in range(11900, 12001):
+        print('f count i is ', i, getFractionCountInRange(i))
 
 euler73()
 # testAbsoluteSort()
+# testFractionCount()
+testFCPerf()
