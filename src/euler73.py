@@ -12,6 +12,10 @@ def isInRangeAndNotReducible(n,d):
 @track_performance
 def euler73():
     print('project euler problem 73')
+    count = 0
+    for i in range(2, 12001):
+        count += getFractionCountInRange(i)
+    print('count is ', count)
    
 def getFractionCountInRange(d):
     count = 0
@@ -44,4 +48,4 @@ def testFCPerf():
 euler73()
 # testAbsoluteSort()
 # testFractionCount()
-testFCPerf()
+# testFCPerf()
