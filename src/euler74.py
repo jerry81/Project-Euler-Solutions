@@ -9,6 +9,21 @@ def getNextIter(num):
         s += factorial(asInt)
     return s
 
+def inMap(x, m):
+    try: 
+        y = m[x]
+        return True
+    except:
+        return False
+
+def iterUntilRepeat(starting):
+    repeats = {str(starting):True}
+    nxt = starting
+    while True:
+        nxt = getNextIter(nxt)
+        if inMap(nxt, repeats):
+            return repeats, nxt
+        repeats[nxt] = True
 
 @track_performance
 def euler74():
@@ -17,5 +32,9 @@ def euler74():
 def testGetNextIter():
     print('nextIter 145', getNextIter(145))
 
-euler74()
-testGetNextIter()
+def testIterUntilRepeat():
+    print('iur 69', iterUntilRepeat(69))
+
+# euler74()
+# testGetNextIter()
+testIterUntilRepeat()
