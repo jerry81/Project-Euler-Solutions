@@ -28,13 +28,19 @@ def iterUntilRepeat(starting):
 @track_performance
 def euler74():
     print('project euler problem 74')
-   
+    hitcount = 0
+    for i in range(1, 1000000):
+        arr, last = iterUntilRepeat(i)
+        if len(arr) == 60:
+            hitcount += 1
+    print('hitCount is ', hitcount)
+
 def testGetNextIter():
     print('nextIter 145', getNextIter(145))
 
 def testIterUntilRepeat():
     print('iur 69', iterUntilRepeat(69))
 
-# euler74()
+euler74()
 # testGetNextIter()
-testIterUntilRepeat()
+# testIterUntilRepeat()
