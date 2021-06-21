@@ -13,11 +13,11 @@ def getMaxA(t):
 
 def getSetOfIntegerSides(t):
     returned = []
-    limA = int(sqrt(t))
+    limA = int(getMaxA(t))
     for i in range(1, limA+1):
         b = getBGivenAAndT(i, t)
         if isWhole(b):
-            returned += (i,b,sqrt(i**2+b**2))
+            returned.append({ i,b,sqrt(i**2+b**2) })
     return returned
 
 @track_performance
@@ -56,5 +56,5 @@ def testGetMax():
 # euler75()
 # testIsWhole()
 # testGetB()
-# testGetSet()
-testGetMax()
+testGetSet()
+# testGetMax()
