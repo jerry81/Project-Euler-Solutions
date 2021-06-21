@@ -46,6 +46,12 @@ def testGetSet():
 
 def testGetMax():
     print('getMax 12', getMaxA(12))
+    print('getMax 24', getMaxA(24))
+    print('getMax 30', getMaxA(30))
+    print('getMax 36', getMaxA(36))
+    print('getMax 40', getMaxA(40))
+    print('getMax 48', getMaxA(48))
+    print('getMax 120', getMaxA(120))
 
 # euler75()
 # testIsWhole()
