@@ -34,6 +34,12 @@ def testGetB():
 
 def testGetSet():
     print('getSet 12', getSetOfIntegerSides(12))
+    print('getSet 24', getSetOfIntegerSides(24))
+    print('getSet 30', getSetOfIntegerSides(30))
+    print('getSet 36', getSetOfIntegerSides(36))
+    print('getSet 40', getSetOfIntegerSides(40))
+    print('getSet 48', getSetOfIntegerSides(48))
+    print('getSet 120', getSetOfIntegerSides(120))
 
 euler75()
 # testIsWhole()
