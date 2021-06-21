@@ -8,6 +8,9 @@ def getBGivenAAndT(a, t):
 def isWhole(n):
     return int(n) == n
 
+def getMaxA(t):
+    return int((4*t - sqrt(8*t**2)) / 4)
+
 def getSetOfIntegerSides(t):
     returned = []
     limA = int(sqrt(t))
@@ -41,7 +44,11 @@ def testGetSet():
     print('getSet 48', getSetOfIntegerSides(48))
     print('getSet 120', getSetOfIntegerSides(120))
 
-euler75()
+def testGetMax():
+    print('getMax 12', getMaxA(12))
+
+# euler75()
 # testIsWhole()
 # testGetB()
-testGetSet()
+# testGetSet()
+testGetMax()
