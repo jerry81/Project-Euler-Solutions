@@ -1,4 +1,5 @@
 from utils.annotations import track_performance
+from math import sqrt
 
 def getBGivenAAndT(a, t):
     d = t - a
@@ -6,6 +7,15 @@ def getBGivenAAndT(a, t):
 
 def isWhole(n):
     return int(n) == n
+
+def getSetOfIntegerSides(t):
+    returned = []
+    limA = int(sqrt(t))
+    for i in range(1, limA+1):
+        b = getBGivenAAndT(i, t)
+        if isWhole(b):
+            returned += (i,b,sqrt(i**2+b**2))
+    return returned
 
 @track_performance
 def euler75():
@@ -22,6 +32,10 @@ def testGetB():
     print('getB 6, 24', getBGivenAAndT(6,24))
     print('getB 20, 120', getBGivenAAndT(20, 120))
 
+def testGetSet():
+    print('getSet 12', getSetOfIntegerSides(12))
+
 euler75()
 # testIsWhole()
-testGetB()
+# testGetB()
+testGetSet()
