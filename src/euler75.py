@@ -53,8 +53,16 @@ def testGetMax():
     print('getMax 48', getMaxA(48))
     print('getMax 120', getMaxA(120))
 
+@track_performance
+def stress():
+    for i in range(1499950, 1500001):
+        res = getSetOfIntegerSides(i)
+        if len(res) == 1:
+          print('getSet i is ', i, getSetOfIntegerSides(i))
+
 # euler75()
 # testIsWhole()
 # testGetB()
-testGetSet()
+# testGetSet()
 # testGetMax()
+stress()
