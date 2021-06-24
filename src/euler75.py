@@ -15,19 +15,32 @@ def getSetOfIntegerSides(t):
     returned = []
     limA = int(getMaxA(t))
     count = 0
-    print('lim A is ', limA)
-    for i in range(1, limA+1):
+    for i in range(limA, 0, -1):
         b = getBGivenAAndT(i, t)
         if isWhole(b):
             returned.append({ i,b,sqrt(i**2+b**2) })
             count += 1
-            if count > 1:
-                return []
+            """             if count > 1:
+              return [] """
     return returned
 
 @track_performance
 def euler75():
     print('project euler problem 75')
+    count = 0
+    st = 1
+    en = 1500000 // 2 + 1
+    for i in range(st, en):
+        x = i * 2
+        if x % 10000 == 0:
+            print('currently processing ', x)
+        if x > 1500000:
+            print('broke out. count is ', count)
+        res = getSetOfIntegerSides(x)
+        if len(res) == 1:
+          count += 1
+    print('count is ', count)
+    # brute force chunking
 
 def testIsWhole():
     print('isWhole 7.0', isWhole(7.0))
@@ -39,6 +52,9 @@ def testGetB():
     print('getB 2 12', getBGivenAAndT(2, 12))
     print('getB 6, 24', getBGivenAAndT(6,24))
     print('getB 20, 120', getBGivenAAndT(20, 120))
+    print('getB 35, 120', getBGivenAAndT(35, 120))
+    for i in range(1, 35):
+      print('getB i, 120', i, getBGivenAAndT(i, 120))
 
 def testGetSet():
     print('getSet 12', getSetOfIntegerSides(12))
@@ -48,6 +64,23 @@ def testGetSet():
     print('getSet 40', getSetOfIntegerSides(40))
     print('getSet 48', getSetOfIntegerSides(48))
     print('getSet 120', getSetOfIntegerSides(120))
+    print('getSet 1200', getSetOfIntegerSides(1200))
+    print('getSet 240', getSetOfIntegerSides(240))
+    print('getSet 300', getSetOfIntegerSides(300))
+    print('getSet 360', getSetOfIntegerSides(360))
+    print('getSet 400', getSetOfIntegerSides(400))
+    print('getSet 480', getSetOfIntegerSides(480))
+    print('getSet 2400', getSetOfIntegerSides(2400))
+    print('getSet 3000', getSetOfIntegerSides(3000))
+    print('getSet 3600', getSetOfIntegerSides(3600))
+    print('getSet 4000', getSetOfIntegerSides(4000))
+    print('getSet 4800', getSetOfIntegerSides(4800))
+    print('getSet 12000', getSetOfIntegerSides(12000))
+    print('getSet 40000', getSetOfIntegerSides(40000))
+    print('getSet 400000', getSetOfIntegerSides(400000))
+    print('getSet 1500000', getSetOfIntegerSides(1500000))
+    """     for t in range(1, 5000):
+        print('getSet(t) is', t, getSetOfIntegerSides(t)) """
 
 def testGetMax():
     print('getMax 12', getMaxA(12))
@@ -57,6 +90,7 @@ def testGetMax():
     print('getMax 40', getMaxA(40))
     print('getMax 48', getMaxA(48))
     print('getMax 120', getMaxA(120))
+    print('getmax 1500000', getMaxA(1500000))
 
 @track_performance
 def stress():
@@ -68,6 +102,6 @@ def stress():
 # euler75()
 # testIsWhole()
 # testGetB()
-# testGetSet()
+testGetSet()
 # testGetMax()
-stress()
+# stress()
