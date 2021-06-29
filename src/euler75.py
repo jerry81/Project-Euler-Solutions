@@ -82,8 +82,18 @@ def testGetSet():
     print('getSet 40000', getSetOfIntegerSides(40000))
     print('getSet 400000', getSetOfIntegerSides(400000))
     print('getSet 1500000', getSetOfIntegerSides(1500000))
-    """     for t in range(1, 5000):
-        print('getSet(t) is', t, getSetOfIntegerSides(t)) """
+
+def testAllSets():
+        allSets = []
+        nonZero = []
+        for t in range(1, 100):
+          curSet = getSetOfIntegerSides(t)
+          if len(curSet) == 1:
+              allSets.append(t)
+          elif len(curSet) != 0:
+            nonZero.append(t)
+        print('allSets is ', allSets)
+        print('nonZero are ', nonZero)
 
 def testGetMax():
     print('getMax 12', getMaxA(12))
@@ -105,6 +115,7 @@ def stress():
 # euler75()
 # testIsWhole()
 # testGetB()
-testGetSet()
+# testGetSet()
 # testGetMax()
 # stress()
+testAllSets()
