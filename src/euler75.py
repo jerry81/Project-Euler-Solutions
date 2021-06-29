@@ -114,6 +114,8 @@ def markMultiples(sv, seed, lim):
         cur = multiplier * seed
         if cur > lim:
             return
+        if sv[cur] != None:
+            continue
         if bust == True:
             sv[cur] = False
         else:
