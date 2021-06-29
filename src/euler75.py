@@ -83,10 +83,53 @@ def testGetSet():
     print('getSet 400000', getSetOfIntegerSides(400000))
     print('getSet 1500000', getSetOfIntegerSides(1500000))
 
+def getFilteredList():
+    evensTo15M = list(range(2,1500001,2))
+    seive = {}
+    for i in evensTo15M:
+        seive[i] = None
+    for j in range(12,750001):
+        k = j*2
+        if seive[k] != None:
+            continue
+        curSet = getSetOfIntegerSides(k)
+        if len(curSet) == 1:
+            seive[k] = True 
+            markMultiples(seive, k, 1500000)
+        else:
+            seive[k] = False
+    # filter out False 
+    remainingItems = list(filter(lambda x: x[1] != False, list(seive.items())))
+    remainingNones = len(list(filter(lambda x: x[1] == None, remainingItems)))
+    trues = len(list(filter(lambda x: x[1] == True, remainingItems)))
+    # print('remainingItems', remainingItems)
+    print('len of remaining items is ', len(remainingItems))
+    print('remainingNones', remainingNones)
+    print('trues are ', trues)
+
+def markMultiples(sv, seed, lim):
+    multiplier = 2
+    bust = False
+    while True:
+        cur = multiplier * seed
+        if cur > lim:
+            return
+        if bust == True:
+            sv[cur] = False
+        else:
+            setOne = getSetOfIntegerSides(cur)
+            if len(setOne) == 1:
+                sv[cur] = True
+            else:
+                sv[cur] = False
+                bust = True
+        multiplier += 1
+        
+
 def testAllSets():
         allSets = []
         nonZero = []
-        for t in range(1, 100):
+        for t in range(1, 5000):
           curSet = getSetOfIntegerSides(t)
           if len(curSet) == 1:
               allSets.append(t)
@@ -118,4 +161,5 @@ def stress():
 # testGetSet()
 # testGetMax()
 # stress()
-testAllSets()
+# testAllSets()
+getFilteredList()
