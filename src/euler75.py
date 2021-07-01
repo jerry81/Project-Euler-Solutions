@@ -1,5 +1,6 @@
 from utils.annotations import track_performance
 from math import sqrt
+from utils.fileUtils import writeMapToFile, openMap
 
 def getBGivenAAndT(a, t):
     d = t - a
@@ -83,12 +84,14 @@ def testGetSet():
     print('getSet 400000', getSetOfIntegerSides(400000))
     print('getSet 1500000', getSetOfIntegerSides(1500000))
 
+@track_performance
 def getFilteredList():
     evensTo15M = list(range(2,1500001,2))
+    # read from file
     seive = {}
     for i in evensTo15M:
         seive[i] = None
-    for j in range(12,750001):
+    for j in range(12,500):
         k = j*2
         if seive[k] != None:
             continue
@@ -100,12 +103,11 @@ def getFilteredList():
             seive[k] = False
     # filter out False 
     remainingItems = list(filter(lambda x: x[1] != False, list(seive.items())))
+    # write to file
+    writeMapToFile('0to5000Processed.txt', seive)
     remainingNones = len(list(filter(lambda x: x[1] == None, remainingItems)))
     trues = len(list(filter(lambda x: x[1] == True, remainingItems)))
     # print('remainingItems', remainingItems)
-    print('len of remaining items is ', len(remainingItems))
-    print('remainingNones', remainingNones)
-    print('trues are ', trues)
 
 def markMultiples(sv, seed, lim):
     multiplier = 2
