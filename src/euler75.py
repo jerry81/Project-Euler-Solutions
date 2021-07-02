@@ -64,6 +64,8 @@ def testGetSet():
     print('getSet 36', getSetOfIntegerSides(36))
     print('getSet 40', getSetOfIntegerSides(40))
     print('getSet 48', getSetOfIntegerSides(48))
+    print('getSet 60', getSetOfIntegerSides(48))
+    print('getSet 72', getSetOfIntegerSides(48))
     print('getSet 120', getSetOfIntegerSides(120))
     print('getSet 1200', getSetOfIntegerSides(1200))
     print('getSet 240', getSetOfIntegerSides(240))
@@ -154,6 +156,12 @@ def testGetMax():
     print('getMax 120', getMaxA(120))
     print('getmax 1500000', getMaxA(1500000))
 
+def generateTriple(m,n):
+    a = m**2 - n**2
+    b = 2*m*n
+    c = m**2 + n**2
+    return a,b,c
+
 @track_performance
 def stress():
     for i in range(1499950, 1500001):
@@ -164,8 +172,8 @@ def stress():
 # euler75()
 # testIsWhole()
 # testGetB()
-# testGetSet()
+testGetSet()
 # testGetMax()
 # stress()
 # testAllSets()
-getFilteredList()
+# getFilteredList()
