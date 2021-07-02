@@ -26,6 +26,26 @@ def getSetOfIntegerSides(t):
     return returned
 
 @track_performance
+def euler75_2():
+    print('project euler problem 75')
+    LIM = 1500001
+    UPPER_LIM_OUTER_LOOP = 866
+    countMap = {}
+    for i in range(2, UPPER_LIM_OUTER_LOOP):
+        for j in range(1, i):
+            a,b,c = generateTriple(i,j)
+            p = a+b+c
+            if p > LIM:
+                continue
+            try:
+                t = countMap[p]
+                countMap[p] += 1
+            except:
+                countMap[p] = 1
+    print('countMap is ', list(countMap.items())[:100])
+    print('count is ', len(list(filter(lambda x: x == 1, list(countMap.values())))))
+
+@track_performance
 def euler75():
     print('project euler problem 75')
     count = 0
@@ -174,11 +194,7 @@ def testGenerateTriples():
 
 def testLimitsAndPerf():
     print('getPerimiter 7500, 7499', getPerimiter(7500, 7499))
-    print('getPerimiter 7500, 1', getPerimiter(7500, 1))
-    for i in range(1, 7500):
-        if getPerimiter(i, 1) > 1500000:
-            print('i is ', i)
-            return
+    print('getPerimiter 866 is ', getPerimiter(866, 1))
     
 
 @track_performance
@@ -197,4 +213,5 @@ def stress():
 # testAllSets()
 # getFilteredList()
 # testGenerateTriples()
-testLimitsAndPerf()
+# testLimitsAndPerf()
+euler75_2()
