@@ -91,7 +91,10 @@ def getFilteredList():
     seive = {}
     for i in evensTo15M:
         seive[i] = None
-    for j in range(12,500):
+    print('seive initialized')
+    for j in range(12,100):
+        if (j%25 == 0):
+            print('currently processing ', j)
         k = j*2
         if seive[k] != None:
             continue
@@ -104,7 +107,7 @@ def getFilteredList():
     # filter out False 
     remainingItems = list(filter(lambda x: x[1] != False, list(seive.items())))
     # write to file
-    writeMapToFile('0to5000Processed.txt', seive)
+    writeMapToFile('0to100Processed.txt', seive)
     remainingNones = len(list(filter(lambda x: x[1] == None, remainingItems)))
     trues = len(list(filter(lambda x: x[1] == True, remainingItems)))
     # print('remainingItems', remainingItems)
@@ -117,6 +120,7 @@ def markMultiples(sv, seed, lim):
         if cur > lim:
             return
         if sv[cur] != None:
+            multiplier += 1
             continue
         if bust == True:
             sv[cur] = False
