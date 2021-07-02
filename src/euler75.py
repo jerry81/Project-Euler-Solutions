@@ -87,10 +87,10 @@ def testGetSet():
 @track_performance
 def getFilteredList():
     # read from file
-    seive = openMap('0to100Processed.txt')
+    seive = openMap('0to5000Processed.txt')
     print('seive is ', list(seive.items())[:100])
     print('seive initialized')
-    for j in range(100,5000):
+    for j in range(4999,10000):
         if (j%1000 == 0):
             print('currently processing ', j)
         k = j*2
@@ -105,7 +105,7 @@ def getFilteredList():
     # filter out False 
     remainingItems = list(filter(lambda x: x[1] != False, list(seive.items())))
     # write to file
-    writeMapToFile('0to5000Processed.txt', seive)
+    writeMapToFile('0to10000Processed.txt', seive)
     remainingNones = len(list(filter(lambda x: x[1] == None, remainingItems)))
     trues = len(list(filter(lambda x: x[1] == True, remainingItems)))
     print('remainingItems', remainingNones)
