@@ -86,31 +86,29 @@ def testGetSet():
 
 @track_performance
 def getFilteredList():
-    evensTo15M = list(range(2,1500001,2))
     # read from file
-    seive = {}
-    for i in evensTo15M:
-        seive[i] = None
+    seive = openMap('0to100Processed.txt')
+    print('seive is ', list(seive.items())[:100])
     print('seive initialized')
-    for j in range(12,100):
-        if (j%25 == 0):
+    for j in range(100,5000):
+        if (j%1000 == 0):
             print('currently processing ', j)
         k = j*2
-        if seive[k] != None:
+        if seive[str(k)] != None:
             continue
         curSet = getSetOfIntegerSides(k)
         if len(curSet) == 1:
-            seive[k] = True 
+            seive[str(k)] = True 
             markMultiples(seive, k, 1500000)
         else:
-            seive[k] = False
+            seive[str(k)] = False
     # filter out False 
     remainingItems = list(filter(lambda x: x[1] != False, list(seive.items())))
     # write to file
-    writeMapToFile('0to100Processed.txt', seive)
+    writeMapToFile('0to5000Processed.txt', seive)
     remainingNones = len(list(filter(lambda x: x[1] == None, remainingItems)))
     trues = len(list(filter(lambda x: x[1] == True, remainingItems)))
-    # print('remainingItems', remainingItems)
+    print('remainingItems', remainingNones)
 
 def markMultiples(sv, seed, lim):
     multiplier = 2
@@ -119,17 +117,17 @@ def markMultiples(sv, seed, lim):
         cur = multiplier * seed
         if cur > lim:
             return
-        if sv[cur] != None:
+        if sv[str(cur)] != None:
             multiplier += 1
             continue
         if bust == True:
-            sv[cur] = False
+            sv[str(cur)] = False
         else:
             setOne = getSetOfIntegerSides(cur)
             if len(setOne) == 1:
-                sv[cur] = True
+                sv[str(cur)] = True
             else:
-                sv[cur] = False
+                sv[str(cur)] = False
                 bust = True
         multiplier += 1
         
