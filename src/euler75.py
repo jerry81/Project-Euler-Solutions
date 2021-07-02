@@ -162,6 +162,12 @@ def generateTriple(m,n):
     c = m**2 + n**2
     return a,b,c
 
+def testGenerateTriples():
+    for i in range(2, 10):
+        for j in range(1, i):
+            a,b,c = generateTriple(i, j)
+            print('given i, j, triple is, sum is  ', i, j, (a,b,c), sum([a,b,c]))
+
 @track_performance
 def stress():
     for i in range(1499950, 1500001):
@@ -172,8 +178,9 @@ def stress():
 # euler75()
 # testIsWhole()
 # testGetB()
-testGetSet()
+# testGetSet()
 # testGetMax()
 # stress()
 # testAllSets()
 # getFilteredList()
+testGenerateTriples()
