@@ -52,6 +52,20 @@ def euler75_2():
                   countMap[p] += 1
               except:
                   countMap[p] = 1
+            # tally multiples
+            multiple=2
+            while True:
+                a2,b2,c2 = a*multiple, b*multiple, c*multiple
+                p2 = a2+b2+c2
+                if p2<LIM:
+                  try:
+                    t = countMap[p2]
+                    countMap[p2] += 1
+                  except:
+                    countMap[p2] = 1
+                else:
+                    break
+                multiple += 1
     sliced = list(countMap.values())[:200]
     print('countMap is ', list(countMap.items())[:200])
     print('len of sliced is ', len(sliced))
