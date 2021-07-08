@@ -29,6 +29,9 @@ def getSetOfIntegerSides(t):
 def isOdd(n):
     return n%2 == 1 
 
+def areCoprime(n,m):
+    return getGCD(n,m) == 1
+
 @track_performance
 def euler75_2():
     print('project euler problem 75')
@@ -38,6 +41,8 @@ def euler75_2():
     for i in range(2, UPPER_LIM_OUTER_LOOP):
         for j in range(1, i):
             if isOdd(i) and isOdd(j):
+                continue
+            if not areCoprime(i, j):
                 continue
             a,b,c = generateTriple(i,j)
             p = a+b+c
@@ -230,9 +235,6 @@ def testIsOdd():
 
 # testIsOdd()
 
-def areCoprime(n,m):
-    return getGCD(n,m) == 1
-
 def testAreCoprime():
     print('coprime 3,5', areCoprime(3,5))
     print('coprime 11,40', areCoprime(11,40))
@@ -241,4 +243,4 @@ def testAreCoprime():
     print('coprime 88, 87', areCoprime(88,87))
     print('coprime 121 22', areCoprime(121, 44))
 
-testAreCoprime()
+# testAreCoprime()
