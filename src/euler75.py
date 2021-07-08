@@ -36,6 +36,8 @@ def euler75_2():
     countMap = {}
     for i in range(2, UPPER_LIM_OUTER_LOOP):
         for j in range(1, i):
+            if isOdd(i) and isOdd(j):
+                continue
             a,b,c = generateTriple(i,j)
             p = a+b+c
             if p < LIM:
@@ -114,10 +116,9 @@ def testGetSet():
 @track_performance
 def getFilteredList():
     # read from file
-    seive = openMap('0to5000Processed.txt')
-    print('seive is ', list(seive.items())[:100])
+    seive = {}
     print('seive initialized')
-    for j in range(4999,10000):
+    for j in range(0,10000):
         if (j%1000 == 0):
             print('currently processing ', j)
         k = j*2
@@ -132,7 +133,7 @@ def getFilteredList():
     # filter out False 
     remainingItems = list(filter(lambda x: x[1] != False, list(seive.items())))
     # write to file
-    writeMapToFile('0to10000Processed.txt', seive)
+    # writeMapToFile('0to10000Processed.txt', seive)
     remainingNones = len(list(filter(lambda x: x[1] == None, remainingItems)))
     trues = len(list(filter(lambda x: x[1] == True, remainingItems)))
     print('remainingItems', remainingNones)
@@ -219,11 +220,11 @@ def stress():
 # getFilteredList()
 # testGenerateTriples()
 # testLimitsAndPerf()
-# euler75_2()
+euler75_2()
 
 def testIsOdd():
     print('isOdd 3', isOdd(3))
     print('isOdd 19999', isOdd(19999))
     print('isOdd 1000', isOdd(1000))
 
-testIsOdd()
+# testIsOdd()
