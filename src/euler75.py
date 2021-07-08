@@ -25,24 +25,29 @@ def getSetOfIntegerSides(t):
               return [] """
     return returned
 
+def isOdd(n):
+    return n%2 == 1 
+
 @track_performance
 def euler75_2():
     print('project euler problem 75')
     LIM = 1500001
-    UPPER_LIM_OUTER_LOOP = 866
+    UPPER_LIM_OUTER_LOOP = 2000
     countMap = {}
     for i in range(2, UPPER_LIM_OUTER_LOOP):
         for j in range(1, i):
             a,b,c = generateTriple(i,j)
             p = a+b+c
-            if p > LIM:
-                continue
-            try:
-                t = countMap[p]
-                countMap[p] += 1
-            except:
-                countMap[p] = 1
-    print('countMap is ', list(countMap.items())[:100])
+            if p < LIM:
+              try:
+                  t = countMap[p]
+                  countMap[p] += 1
+              except:
+                  countMap[p] = 1
+    sliced = list(countMap.values())[:200]
+    print('countMap is ', list(countMap.items())[:200])
+    print('len of sliced is ', len(sliced))
+    print('len of filtered slice is ', len(list(filter(lambda x: x==1, sliced))))
     print('count is ', len(list(filter(lambda x: x == 1, list(countMap.values())))))
 
 @track_performance
@@ -214,4 +219,11 @@ def stress():
 # getFilteredList()
 # testGenerateTriples()
 # testLimitsAndPerf()
-euler75_2()
+# euler75_2()
+
+def testIsOdd():
+    print('isOdd 3', isOdd(3))
+    print('isOdd 19999', isOdd(19999))
+    print('isOdd 1000', isOdd(1000))
+
+testIsOdd()
