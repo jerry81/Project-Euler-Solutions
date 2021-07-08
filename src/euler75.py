@@ -1,6 +1,7 @@
 from utils.annotations import track_performance
 from math import sqrt
 from utils.fileUtils import writeMapToFile, openMap
+from utils.toitientHelpers import getGCD
 
 def getBGivenAAndT(a, t):
     d = t - a
@@ -228,3 +229,16 @@ def testIsOdd():
     print('isOdd 1000', isOdd(1000))
 
 # testIsOdd()
+
+def areCoprime(n,m):
+    return getGCD(n,m) == 1
+
+def testAreCoprime():
+    print('coprime 3,5', areCoprime(3,5))
+    print('coprime 11,40', areCoprime(11,40))
+    print('coprime 8,20', areCoprime(8,20))
+    print('coprime 12,15', areCoprime(12,15))
+    print('coprime 88, 87', areCoprime(88,87))
+    print('coprime 121 22', areCoprime(121, 44))
+
+testAreCoprime()
