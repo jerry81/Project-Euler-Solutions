@@ -70,7 +70,7 @@ def testGetAddendsR():
     print('getAddends 3', getAddendsR(3))
     for i in range(4, 12):
         print('getAddends i, and len is ', i, getAddendsR(i), len(getAddendsR(i)))
-    for i in range(4, 25):
+    for i in range(4, 101):
         print('len for i is ', i, len(getAddendsR(i))) 
     # print('getAddends 100 is', getAddendsR(100)[:-200])
 
@@ -86,6 +86,10 @@ def testRemoveDups():
     print('removeDups test 1', removeDups([[1,2], [1,2]]))
     print('removeDups test 2', removeDups([[1, 5], [2, 4], [3, 3], [1, 1, 4], [1, 2, 3], [1, 1, 1, 3], [1, 1, 2, 2], [1, 1, 1, 1, 2], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 2], [1, 1, 2, 2], [1, 1, 1, 1, 2], [1, 1, 1, 3], [1, 2, 3], [2, 2, 2], [1, 1, 2, 2], [1, 1, 1, 1, 2], [1, 1, 2, 2], [1, 2, 3], [1, 1, 1, 3], [1, 1, 4]]))
 
-euler76()
-# testGetAddendsR()
+# euler76()
+testGetAddendsR()
 # testRemoveDups()
+
+# plan for tmrw - 
+# instead of storing arrays of arrays, 
+# use map of strings instead
