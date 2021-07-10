@@ -46,7 +46,11 @@ def getAddendsR(s):
         return [[1,1]]
     combos = []
     for i in range(1, s):
-      prev = getAddendsR(s-i)
+      prev = None
+      if inMap(s-i, memo):
+          prev = memo[s-i]
+      else:
+          prev = getAddendsR(s-i)
       # TODO: memoize
       processedPrev = list(map(lambda arr: [i, *arr], prev))
       for pp in processedPrev:
@@ -58,6 +62,7 @@ def getAddendsR(s):
       cur.append([i, s-i])
     combined = [*cur, *combos]
     asSet = removeDups(combined)
+    memo[s] = asSet
     return asSet
 
 def testGetAddendsR():
