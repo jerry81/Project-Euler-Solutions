@@ -80,16 +80,12 @@ def euler76():
     # print(len(getAddendsR(100)))
     # try removing dups
     permsOf100 = getAddendsR(100)
-    for i in permsOf100:
-        i.sort()
-    filtered = list(permsOf100 for permsOf100,_ in itertools.groupby(permsOf100))
-    print('len is ', len(filtered))
+    print('len is ', len(permsOf100))
 
 def testRemoveDups():
     print('removeDups test 1', removeDups([[1,2], [1,2]]))
     print('removeDups test 2', removeDups([[1, 5], [2, 4], [3, 3], [1, 1, 4], [1, 2, 3], [1, 1, 1, 3], [1, 1, 2, 2], [1, 1, 1, 1, 2], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 2], [1, 1, 2, 2], [1, 1, 1, 1, 2], [1, 1, 1, 3], [1, 2, 3], [2, 2, 2], [1, 1, 2, 2], [1, 1, 1, 1, 2], [1, 1, 2, 2], [1, 2, 3], [1, 1, 1, 3], [1, 1, 4]]))
 
-# euler76()
-testGetAddendsR()
-# euler76()
+euler76()
+# testGetAddendsR()
 # testRemoveDups()
