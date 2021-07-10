@@ -1,5 +1,6 @@
 from utils.annotations import track_performance
 import itertools
+from utils.memoHelper import inMap
 
 # sums of 5
 # 1,4
@@ -38,6 +39,8 @@ def removeDups(k):
       k.sort()
       return list(k for k,_ in itertools.groupby(k))
 
+memo = {}
+
 def getAddendsR(s):
     if s == 2:
         return [[1,1]]
@@ -62,10 +65,9 @@ def testGetAddendsR():
     print('getAddends 3', getAddendsR(3))
     for i in range(4, 12):
         print('getAddends i, and len is ', i, getAddendsR(i), len(getAddendsR(i)))
-    """   for i in range(4, 75):
-        print('len for i is ', i, len(getAddendsR(i))) """
+    for i in range(4, 25):
+        print('len for i is ', i, len(getAddendsR(i))) 
     # print('getAddends 100 is', getAddendsR(100)[:-200])
-
 
 @track_performance
 def euler76():
