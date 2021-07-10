@@ -37,14 +37,17 @@ def getAddendsR(s):
     for i in range(1, s//2 + 1):
       cur.append([i, s-i])
     return [*cur, *processedPrev]
-    
+
 def testGetAddendsR():
     print('getAddends 2', getAddendsR(2))
     print('getAddends 3', getAddendsR(3))
+    for i in range(4, 6):
+        print('getAddends i', i, getAddendsR(i))
 
 @track_performance
 def euler76():
     print('project euler problem 76')
+    print(len(getAddendsR(100)))
 
-# euler76()
-testGetAddendsR()
+euler76()
+# testGetAddendsR()
