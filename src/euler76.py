@@ -1,4 +1,5 @@
 from utils.annotations import track_performance
+import itertools
 
 # sums of 5
 # 1,4
@@ -41,13 +42,21 @@ def getAddendsR(s):
 def testGetAddendsR():
     print('getAddends 2', getAddendsR(2))
     print('getAddends 3', getAddendsR(3))
-    for i in range(4, 6):
+    for i in range(4, 12):
         print('getAddends i', i, getAddendsR(i))
+    print('getAddends 100 is', getAddendsR(100)[:200])
 
 @track_performance
 def euler76():
     print('project euler problem 76')
-    print(len(getAddendsR(100)))
+    # print(len(getAddendsR(100)))
+    # try removing dups
+    permsOf100 = getAddendsR(100)
+    for i in permsOf100:
+        i.sort()
+    filtered = list(permsOf100 for permsOf100,_ in itertools.groupby(permsOf100))
+    print('len is ', len(filtered))
 
+# euler76()
+testGetAddendsR()
 euler76()
-# testGetAddendsR()
