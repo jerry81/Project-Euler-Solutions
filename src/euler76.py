@@ -27,24 +27,41 @@ import itertools
 # sums of 2
 # 1,1
 
+# sum 7
+
+# 1,1...1
+# 2,5
+# 2,2,3
+# 3,3,1
+
 def getAddendsR(s):
     if s == 2:
         return [[1,1]]
-    prev = getAddendsR(s-1)
-    # TODO: memoize
-    processedPrev = list(map(lambda arr: [1, *arr], prev))
+    combos = []
+    for i in range(1, s):
+      prev = getAddendsR(s-i)
+      # TODO: memoize
+      processedPrev = list(map(lambda arr: [i, *arr], prev))
+      for pp in processedPrev:
+          pp.sort()
+      combos = [*combos, *processedPrev]
     # process the two item breakdowns
     cur = []
     for i in range(1, s//2 + 1):
       cur.append([i, s-i])
-    return [*cur, *processedPrev]
+    return removeDups([*cur, *combos])
 
 def testGetAddendsR():
     print('getAddends 2', getAddendsR(2))
     print('getAddends 3', getAddendsR(3))
     for i in range(4, 12):
-        print('getAddends i', i, getAddendsR(i))
-    print('getAddends 100 is', getAddendsR(100)[:200])
+        print('getAddends i, and len is ', i, getAddendsR(i), len(getAddendsR(i)))
+    """   for i in range(4, 75):
+        print('len for i is ', i, len(getAddendsR(i))) """
+    # print('getAddends 100 is', getAddendsR(100)[:-200])
+
+def removeDups(k):
+      return list(k for k,_ in itertools.groupby(k))
 
 @track_performance
 def euler76():
@@ -59,4 +76,4 @@ def euler76():
 
 # euler76()
 testGetAddendsR()
-euler76()
+# euler76()
