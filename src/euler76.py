@@ -34,6 +34,10 @@ import itertools
 # 2,2,3
 # 3,3,1
 
+def removeDups(k):
+      k.sort()
+      return list(k for k,_ in itertools.groupby(k))
+
 def getAddendsR(s):
     if s == 2:
         return [[1,1]]
@@ -49,7 +53,9 @@ def getAddendsR(s):
     cur = []
     for i in range(1, s//2 + 1):
       cur.append([i, s-i])
-    return removeDups([*cur, *combos])
+    combined = [*cur, *combos]
+    asSet = removeDups(combined)
+    return asSet
 
 def testGetAddendsR():
     print('getAddends 2', getAddendsR(2))
@@ -60,8 +66,6 @@ def testGetAddendsR():
         print('len for i is ', i, len(getAddendsR(i))) """
     # print('getAddends 100 is', getAddendsR(100)[:-200])
 
-def removeDups(k):
-      return list(k for k,_ in itertools.groupby(k))
 
 @track_performance
 def euler76():
@@ -74,6 +78,11 @@ def euler76():
     filtered = list(permsOf100 for permsOf100,_ in itertools.groupby(permsOf100))
     print('len is ', len(filtered))
 
+def testRemoveDups():
+    print('removeDups test 1', removeDups([[1,2], [1,2]]))
+    print('removeDups test 2', removeDups([[1, 5], [2, 4], [3, 3], [1, 1, 4], [1, 2, 3], [1, 1, 1, 3], [1, 1, 2, 2], [1, 1, 1, 1, 2], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 2], [1, 1, 2, 2], [1, 1, 1, 1, 2], [1, 1, 1, 3], [1, 2, 3], [2, 2, 2], [1, 1, 2, 2], [1, 1, 1, 1, 2], [1, 1, 2, 2], [1, 2, 3], [1, 1, 1, 3], [1, 1, 4]]))
+
 # euler76()
 testGetAddendsR()
 # euler76()
+# testRemoveDups()
