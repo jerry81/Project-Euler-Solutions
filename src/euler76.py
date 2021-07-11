@@ -54,7 +54,6 @@ def hashToArr(hash):
 
 # improved, using map, and strings
 
-
 def getAddendsR2(s):
     if s == 2:
         return {'1,1': True}
@@ -67,7 +66,11 @@ def getAddendsR2(s):
             prev = getAddendsR2(s-i)
         prevList = list(prev.keys())
         for p in prevList:
-            k = str(i) + ',' + p
+            # k = str(i) + ',' + p
+            l = hashToArr(p)
+            l.append(str(i))
+            l.sort()
+            k = arrayToHash(l)
             combos[k] = True
     # process the two item breakdowns
     for i in range(1, s//2 + 1):
@@ -115,11 +118,11 @@ def testGetAddendsR():
 def testGetAddendsR2():
     print('getAddends 2', getAddendsR2(2))
     print('getAddends 3', getAddendsR2(3))
-"""     for i in range(4, 12):
+    for i in range(4, 12):
         print('getAddends i, and len is ', i,
-              getAddendsR2(i), len(getAddendsR2(i)))
+              list(getAddendsR2(i).keys()), len(getAddendsR2(i)))
     for i in range(4, 101):
-        print('len for i is ', i, len(getAddendsR2(i))) """
+        print('len for i is ', i, len(getAddendsR2(i)))
 
 
 @track_performance
