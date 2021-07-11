@@ -41,6 +41,35 @@ def removeDups(k):
 
 memo = {}
 
+def arrayToHash(arr):
+    arr = list(map(lambda x: str(x), arr))
+    return ','.join(arr)
+
+# improved, using map, and strings
+def getAddendsR2(s):
+    if s == 2:
+        return {'1,1':True}
+    combos = []
+    for i in range(1, s):
+      prev = None
+      if inMap(s-i, memo):
+          prev = memo[s-i]
+      else:
+          prev = getAddendsR(s-i)
+      # TODO: memoize
+      processedPrev = list(map(lambda arr: [i, *arr], prev))
+      for pp in processedPrev:
+          pp.sort()
+      combos = [*combos, *processedPrev]
+    # process the two item breakdowns
+    cur = []
+    for i in range(1, s//2 + 1):
+      cur.append([i, s-i])
+    combined = [*cur, *combos]
+    asSet = removeDups(combined)
+    memo[s] = asSet
+    return asSet
+
 def getAddendsR(s):
     if s == 2:
         return [[1,1]]
@@ -87,9 +116,14 @@ def testRemoveDups():
     print('removeDups test 2', removeDups([[1, 5], [2, 4], [3, 3], [1, 1, 4], [1, 2, 3], [1, 1, 1, 3], [1, 1, 2, 2], [1, 1, 1, 1, 2], [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 2], [1, 1, 2, 2], [1, 1, 1, 1, 2], [1, 1, 1, 3], [1, 2, 3], [2, 2, 2], [1, 1, 2, 2], [1, 1, 1, 1, 2], [1, 1, 2, 2], [1, 2, 3], [1, 1, 1, 3], [1, 1, 4]]))
 
 # euler76()
-testGetAddendsR()
+# testGetAddendsR()
 # testRemoveDups()
 
 # plan for tmrw - 
 # instead of storing arrays of arrays, 
 # use map of strings instead
+
+def testArrToHash():
+    print('tohash [1,2,3]', arrayToHash([1,2,3]))
+
+testArrToHash()
