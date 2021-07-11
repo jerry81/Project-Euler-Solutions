@@ -64,8 +64,8 @@ def getAddendsR2(s):
         if inMap(s-i, memo):
             prev = memo[s-i]
         else:
-            prev = getAddendsR(s-i)
-        prevlist = list(prev.keys())
+            prev = getAddendsR2(s-i)
+        prevList = list(prev.keys())
         for p in prevList:
             k = str(i) + ',' + p
             combos[k] = True
