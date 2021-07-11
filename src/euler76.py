@@ -40,7 +40,6 @@ def removeDups(k):
     k.sort()
     return list(k for k, _ in itertools.groupby(k))
 
-
 memo = {}
 
 
