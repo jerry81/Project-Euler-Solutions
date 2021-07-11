@@ -45,6 +45,9 @@ def arrayToHash(arr):
     arr = list(map(lambda x: str(x), arr))
     return ','.join(arr)
 
+def hashToArr(hash):
+    return hash.split(',')
+
 # improved, using map, and strings
 def getAddendsR2(s):
     if s == 2:
@@ -125,5 +128,6 @@ def testRemoveDups():
 
 def testArrToHash():
     print('tohash [1,2,3]', arrayToHash([1,2,3]))
+    print('toArr 1,2,3', hashToArr('1,2,3'))
 
 testArrToHash()
